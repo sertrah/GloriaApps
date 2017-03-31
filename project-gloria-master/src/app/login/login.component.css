@@ -1,0 +1,50 @@
+#lock {
+    width:40%;
+    margin: 1.5em auto 4em auto;
+    display:block;
+}
+
+#fb {
+    background:#3B5998 url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/F_icon.svg/1024px-F_icon.svg.png') no-repeat 14px 6px;
+    background-size: 47px;
+    color:#fff;
+}
+.form-container {
+    background:white;
+    padding:3.5em;
+    width:500px;
+    position:relative;
+    left:50%;
+    margin-left:-250px;
+}
+#google {
+    border: 1px solid #95989A;
+    background: #fff  url('https://www.seeklogo.net/wp-content/uploads/2015/09/new-google-favicon.svg') no-repeat 25px;
+    background-size: 25px;
+}
+
+#email {
+    background: #ECECEC  url('https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Email_Silk.svg/2000px-Email_Silk.svg.png') no-repeat 25px;
+    background-size: 25px;
+}
+
+@media (max-width: 600px) {
+    #page {
+        padding:1em;
+    }
+    #toolbar {
+        width:90%;
+        margin-left: -45%;
+    }
+    #fb {
+        background:#3B5998;
+    }
+
+    #google {
+        background: #fff;
+    }
+
+    #email {
+        background: #ECECEC;
+    }
+}

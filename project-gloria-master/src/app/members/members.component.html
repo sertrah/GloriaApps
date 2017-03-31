@@ -1,0 +1,87 @@
+<div class="form-container" id="toolbar">
+    <header [@fallIn]="state">
+
+    </header>
+<div id="page" [@moveInLeft]="state" class="">
+      <div  class="openn">
+          <span class="cls"></span>
+          <span>
+              <ul class="sub-menu ">
+                  <li>
+                      <a href="#about" title="about">Sobre / About</a>
+                  </li>
+                  <li>
+                      <a href="#skills" title="skills">Habilidades / Skills</a>
+                  </li>
+                  <li>
+                      <a href="#jobs" title="jobs">Trabalhos / Jobs</a>
+                  </li>
+                  <li>
+                      <a (click)="logout()" title="Logout">Logout</a>
+                  </li>
+              </ul>
+          </span>
+          <span class="cls"></span>
+      </div>
+  <div class="row ">
+    <div class="col s12  m3">
+      <div class="card small">
+        <div class="card-image ">
+          <div class="overlay"></div>
+          <img  src="{{ObjUser.photoUrl}}" class="">
+          <span class="card-title">{{ ObjUser.name }}</span>
+        </div>
+        <div class="card-content">
+          <p>Welcome back! my friend Yuxi</p>
+
+        </div>
+        <div class="card-action">
+          <a href="#">This is a link</a>
+        </div>
+
+      </div>
+      <blockquote>
+         We are the RockStars!.
+      </blockquote>
+    </div>
+    <div class="col s12  m9">
+      <h2>Products</h2>
+      <ul class="collection">
+          <li class="collection-item avatar">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/56/Candy-Corn.jpg" alt="" class="circle">
+            <span class="title">Title</span>
+            <p>First Line <br>
+              Second Line
+            </p>
+            <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+          </li>
+          <li class="collection-item avatar">
+            <i class="material-icons circle">folder</i>
+            <span class="title">Title</span>
+            <p>First Line <br>
+              Second Line
+            </p>
+            <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+          </li>
+          <li class="collection-item avatar">
+            <i class="material-icons circle green">insert_chart</i>
+            <span class="title">Title</span>
+            <p>First Line <br>
+              Second Line
+            </p>
+            <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+          </li>
+          <li class="collection-item avatar">
+            <i class="material-icons circle red">play_arrow</i>
+            <span class="title">Title</span>
+            <p>First Line <br>
+              Second Line
+            </p>
+            <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+          </li>
+        </ul>
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,65 @@
+<p>
+  inventory works!
+</p>
+
+<!-- Modal Trigger -->
+
+  <button   data-target="modal1"  class="btn" (click)="openModal('nokey', false)">Modal</button>
+  <table class="centered">
+      <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>Quantity</th>
+            <th>price</th>
+            <th>Actions</th>
+        </tr>
+      </thead>
+
+      <tbody >
+        <tr *ngFor="let item of items | async">
+          <td class="a[]"  >{{ item.product }}</td>
+          <td class="b[]" >{{ item.quantity}}</td> 
+          <td class="c[]" >{{ item.price}}</td>
+          <td class="d[]" >
+            <a  data-target="modal1" class="btn-floating" (click)="openModal(item.$key, true)"><i class="material-icons">&#xE3C9;</i></a>
+            <input type="text" value="{{ item.product }}" id="updVal" hidden>
+            <a class="btn-floating" (click)="delReg(item.$key)"><i class="material-icons">&#xE92B;</i></a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+          
+  <!-- Modal Structure -->
+
+  <!-- Modal Structure -->
+<div id="modal1" class="modal">
+  <form #formData='ngForm' (ngSubmit)="onSubmit(formData)">
+    <div class="modal-content">
+      <div class="row">    
+        <div class="input-field col s6">
+          <input (ngModel)="productN" value="{{ObjProd.product}}"  name="productN" type="text"  >
+          <label for="productN">Product Name</label>
+        </div>
+        <div class="input-field col s6">
+          <input (ngModel)="price" value="{{ObjProd.price}}"  name="price" type="text"  >
+          <label for="price">price</label>
+        </div>
+        <div class="input-field col s6">
+          <input (ngModel)="quantity" value="{{ObjProd.quantity}}"   name="quantity" type="text"  >
+          <label for="quantity">quantity</label>
+        </div>
+        <div class="input-field col s6">
+          <input (ngModel)="photoURL" value="{{ObjProd.product}}"   name="photoURL" type="text"  >
+          <label for="photoURL">photoURL</label>
+          
+        </div>
+         <input type="text" placeholder="Full name" value="hola" (ngModel)="namef" name="namef" class="txt" required>
+        <input type="text" (ngModel)="keyProduct"   name="keyProduct" value="{{ObjProd.key}}" >
+        <input type="text" (ngModel)="typeProduct"   name="typeProduct" value="{{ObjProd.type}}" >
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="submit"  class="modal-action modal-close waves-effect waves-green btn-flat " >Update Product</button>
+    </div>
+  </form>
+</div>
