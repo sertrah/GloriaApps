@@ -5,7 +5,7 @@ html {
   height: 100%;
 }
 .collection .collection-item.avatar {
-  z-index: -1;
+  z-index: 0;
 }
 .collection{
   border-width: 0px;
@@ -21,7 +21,9 @@ a {
 
 
 body {
-  background: #bfcff0;
+ background: #61C5E0;
+  background-position: center;
+  background-size: cover;
   width: 100%;
   height: 100%;
   font-family: 'Roboto', sans-serif;
@@ -38,6 +40,7 @@ h1 {
 .openn {
   position: fixed;
   top: 40px;
+  z-index: 4;
   right: 40px;
   width: 50px;
   height: 50px;
@@ -157,6 +160,7 @@ h1 {
   clear: both;
   padding: 20px 40px;
   background: #fff;
+  color: #000;
   border-radius: 3px;
   border: 2px solid #10a1ea;
   overflow: hidden;
@@ -227,8 +231,32 @@ h2 {
     text-align:center;
     display:block;
     margin: 15px 0;
+    position: relative;
 }
-
+.alc:hover {
+    color: #fff;
+    -webkit-transition: all 0.3s ease-in-out 0s;
+    transition: all 0.3s ease-in-out 0s;
+}
+.alc:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #fff;
+  visibility: hidden;
+  -webkit-transform: scaleX(0);
+  transform: scaleX(0);
+  -webkit-transition: all 0.3s ease-in-out 0s;
+  transition: all 0.3s ease-in-out 0s;
+}
+.alc:hover:before {
+  visibility: visible;
+  -webkit-transform: scaleX(1);
+  transform: scaleX(1);
+}
 .error {
     background:#f1f0ef;
     padding:1em;
@@ -272,11 +300,108 @@ h2 {
   left: -5px;
   animation: spin 1.2s infinite;
 }
+.btn-5 {
+  border: 0 solid;
+  box-shadow: inset 0 0 20px rgba(255, 255, 255, 0);
+  outline: 1px solid;
+  outline-color: rgba(255, 255, 255, .5);
+  outline-offset: 0px;
+  text-shadow: none;
+  transition: all 1250ms cubic-bezier(0.19, 1, 0.22, 1);
+} 
 
+.btn-5:hover {
+  
+  box-shadow: inset 0 0 20px rgba(255, 255, 255, .5), 0 0 20px rgba(255, 255, 255, .2);
+  outline-color: rgba(255, 255, 255, 0);
+  outline-offset: 15px;
+  text-shadow: 1px 1px 2px #427388;
+
+}
 @keyframes spin {
   100% {
     transform: rotate(360deg);
   }
+}
+
+.btn-reg {
+  background: #6a1b9a;
+  border: 1px solid #6a1b9a;
+  box-shadow: 0px 2px 0 #6a1b9a, 2px 4px 6px #6a1b9a;
+  font-weight: 900;
+  letter-spacing: 1px;
+  -webkit-transition: all 150ms linear;
+  transition: all 150ms linear;
+}
+.btn-large.purple.darken-3:hover{
+  -webkit-transition:  1s ease-in-out;
+  transition:  1s ease-in-out;
+  background-color: #a429ef !important;
+}
+.img-anim{
+-webkit-animation: 
+        fadeInDown 3s 1,
+        levitate 3s infinite;  
+    -moz-animation: 
+        fadeInDown 3s 1,
+        levitate 3s infinite;
+}
+
+@-webkit-keyframes fadeInDown {
+    0% {
+         -webkit-transform: translateY(-50px);
+        opacity:0;        
+   }
+
+    100% {
+        -webkit-transform: translateY(10px);
+        opacity:1;
+   }
+}
+@-moz-keyframes fadeInDown {
+    0% {
+         -moz-transform: translateY(-50px);
+        opacity:0;        
+   }
+
+    100% {
+        -moz-transform: translateY(10px);
+        opacity:1;
+   }
+}
+
+@-webkit-keyframes levitate{
+  0% {
+         -webkit-transform: translateY(-5px);
+
+   }
+   
+   
+
+    50% {
+           -webkit-transform: translateY(0px);
+   }
+
+100%{
+         -webkit-transform: translateY(-5px);
+}
+
+}
+
+@-moz-keyframes levitate{
+  0% {
+         -moz-transform: translateY(-5px);
+   }
+
+    50% {
+           -moz-transform: translateY(3px);
+
+   }
+
+100%{
+         -moz-transform: translateY(-5px);
+}
+
 }
 
 

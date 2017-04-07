@@ -2,6 +2,9 @@
     width:40%;
     margin: 1.5em auto 4em auto;
     display:block;
+    -webkit-animation:spin 8s ease-in infinite;
+    -moz-animation:spin 8s ease-in infinite;
+    animation:spin 8s ease-in infinite;
 }
 
 #fb {
@@ -10,15 +13,15 @@
     color:#fff;
 }
 .form-container {
-    background:white;
+    background: rgba(84, 191, 220, 0.72);
     padding:3.5em;
     width:500px;
     position:relative;
     left:50%;
+    border: 1px solid #fff;
     margin-left:-250px;
 }
 #google {
-    border: 1px solid #95989A;
     background: #fff  url('https://www.seeklogo.net/wp-content/uploads/2015/09/new-google-favicon.svg') no-repeat 25px;
     background-size: 25px;
 }
@@ -27,6 +30,9 @@
     background: #ECECEC  url('https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Email_Silk.svg/2000px-Email_Silk.svg.png') no-repeat 25px;
     background-size: 25px;
 }
+@-moz-keyframes spin { 100% { -moz-transform: rotateY(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotateY(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotateY(360deg); transform:rotateY(360deg);  } }
 
 @media (max-width: 600px) {
     #page {

@@ -1,20 +1,24 @@
 export interface IInventory {
   //$key?: string; Mi UID
-  IsAdmin: boolean;
   createdAt: string;
-  name: string;
-  photoUrl: string;
+  product: string;
+  price: number;
+  quantity: number;
+  path: string;
 }
 
 export class Inventory implements IInventory {
-  IsAdmin: boolean = false;
   createdAt: string = Date.now().toString();
-  name: string;
-  key: string;
-  photoUrl: string = "https://media.licdn.com/mpr/mpr/shrink_200_200/AAEAAQAAAAAAAAfwAAAAJGMzMjBhYzIzLTI3NDAtNGNiZi04Yjk0LTVmNDc2ZjY2ODljYw.png";
+  product: string;
+  price: number;
+  quantity: number;
+  path: string;
 
-  constructor(name: string, photoUrl: string = "https://media.licdn.com/mpr/mpr/shrink_200_200/AAEAAQAAAAAAAAfwAAAAJGMzMjBhYzIzLTI3NDAtNGNiZi04Yjk0LTVmNDc2ZjY2ODljYw.png") {
-    this.name = name;
-    this.photoUrl = photoUrl;
+  constructor(product: string,   price: number , quantity: number, path: string ) {
+    this.product = product;
+    this.price = price;
+    this.quantity = quantity;
+    this.path = path;
+    
   }
 }

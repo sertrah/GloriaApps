@@ -14,6 +14,7 @@ import { routes } from './app.routes';
 import { InventoryComponent } from './inventory/inventory.component';
 
 
+
 var firebaseConfig = {
   apiKey: "AIzaSyABL2Mn6GNlnuw8RqNdb6Yjjs_4OM-IWnM",
   authDomain: "gloriaapps-a00ed.firebaseapp.com",

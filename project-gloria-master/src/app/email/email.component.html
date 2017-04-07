@@ -1,15 +1,17 @@
-<div class="form-container">
-    <a routerLink="/login" id="goback">Go back</a>
-    <h2>Custom Login</h2>
+<div class="row">
+    <div class="container  ">
+      <a  routerLink="/login" id="goback" class="waves-effect waves-light btn btn-flat"><i class="material-icons left">&#xE314;</i>BACK</a>
+      <h2 class="col s12 center-align grey-text text-lighten-5">Custom Login</h2>
 
-    <span class="error" *ngIf="error" [@fallIn]='state'>{{ error }}</span>
+      <span class="col s12" class="error" *ngIf="error" [@fallIn]='state'>{{ error }}</span>
 
-    <form #formData='ngForm' (ngSubmit)="onSubmit(formData)">
+      <form #formData='ngForm' (ngSubmit)="onSubmit(formData)"  class="col s12 center">
 
-      <input type="text" placeholder="Email address.." (ngModel)="email" name="email" class="txt" required>
-      <input type="password" placeholder="Password" (ngModel)="password" name="password" class="txt" required>
+        <input type="text" placeholder="Email address.." (ngModel)="email" name="email" class="txt" required>
+        <input type="password" placeholder="Password" (ngModel)="password" name="password" class="txt" required>
 
-      <button type="submit" [disabled]="!formData.valid" class="basic-btn">Log in</button>
-      <a routerLink="/signup" class="alc">Don't have an account?</a>
-  </form>
+        <button type="submit" [disabled]="!formData.valid" class="waves-effect waves-light btn  btn-large purple darken-3 col s12">Log in</button>
+        <a routerLink="/signup" class="alc">Don't have an account?</a>
+    </form>
+  </div>
 </div>

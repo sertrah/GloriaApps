@@ -1,16 +1,22 @@
-<div class="form-container">
-  <a routerLink="/login" id="goback">Go back</a>
+<div class="row">
+  <div class="container  ">
+ <a  routerLink="/login" id="goback" class="waves-effect waves-light btn btn-flat"><i class="material-icons left">&#xE314;</i>BACK</a>
+  <h2 class="col s12 center-align grey-text text-lighten-5">Join now</h2>
 
-  <h2>Join now</h2>
-
-  <span class="error" *ngIf="error" [@fallIn]='state'>{{ error }}</span>
+  <div class="valign-wrapper col s12">
+    <img src="http://yuxiglobal.com/pages/img/boss.png" class="responsive-img valign img-anim" 
+    style="margin: 0 auto; width: 20%;">
     
-  <form #formData='ngForm' (ngSubmit)="onSubmit(formData)">
+  </div>
+  
+  <span class="error" *ngIf="error" [@fallIn]='state' class="col s12">{{ error }}</span>
+    
+  <form #formData='ngForm' (ngSubmit)="onSubmit(formData)" class="col s12 center">
       <input type="text" placeholder="Full name" (ngModel)="namef" name="namef" class="txt" required>
     <input type="text" placeholder="Email address.." (ngModel)="email" name="email" class="txt" required>
     <input type="password" placeholder="Password" (ngModel)="password" name="password" class="txt" required>
 
-
-    <button type="submit" [disabled]="!formData.valid" class="basic-btn">Create my account</button>
+    <button type="submit" [disabled]="!formData.valid" class=" waves-effect waves-light btn  btn-large purple darken-3 col s12">Create my account</button>
   </form>
+  </div>
 </div>

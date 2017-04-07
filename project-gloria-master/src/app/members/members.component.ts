@@ -24,7 +24,7 @@ export class MembersComponent implements OnInit {
           .subscribe(snapshots=>{
             snapshots.forEach(snapshot => {
               this.ObjUser[snapshot.key] = snapshot.val();
-              console.log(this.ObjUser);
+            
             });
         })
       }

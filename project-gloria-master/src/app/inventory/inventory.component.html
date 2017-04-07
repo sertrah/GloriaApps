@@ -8,6 +8,7 @@
   <table class="centered">
       <thead>
         <tr>
+            <th>img</th>
             <th>Product Name</th>
             <th>Quantity</th>
             <th>price</th>
@@ -16,14 +17,16 @@
       </thead>
 
       <tbody >
-        <tr *ngFor="let item of items | async">
-          <td class="a[]"  >{{ item.product }}</td>
-          <td class="b[]" >{{ item.quantity}}</td> 
-          <td class="c[]" >{{ item.price}}</td>
+        <tr *ngFor="let img of imageList | async">
+         
+          <td  class="responsive-img"  style="max-width:100px;max-height:100px;" ><img src="{{ img.downloadURL.pa }}" alt=""></td>
+          <td class="b[]" >{{ img.product}}</td> 
+          <td class="c[]" >{{ img.price}}</td>
+          <td class="c[]" >{{ img.quantity}}</td>
           <td class="d[]" >
-            <a  data-target="modal1" class="btn-floating" (click)="openModal(item.$key, true)"><i class="material-icons">&#xE3C9;</i></a>
-            <input type="text" value="{{ item.product }}" id="updVal" hidden>
-            <a class="btn-floating" (click)="delReg(item.$key)"><i class="material-icons">&#xE92B;</i></a>
+            <a  data-target="modal1" class="btn-floating" (click)="openModal(img.$key, true)"><i class="material-icons">&#xE3C9;</i></a>
+            
+            <a class="btn-floating" (click)="delReg(img.$key)"><i class="material-icons">&#xE92B;</i></a>
           </td>
         </tr>
       </tbody>
@@ -33,33 +36,42 @@
 
   <!-- Modal Structure -->
 <div id="modal1" class="modal">
-  <form #formData='ngForm' (ngSubmit)="onSubmit(formData)">
+  <form #formData='ngForm' (ngSubmit)="onSubmit(formData.value)">
     <div class="modal-content">
       <div class="row">    
-        <div class="input-field col s6">
-          <input (ngModel)="productN" value="{{ObjProd.product}}"  name="productN" type="text"  >
+        <div class="input-field col s12">
+          <input [(ngModel)]="productN" value="{{ObjProd.product}}"  name="productN" type="text" autofocus >
           <label for="productN">Product Name</label>
         </div>
-        <div class="input-field col s6">
-          <input (ngModel)="price" value="{{ObjProd.price}}"  name="price" type="text"  >
+        <div class="input-field col s12">
+          <input [(ngModel)]="price" value="{{ObjProd.price}}"  name="price" type="text" autofocus >
           <label for="price">price</label>
         </div>
-        <div class="input-field col s6">
-          <input (ngModel)="quantity" value="{{ObjProd.quantity}}"   name="quantity" type="text"  >
+        <div class="input-field col s12">
+          <input [(ngModel)]="quantity" value="{{ObjProd.quantity}}"   name="quantity" type="text" autofocus >
           <label for="quantity">quantity</label>
         </div>
-        <div class="input-field col s6">
-          <input (ngModel)="photoURL" value="{{ObjProd.product}}"   name="photoURL" type="text"  >
+        <div class="input-field col s12">
+          <input [(ngModel)]="photoURL" value="{{ObjProd.product}}"   name="photoURL" type="text" autofocus >
           <label for="photoURL">photoURL</label>
           
         </div>
-         <input type="text" placeholder="Full name" value="hola" (ngModel)="namef" name="namef" class="txt" required>
-        <input type="text" (ngModel)="keyProduct"   name="keyProduct" value="{{ObjProd.key}}" >
-        <input type="text" (ngModel)="typeProduct"   name="typeProduct" value="{{ObjProd.type}}" >
       </div>
     </div>
     <div class="modal-footer">
-      <button type="submit"  class="modal-action modal-close waves-effect waves-green btn-flat " >Update Product</button>
+      
+ <form ngNoForm>
+    <input id="file" name="file" type="file" >
+  
+    </form>
+    <h2>File Gallery</h2>
+ <div style="overflow:hidden;">
+        <div  style="position:relative;width:100px;height:100px;float:left;display:flex;justify-content:center;align-items:center;">
+            <img [src]="ObjProd.path" style="max-width:100px;max-height:100px;">
+            <button (click)="delete(ObjProd.path, ObjProd.key)" style="position:absolute;top:2px;right:2px;">[x]</button>
+        </div>
     </div>
+    </div>
+    <button type="submit"  class="modal-action modal-close  " >Update Product</button>
   </form>
 </div>

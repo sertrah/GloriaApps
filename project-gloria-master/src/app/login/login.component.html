@@ -1,11 +1,13 @@
+
 <div class="form-container">
-  <img src="https://a248.e.akamai.net/secure.meetupstatic.com/photos/member/d/5/c/0/highres_262074720.jpeg" id="lock">
+  <img src="assets/images/yuxxi.png" id="lock">
 
     <span class="error" *ngIf="error">{{ error }}</span>
 
-  <button (click)="loginFb()" id="fb">Login With Facebook</button><br>
-  <button (click)="loginGoogle()" id="google">Login With Google</button>
-  <button routerLink="/login-email" id="email">Email</button>
+  <button (click)="loginFb()" id="fb" class="btn-5">Login With Facebook</button><br>
+  <button (click)="loginGoogle()" id="google" class="btn-5">Login With Google</button>
+  <button routerLink="/login-email" id="email" class="btn-5">Email</button>
+  
 
-  <a routerLink="/signup" routerLinkActive="active" class="alc">No account? <strong>Create one here</strong></a>
+  <a routerLink="/signup" routerLinkActive="active" class="alc "> <strong>Create one here</strong></a>
 </div>
