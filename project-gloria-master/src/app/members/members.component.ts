@@ -3,6 +3,7 @@ import { AngularFire, AuthProviders, AuthMethods,FirebaseListObservable } from '
 import { Router } from '@angular/router';
 import { moveIn, fallIn, moveInLeft } from '../router.animations';
 import { Observable } from 'rxjs';
+import { Icart, Cartmodel } from '../models/cart';
 import * as firebase from 'firebase';
 
 interface Image {
@@ -12,6 +13,7 @@ interface Image {
     quantity?: any;
     downloadURL?: string;
     $key?: string;
+   
 
 }
 @Component({
@@ -25,10 +27,12 @@ export class MembersComponent implements OnInit {
 
 
   public ObjUser: Object[] = [];
-  public itemsP : any;
+  public itemsP : Object[] = [];
   public purchaseditm : any;
+  items = [{q: "a-1", pend: 0, key: "1", downloadURL: "a.downloadURL" }];
     fileList : FirebaseListObservable<Image[]>;
     imageList : Observable<Image[]>;
+   
   constructor(public af: AngularFire,private router: Router) {
     
     this.af.auth.subscribe(auth => {
@@ -45,8 +49,8 @@ export class MembersComponent implements OnInit {
             this.imageList = this.fileList.map( itemList =>
             itemList.map( item => {
                 var pathReference = storage.ref(item.path).getDownloadURL().then(url => {  return url });
-                let result = {$key: item.$key, downloadURL: pathReference, path: item.path, product: item.product, price: item.price, quantity: item.quantity};
-                console.log(result);
+                let result = {$key: item.$key, downloadURL: pathReference, path: item.path, product: item.product, price: item.price, quantity: item.quantity, pend: 0};
+                console.log(pathReference);
                 return result;
             })
         );
@@ -64,13 +68,19 @@ export class MembersComponent implements OnInit {
 
   ngOnInit() {
   }
- init(a) {
-      let items = [{q: "a-1", p: "pathReference"},{q: "item.1", p: "pathReference2"}];
-      let purchaseditm = [{q: a+1, p: "pathReference"},{q: "item.1", p: "pathReference2"}];
-       
-        this.itemsP = items;
-        console.log(a);
- return 1;
+ init(a,p) {
+      
+      if(this.itemsP[p] == null){
+      let items = {q: a.product, pend: 0, key: "1", downloadURL: a.downloadURL };
+        this.itemsP[p] = items;
+      }else{
+      let items = {q: a.product, pend: 1 , key: "1", downloadURL: a.downloadURL };
+        this.itemsP[p]  = items;
+ 
+      }
+ console.log(this.itemsP);
+   
+        
   }
 
 }
