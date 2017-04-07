@@ -41,27 +41,14 @@
         </div>
 
       </div>
-      <blockquote>
+      <blockquote id="shopd" *ngFor="let item of itemsP " >
+
           <div class="chip">
-            <img src="{{ObjUser.photoUrl}}" alt="Contact Person">
-            5
+            <img src="{{item.p}}" alt="Contact Person">
+            {{item.q}}
             <i class="close material-icons">close</i>
           </div>
-          <div class="chip">
-            <img src="{{ObjUser.photoUrl}}" alt="Contact Person">
-            10
-            <i class="close material-icons">close</i>
-          </div>
-          <div class="chip">
-            <img src="{{ObjUser.photoUrl}}" alt="Contact Person">
-            9
-            <i class="close material-icons">close</i>
-          </div>
-          <div class="chip">
-            <img src="{{ObjUser.photoUrl}}" alt="Contact Person">
-            1
-            <i class="close material-icons">close</i>
-          </div>
+
           <a class="waves-effect waves-light btn"><i class="material-icons">&#xE8CC;</i>Buy</a>
       </blockquote>
     </div>
@@ -82,20 +69,13 @@
             </div>
           </div>
         </div>
-      <ul class="collection col s12">
-          <li class="collection-item avatar">
-            <i class="material-icons circle">folder</i>
-            <span class="title">Product Name </span>
-            <p><i class="material-icons tiny">&#xE227;</i> 45.8</p>
-             <p> Quantity: <strong>30</strong> </p>
-            <a class="waves-effect waves-light btn secondary-content"><i class="material-icons">&#xE854;</i></a>
-          </li>
-          <li class="collection-item avatar">
-            <i class="material-icons circle">folder</i>
-            <span class="title">Product Name </span>
-            <p><i class="material-icons tiny">&#xE227;</i> 45.8</p>
-             <p> Quantity: <strong>30</strong> </p>
-            <a class="waves-effect waves-light btn secondary-content"><i class="material-icons">&#xE854;</i></a>
+      <ul class="collection col s12"  *ngFor="let prd of imageList | async">
+          <li class="collection-item avatar" >
+            <img src="{{prd.downloadURL}}" alt="" class="circle">
+            <span class="title">{{prd.product}} </span>
+            <p><i class="material-icons tiny">&#xE227;</i> {{prd.price}}</p>
+             <p> Quantity: <strong id="Quanty">{{prd.quantity}}</strong> <input type="text" [(ngModel)]="mvalor" id="valq"> </p>
+            <a (click)="init(prd )"  class="waves-effect waves-light btn secondary-content btn-addlist" id="" name="refawe2"><i class="material-icons">&#xE854;</i></a>
           </li>
         </ul>
     </div>
