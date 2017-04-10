@@ -8,7 +8,7 @@
           <span>
               <ul class="sub-menu ">
                   <li>
-                      <a href="#about" title="about">{{valueDate | date: 'dd/MM/yyyy'}}</a>
+                      <a href="#about" title="about">Sobre / About</a>
                   </li>
                   <li>
                       <a href="#skills" title="skills">Habilidades / Skills</a>
@@ -41,15 +41,15 @@
         </div>
 
       </div>
-      <blockquote id="shopd" *ngFor="let item of itemsP " >
+      <blockquote id="shopd" >
 
-          <div class="chip">
-            <img src="{{item.p}}" alt="Contact Person">
+          <div class="chip" *ngFor="let item of ObjCart " >
+            <img src="{{item.url}}" alt="Contact Person">
             {{item.q}}
             <i class="close material-icons">close</i>
           </div>
 
-          <a class="waves-effect waves-light btn"><i class="material-icons">&#xE8CC;</i>Buy</a>
+          <a class="waves-effect waves-light btn" (click)="purchasedItems( )" ><i class="material-icons">&#xE8CC;</i>Buy</a>
       </blockquote>
     </div>
       <div class="col s12  m9">
@@ -69,13 +69,13 @@
             </div>
           </div>
         </div>
-      <ul class="collection col s12"  *ngFor="let prd of imageList | async">
+      <ul class="collection col s12"  *ngFor="let prd of imageList | async; let i = index">
           <li class="collection-item avatar" >
-            <img src="{{prd.downloadURL}}" alt="" class="circle">
+            <img src="{{prd.downloadURL.pa}}" alt="" class="circle">
             <span class="title">{{prd.product}} </span>
             <p><i class="material-icons tiny">&#xE227;</i> {{prd.price}}</p>
              <p> Quantity: <strong id="Quanty">{{prd.quantity}}</strong> <input type="text" [(ngModel)]="mvalor" id="valq"> </p>
-            <a (click)="init(prd )"  class="waves-effect waves-light btn secondary-content btn-addlist" id="" name="refawe2"><i class="material-icons">&#xE854;</i></a>
+            <a (click)="init(prd, i )"  class="waves-effect waves-light btn secondary-content btn-addlist" id="" name="refawe2"><i class="material-icons">&#xE854;</i></a>
           </li>
         </ul>
     </div>
