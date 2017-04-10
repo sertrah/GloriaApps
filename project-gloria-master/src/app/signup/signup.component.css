@@ -6,3 +6,40 @@
 color: #ffffff;
     border-bottom: 1px solid #fff; 
 }
+.txt{
+     background: #5b1249;
+}
+.form-container {
+    background: #5b1249;
+    color: #fff;
+    padding-top: 10%;
+    /*padding:3.5em;
+    width:500px;*/
+    position:relative;
+    /*left:50%;
+    border: 1px solid #fff;
+    margin-left:-250px;*/
+}
+.margin-rs{
+    margin:0px 50px;
+}
+.valign-wrapper{
+    height: 100%;
+    margin-bottom: 0px;
+}
+.valign{
+    height: 100%;
+}
+#lock {
+    /*width:40%;
+    margin: 1.5em auto 4em auto;*/
+    display:block;
+    margin-top: 10%;
+    -webkit-animation:spin 8s ease-in infinite;
+    -moz-animation:spin 8s ease-in infinite;
+    animation:spin 8s ease-in infinite;
+}
+
+@-moz-keyframes spin { 100% { -moz-transform: rotateY(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotateY(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotateY(360deg); transform:rotateY(360deg);  } }

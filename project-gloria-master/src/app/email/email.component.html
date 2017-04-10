@@ -1,8 +1,5 @@
 <div class="row">
     <div class="container  ">
-      <a  routerLink="/login" id="goback" class="waves-effect waves-light btn btn-flat"><i class="material-icons left">&#xE314;</i>BACK</a>
-      <h2 class="col s12 center-align grey-text text-lighten-5">Custom Login</h2>
-
       <span class="col s12" class="error" *ngIf="error" [@fallIn]='state'>{{ error }}</span>
 
       <form #formData='ngForm' (ngSubmit)="onSubmit(formData)"  class="col s12 center">
