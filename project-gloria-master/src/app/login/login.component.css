@@ -1,34 +1,48 @@
 #lock {
-    width:40%;
-    margin: 1.5em auto 4em auto;
+    /*width:40%;
+    margin: 1.5em auto 4em auto;*/
     display:block;
+    margin-top: 10%;
     -webkit-animation:spin 8s ease-in infinite;
     -moz-animation:spin 8s ease-in infinite;
     animation:spin 8s ease-in infinite;
 }
-
+.margin-rs{
+    margin:0px 50px;
+}
+.valign-wrapper{
+    height: 100%;
+    margin-bottom: 0px;
+}
+.valign{
+    height: 100%;
+}
 #fb {
     background:#3B5998 url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/F_icon.svg/1024px-F_icon.svg.png') no-repeat 14px 6px;
     background-size: 47px;
     color:#fff;
 }
 .form-container {
-    background: rgba(84, 191, 220, 0.72);
-    padding:3.5em;
-    width:500px;
+    background: #5b1249;
+    color: #fff;
+    padding-top: 10%;
+    /*padding:3.5em;
+    width:500px;*/
     position:relative;
-    left:50%;
+    /*left:50%;
     border: 1px solid #fff;
-    margin-left:-250px;
+    margin-left:-250px;*/
 }
 #google {
     background: #fff  url('https://www.seeklogo.net/wp-content/uploads/2015/09/new-google-favicon.svg') no-repeat 25px;
     background-size: 25px;
+    color: #000;
 }
 
 #email {
     background: #ECECEC  url('https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Email_Silk.svg/2000px-Email_Silk.svg.png') no-repeat 25px;
     background-size: 25px;
+    color: #000;
 }
 @-moz-keyframes spin { 100% { -moz-transform: rotateY(360deg); } }
 @-webkit-keyframes spin { 100% { -webkit-transform: rotateY(360deg); } }
