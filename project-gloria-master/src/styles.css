@@ -21,7 +21,7 @@ a {
 
 
 body {
- background: #57c1dc;
+ background: #fff;
   background-position: center;
   background-size: cover;
   width: 100%;
@@ -289,7 +289,14 @@ h2 {
   margin-top: -20px;
   border-radius: 50%;
 }
-
+.preloader-wrapper{
+  position: fixed;
+  left: 50%;
+  margin-left: -20px;
+  top: 50%;
+  margin-top: -20px;
+  border-radius: 50%;
+}
 
 .loading:after {
   content: '';
@@ -410,12 +417,6 @@ h2 {
     body {
         padding-top:1.2em;
     }
-
-    .form-container {
-        padding:1.2em;
-        width:90%;
-        margin-left:-45%;
-    }
     button {
         font-size:1em;
     }
@@ -456,3 +457,38 @@ h2 {
               
               jello 1s ease-in;
         }
+
+
+.produktliste{margin:0;padding:0; padding-left: 5rem; padding-right: 5rem; max-width: inherit;}
+.produktliste img{width:100%}
+.produktliste .card{cursor:pointer}
+.produktliste .card-image{height:150px;max-height:150px}
+.produktliste .card-content{height:70px;max-height:100%}
+.produktliste .card-action{padding-top: 30px; border-top: 1px solid rgb(90, 34, 79)}
+.produktliste .card-content h3{padding:0;margin:0;font-size:1.5rem;line-height:1.4;font-weight:300}
+.produktliste .card-content h3 a{text-transform:none;color:#212121}
+.produktliste .row{margin:0 !important;padding-left:10px;padding-right:10px}
+.produktliste .price{color:#2196f3;position:relative;text-align:right}
+.produktliste .savemoney{position:absolute;color:#bdbdbd;right:10px;top:-20px}
+.produktliste .reviews-no{display:none}
+.produktliste .card .card-action a:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating){
+      margin-right: 0px;
+    }
+  @media only screen and (max-width:600px){
+    .produktliste{margin:20px 0}
+    .produktliste .card{
+      box-shadow:none;
+      border-bottom:1px solid #e0e0e0;
+      margin:0;
+      display: block;}
+    .produktliste .card-image{width:30%;float:left;height:auto;max-height:auto}
+    .produktliste .card-content{float:right;width:70%;height:auto;max-height:auto;padding:10px}
+    .produktliste .card-content h3{font-size:1.2rem;font-weight:300}
+    .produktliste .card-action{border:0;padding:20px 0 10px;margin:0; position: relative; width: 100%;}
+    .produktliste .price-used{display:none}
+    .product .card-image img{
+          height: auto !important;
+          width: 100% !important;
+    }
+
+    }

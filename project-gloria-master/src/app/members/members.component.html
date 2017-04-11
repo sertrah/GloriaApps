@@ -2,84 +2,95 @@
     <header [@fallIn]="state">
 
     </header>
-<div id="page" [@moveInLeft]="state" class="">
-      <div  class="openn">
-          <span class="cls"></span>
-          <span>
-              <ul class="sub-menu ">
-                  <li>
-                      <a href="#about" title="about">Sobre / About</a>
-                  </li>
-                  <li>
-                      <a href="#skills" title="skills">Habilidades / Skills</a>
-                  </li>
-                  <li>
-                      <a href="#jobs" title="jobs">Trabalhos / Jobs</a>
-                  </li>
-                  <li>
-                      <a (click)="logout()" title="Logout">Logout</a>
-                  </li>
-              </ul>
-          </span>
-          <span class="cls"></span>
-      </div>
-  <div class="row ">
-    <div class="col s12  m3">
-      <div class="card small">
-        <div class="card-image ">
-          <div class="overlay"></div>
-          <img  src="{{ObjUser.photoUrl}}" class="">
-          <span class="card-title">{{ ObjUser.name }}</span>
-        </div>
-        <div class="card-content">
-          <p> Saldo pendiente: $0.</p>
-          
-
-        </div>
-        <div class="card-action">
-            <a href="">Perfil</a>
-        </div>
-
-      </div>
-      <blockquote id="shopd" >
-
-          <div class="chip" *ngFor="let item of ObjCart " >
-            <img src="{{item.url}}" alt="Contact Person">
-            {{item.q}}
-            <i class="close material-icons">close</i>
-          </div>
-
-          <a class="waves-effect waves-light btn" (click)="purchasedItems( )" ><i class="material-icons">&#xE8CC;</i>Buy</a>
-      </blockquote>
+  <div id="page" [@moveInLeft]="state" class="">
+    <div  class="openn">
+        <span class="cls"></span>
+        <span>
+            <ul class="sub-menu ">
+                <li>
+                    <a href="#about" title="about">Sobre / About</a>
+                </li>
+                <li>
+                    <a href="#skills" title="skills">Habilidades / Skills</a>
+                </li>
+                <li>
+                    <a href="#jobs" title="jobs">Trabalhos / Jobs</a>
+                </li>
+                <li>
+                    <a (click)="logout()" title="Logout">Logout</a>
+                </li>
+            </ul>
+        </span>
+        <span class="cls"></span>
     </div>
-      <div class="col s12  m9">
-        <div class="col s12">
-          <div class="content-tittle">
-            <div class="content__container">
-              <p class="content__container__text">
-                Hello
-              </p>
-              
-              <ul class="content__container__list">
-                <li class="content__container__list__item">world !</li>
-                <li class="content__container__list__item">Yuxian !</li>
-                <li class="content__container__list__item">{{ ObjUser.name }} !</li>
-                <li class="content__container__list__item"> Doña Gloria !</li>
-              </ul>
+    <div class="row " style="max-width: inherit">    
+      <div class="col s12  m4 l2 ">
+        <div class="card small custom" style="height:330px; ">
+            <div class="card-image ">
+              <div class="overlay"></div>
+              <div class="container-img">
+                <img  src="{{ObjUser.photoUrl}}" class="">
+              </div>
+              <span class="card-title">{{ ObjUser.name }}</span>
+            </div>
+            <div class="card-content">
+              <p> Saldo pendiente: $0.</p>       
+            </div>
+            <div class="card-action">
+                <a href="" class="btn-flat">Perfil</a> <br>
+                <a href="" class="btn-flat">History </a>
+            </div>
+        </div>
+        <blockquote id="shopd" >
+            <div class="chip" *ngFor="let item of ObjCart " >
+              <img src="{{item.url}}" alt="Contact Person">
+              {{item.q}}
+              <i class="close material-icons">close</i>
+            </div>
+            <a class="waves-effect waves-light btn" (click)="purchasedItems( )" ><i class="material-icons">&#xE8CC;</i>Confirm</a>
+        </blockquote>
+      </div>
+      <div class="col s12  m8 l9 offset-l1">
+          <div class="col s12">
+            <div class="content-tittle">
+              <div class="content__container">
+                <p class="content__container__text">
+                  Hello
+                </p>              
+                <ul class="content__container__list">
+                  <li class="content__container__list__item">Yuxian !</li>
+                  <li class="content__container__list__item">{{ ObjUser.name }} !</li>
+                </ul>
+              </div>
             </div>
           </div>
+          <ul class="row produktliste col s12" >
+            <li  class="col l3 m4 s12 clearfix" *ngFor="let prd of imageList | async; let i = index" style="margin-bottom: 20px">
+                <div class="card row product">
+                    <div class="card-image">
+                      <img src="{{prd.downloadURL.pa}}" alt="iRobot Roomba 651">
+                    </div>
+                    <div class="card-content">
+                      <h3>{{prd.product}}</h3>
+                    </div>
+                    <div class="card-action row">
+                        <span class="col s6 l12 m12 price">
+                            <span>$ {{prd.price}} </span>
+                            <span class="savemoney">
+                              <a>available {{prd.quantity}}</a>
+                            </span>
+                        </span>
+                        <span class="col s6 l12 m12 price">
+                            <a (click)="addCart(prd, i )"  class="waves-effect waves-light btn secondary-content btn-addlist" id="" name="refawe2"><i class="material-icons">&#xE854;</i></a>
+                        </span>
+                    </div>
+                </div>
+              </li>
+
+          </ul>
         </div>
-      <ul class="collection col s12"  *ngFor="let prd of imageList | async; let i = index">
-          <li class="collection-item avatar" >
-            <img src="{{prd.downloadURL.pa}}" alt="" class="circle">
-            <span class="title">{{prd.product}} </span>
-            <p><i class="material-icons tiny">&#xE227;</i> {{prd.price}}</p>
-             <p> Quantity: <strong id="Quanty">{{prd.quantity}}</strong> <input type="text" [(ngModel)]="mvalor" id="valq"> </p>
-            <a (click)="init(prd, i )"  class="waves-effect waves-light btn secondary-content btn-addlist" id="" name="refawe2"><i class="material-icons">&#xE854;</i></a>
-          </li>
-        </ul>
+
     </div>
 
   </div>
 
-</div>

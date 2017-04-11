@@ -10,6 +10,7 @@ $(document).ready(function() {
             $('.openn').removeClass('oppenned');
             event.stopPropagation();
         });
+
     });
 
  $(document).ready(function(){
@@ -20,4 +21,12 @@ $(document).ready(function() {
         complete: function() { } // Callback for Modal close
     
     });
+  });
+
+  document.addEventListener("DOMContentLoaded", function(event) {
+           $('.product').each(function() {
+            var imgURL = $(this).find(".card-image").find('img').attr('src');
+            $(this).find(".card-image").css('background-image', 'url(' + imgURL + ')');
+        });
+      
   });

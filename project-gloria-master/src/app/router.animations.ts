@@ -2,8 +2,6 @@ import {trigger, state, animate, style, transition} from '@angular/core';
 
 export function moveIn() {
   return trigger('moveIn', [
-    state('void', style({}) ),
-    state('*', style({}) ),
     transition(':enter', [
       style({opacity:'0', transform: 'translateX(100px)'}),
       animate('.6s ease-in-out', style({opacity:'1', transform: 'translateX(0)'}))

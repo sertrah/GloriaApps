@@ -13,6 +13,8 @@ import { AuthGuard } from './auth.service';
 import { routes } from './app.routes';
 import { InventoryComponent } from './inventory/inventory.component';
 
+import { QueryDB } from './app.conection';
+
 
 
 var firebaseConfig = {
@@ -39,7 +41,7 @@ var firebaseConfig = {
     AngularFireModule.initializeApp(firebaseConfig),
     routes
   ],
-  providers: [AuthGuard],
+  providers: [AuthGuard,QueryDB],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
