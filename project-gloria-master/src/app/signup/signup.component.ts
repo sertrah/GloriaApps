@@ -13,7 +13,7 @@ import { IUser, User } from '../models/user';
 })
 export class SignupComponent implements OnInit {
   
- state: string = '';
+ 
   error: any;
 
   constructor(public af: AngularFire,private router: Router) {
