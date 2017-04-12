@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { AngularFire, AuthProviders, AuthMethods, FirebaseListObservable } from 'angularfire2';
+import { AngularFire, AuthProviders, AuthMethods, FirebaseListObservable,FirebaseObjectObservable } from 'angularfire2';
 import { Router } from '@angular/router';
 import { moveIn, fallIn, moveInLeft } from '../router.animations';
 import { Observable } from 'rxjs';
@@ -28,12 +28,14 @@ export class MembersComponent implements OnInit {
   public ObjUser: Object[] = [];
   public ObjCart: any[] = [];
   private authReg: any;
-  fileList: FirebaseListObservable<Image[]>;
+  public priceTotal: number = 0;
   imageList: Observable<Image[]>;
+  items: FirebaseListObservable<any>;
   constructor(public af: AngularFire, private router: Router, private qDB: QueryDB) {
     
     this.af.auth.subscribe(auth => {
       if (auth) {
+        
         this.authReg = auth.uid;
         this.af.database.list('/users/' + auth.uid, { preserveSnapshot: true })
           .subscribe(snapshots => {
@@ -43,6 +45,7 @@ export class MembersComponent implements OnInit {
             });
           });
         this.imageList = qDB.listProductForClient("inventory");
+           this.getUserPending(auth.uid);
       }
     });
 
@@ -106,7 +109,7 @@ export class MembersComponent implements OnInit {
         // update and push the data 
         
         items.update(product.key, { quantity: product.quantityT-product.q });
-        this.af.database.list('/purchased/' + this.authReg + '/' + (date_Currentdate) + '/' + product.key ).push({name: product.prod, price: product.p, quantity: product.q });
+        this.af.database.list('/purchased/' + this.authReg + '/' + (date_Currentdate) + '/' + product.key ).push({name: product.prod, price: product.p, quantity: product.q,  Ispaid: false });
         //reset my var
         this.qDB.removeItem('/purchased/' + this.authReg + '/' + (date_Currentdate) + '/' + product.key, '/transaction');
         location.reload();
@@ -115,6 +118,22 @@ export class MembersComponent implements OnInit {
     });
   
 }
+  getUserPending(uid){
+
+    this.af.database.list('/purchased/'+uid).subscribe((hola) =>{
+      hola.map((m) =>{
+          this.af.database.list('/purchased/'+uid+'/'+m.$key).subscribe((a) =>{
+            a.map((c)=> {
+                if(c.price != null ){
+                 this.priceTotal += parseFloat(c.price) * c.quantity ;
+                }
+            })
+          });
+      })
+    });
+
+
+  }
   // your use is value.toDateString.slice(start,end)
   // private toDateString(date: Date): string {
   //     return (date.getFullYear().toString() + '/' 
