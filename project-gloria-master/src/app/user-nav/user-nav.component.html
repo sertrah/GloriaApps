@@ -1,0 +1,17 @@
+        <div class="card small custom" style="min-height: 360px; background: transparent; ">
+            <div class="card-image ">
+              <div class="overlay-p"></div>
+              <div class="container-img">
+                <img  src="{{ObjUser.photoUrl}}" class="">
+              </div>
+              <span class="card-title">{{ ObjUser.name }}</span>
+            </div>
+            <div class="card-content">
+              <p style="color: #b30f0f; font-weight: bold;"> Saldo pendiente: $ {{priceTotal}}.</p>       
+            </div>
+            <div class="card-action">
+                <a href="/members" class="btn-flat cyan-text">products</a> <br>
+                <a href="/history" class="btn-flat cyan-text">History</a> <br>
+                <a (click)="logout()" class="btn-flat cyan-text" title="Logout">Logout</a>
+            </div>
+        </div>

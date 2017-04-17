@@ -14,6 +14,9 @@ import { routes } from './app.routes';
 import { InventoryComponent } from './inventory/inventory.component';
 
 import { QueryDB } from './app.conection';
+import { methodCustom } from './app.methods';
+import { HistorymembersComponent } from './historymembers/historymembers.component';
+import { UserNavComponent } from './user-nav/user-nav.component';
 
 
 
@@ -32,7 +35,9 @@ var firebaseConfig = {
     EmailComponent,
     SignupComponent,
     MembersComponent,
-    InventoryComponent
+    InventoryComponent,
+    HistorymembersComponent,
+    UserNavComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +46,7 @@ var firebaseConfig = {
     AngularFireModule.initializeApp(firebaseConfig),
     routes
   ],
-  providers: [AuthGuard,QueryDB],
+  providers: [AuthGuard,QueryDB,methodCustom],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

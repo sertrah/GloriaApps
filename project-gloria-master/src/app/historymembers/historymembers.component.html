@@ -1,0 +1,33 @@
+    <div class="row " style="max-width: inherit">    
+      <div class="col s12  m4 l2 fix-position">
+        <app-user-nav> </app-user-nav>
+      </div>
+    <div class="col s12  m8 l9 offset-l2 offset-m4">
+      <h1>Purchase history</h1>
+      <table class="responsive-table">
+              <thead>
+                <tr>
+                    <th>Order date</th>
+                    <th>Name</th>              
+                    <th>quantity</th>
+                    <th>Status</th>
+                    <th>Grand Total</th>
+                    
+                  
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let item of itemslist">
+                  <td>{{item.date | date:'fullDate'}}</td>
+                  <td>{{item.name}}</td>
+                  <td>{{item.quantity}}</td>
+                  <td [ngClass]="(item.Ispaid==true)? 'green-text':'red-text'">{{item.Ispaid == true ? "payout": "pending"}}</td>     
+                  <td>{{item.price * item.quantity}}</td>
+                          
+                </tr>
+                
+              </tbody>
+            </table>
+    </div>
+    </div>

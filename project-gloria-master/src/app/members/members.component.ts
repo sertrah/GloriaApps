@@ -25,10 +25,10 @@ interface Image {
 export class MembersComponent implements OnInit {
 
 
-  public ObjUser: Object[] = [];
+
   public ObjCart: any[] = [];
   private authReg: any;
-  public priceTotal: number = 0;
+
   imageList: Observable<Image[]>;
   items: FirebaseListObservable<any>;
   constructor(public af: AngularFire, private router: Router, private qDB: QueryDB) {
@@ -37,15 +37,7 @@ export class MembersComponent implements OnInit {
       if (auth) {
         
         this.authReg = auth.uid;
-        this.af.database.list('/users/' + auth.uid, { preserveSnapshot: true })
-          .subscribe(snapshots => {
-            snapshots.forEach(snapshot => {
-              this.ObjUser[snapshot.key] = snapshot.val();
-
-            });
-          });
         this.imageList = qDB.listProductForClient("inventory");
-           this.getUserPending(auth.uid);
       }
     });
 
@@ -63,7 +55,7 @@ export class MembersComponent implements OnInit {
   addCart(a, i) {
     var date = new Date();
     var date_Currentdate = ('0' + (date.getMonth() + 1)).slice(-2) + "-" + ('0' + date.getDate()).slice(-2) + "-" + date.getFullYear();
-    var adaRankRef = firebase.database().ref('/purchased/' + this.authReg + '/' + (date_Currentdate) + '/' + a.$key + "/transaction");
+    var adaRankRef = firebase.database().ref('/transaction/' + this.authReg + '/' + (date_Currentdate) + '/' + a.$key + "/transaction");
         adaRankRef.transaction( (currentRank) => {
 
           var quantityProduct = this.qDB.getData('inventory/' + a.$key + '/quantity');
@@ -109,30 +101,19 @@ export class MembersComponent implements OnInit {
         // update and push the data 
         
         items.update(product.key, { quantity: product.quantityT-product.q });
-        this.af.database.list('/purchased/' + this.authReg + '/' + (date_Currentdate) + '/' + product.key ).push({name: product.prod, price: product.p, quantity: product.q,  Ispaid: false });
+        this.af.database.list('/purchased/' + this.authReg + '/' + (date_Currentdate)).push({name: product.prod, price: product.p, quantity: product.q,  Ispaid: false, keyreference: product.key, date: Math.round(new Date().getTime()/1000) });
         //reset my var
-        this.qDB.removeItem('/purchased/' + this.authReg + '/' + (date_Currentdate) + '/' + product.key, '/transaction');
+        this.qDB.removeItem('/transaction/' + this.authReg + '/' + (date_Currentdate) + '/' + product.key, '/transaction');
         location.reload();
       }
 
     });
   
 }
-  getUserPending(uid){
 
-    this.af.database.list('/purchased/'+uid).subscribe((hola) =>{
-      hola.map((m) =>{
-          this.af.database.list('/purchased/'+uid+'/'+m.$key).subscribe((a) =>{
-            a.map((c)=> {
-                if(c.price != null ){
-                 this.priceTotal += parseFloat(c.price) * c.quantity ;
-                }
-            })
-          });
-      })
-    });
-
-
+  getDate(){
+    var date = new Date();
+   return  ('0' + (date.getMonth() + 1)).slice(-2) + "-" + ('0' + date.getDate()).slice(-2) + "-" + date.getFullYear();
   }
   // your use is value.toDateString.slice(start,end)
   // private toDateString(date: Date): string {

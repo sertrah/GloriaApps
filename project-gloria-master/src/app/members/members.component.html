@@ -3,44 +3,10 @@
 
     </header>
   <div id="page" [@moveInLeft]="state" class="">
-    <div  class="openn">
-        <span class="cls"></span>
-        <span>
-            <ul class="sub-menu ">
-                <li>
-                    <a href="#about" title="about">Sobre / About</a>
-                </li>
-                <li>
-                    <a href="#skills" title="skills">Habilidades / Skills</a>
-                </li>
-                <li>
-                    <a href="#jobs" title="jobs">Trabalhos / Jobs</a>
-                </li>
-                <li>
-                    <a (click)="logout()" title="Logout">Logout</a>
-                </li>
-            </ul>
-        </span>
-        <span class="cls"></span>
-    </div>
+
     <div class="row " style="max-width: inherit">    
-      <div class="col s12  m4 l2 ">
-        <div class="card small custom" style="height:330px; ">
-            <div class="card-image ">
-              <div class="overlay"></div>
-              <div class="container-img">
-                <img  src="{{ObjUser.photoUrl}}" class="">
-              </div>
-              <span class="card-title">{{ ObjUser.name }}</span>
-            </div>
-            <div class="card-content">
-              <p> Saldo pendiente: $ {{priceTotal}}.</p>       
-            </div>
-            <div class="card-action">
-                <a href="" class="btn-flat">Perfil</a> <br>
-                <a href="" class="btn-flat">History </a>
-            </div>
-        </div>
+      <div class="col s12  m4 l2 fix-position">
+        <app-user-nav> </app-user-nav>
         <blockquote id="shopd" >
             <div class="chip" *ngFor="let item of ObjCart " >
               <img src="{{item.url}}" alt="Contact Person">
@@ -50,7 +16,7 @@
             <a class="waves-effect waves-light btn" (click)="purchasedItems( )" ><i class="material-icons">&#xE8CC;</i>Confirm</a>
         </blockquote>
       </div>
-      <div class="col s12  m8 l9 offset-l1">
+      <div class="col s12  m8 l9 offset-l3 offset-m4">
           <div class="col s12">
             <div class="content-tittle">
                   <h3 class="left-align">Welcome back! </h3>
@@ -69,16 +35,13 @@
                       <h3>{{prd.product}}</h3>
                     </div>
                     <div class="card-action row">
-                        <span class="col s6 l12 m12 price">
-                            <span>$ {{prd.price}} </span>
-                            <span class="savemoney">
-                              <a>available {{prd.quantity}}</a>
-                            </span>
-                        </span>
-                        <span class="col s6 l12 m12 price">
+                        
+                        <p class="col s6 l6 m6 ">${{prd.price}} </p>
+                        <span class="col s6 l6 m6 ">
                             <a (click)="addCart(prd, i )"  class="waves-effect waves-light btn secondary-content btn-addlist" id="" name="refawe2"><i class="material-icons">&#xE854;</i></a>
                         </span>
                     </div>
+                   <span style="position: absolute; right: 0;" data-badge-caption="available" class="new badge green">{{prd.quantity}}</span>
                 </div>
               </li>
 
