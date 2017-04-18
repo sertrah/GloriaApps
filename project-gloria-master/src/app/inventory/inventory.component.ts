@@ -83,20 +83,20 @@ export class InventoryComponent implements OnInit {
   }
   ngOnInit() {
   }
-  SubmitData(formData, path) {
+  SubmitData(formData, path= null ) {
      var product= this.validFieldForm(formData.productN, "product" );
      var price= this.validFieldForm(formData.price, "price" );
      var quantity= this.validFieldForm(formData.quantity, "quantity" );
-     var path= path;
+     var path= path == null ? this.ObjProd["path"] : path;
+
         if(this.ObjProd["type"]){
         this.fileList.update(this.ObjProd["key"], new Inventory(product, price, quantity, path));
-        console.log(product, price, quantity,path);
-        console.log("true");
+
         }else if(this.ObjProd["type"] == false){
         this.fileList.push(new Inventory(product, price, quantity, path));
-        console.log(product, price, quantity,path);
-        console.log("false");
-        }
+
+      }
+      return false
     }
 
   validFieldForm(value, Idnty){
@@ -129,6 +129,7 @@ export class InventoryComponent implements OnInit {
 
         let success = false;
         // This currently only grabs item 0, TODO refactor it to grab them all
+        if([(<HTMLInputElement>document.getElementById('file')).files[0]] == null){
          for (let selectedFile of [(<HTMLInputElement>document.getElementById('file')).files[0]]) {
              console.log(selectedFile);
               //Make local copies of services because "this" will be clobbered
@@ -138,18 +139,30 @@ export class InventoryComponent implements OnInit {
              let path = `/images/${selectedFile.name}`;
              var iRef = storageRef.child(path);
              iRef.put(selectedFile).then((snapshot) => {
-                 console.log('Uploaded a blob or file! Now storing the reference at',`/images/`);
-                  console.log('Uploaded a now reference at',`/inventory/`);
                  this.SubmitData(formData,path);
 
              });
          }
-        
+        }else{
+           this.SubmitData(formData);
+           console.log("hahahahha");
+        }
+      return false
     }
-    delete(a, k) {
+    delReg(a, k) {
         let storagePath = a;
         let referencePath = k;
-        console.log(storagePath, referencePath);
+        
+         const items = this.af.database.list('/inventory');
+         items.remove(referencePath);
+
+        //  delete from storage
+         firebase.storage().ref().child(storagePath).delete().then(
+              () => {},
+              (error) => console.error("Error deleting stored file",storagePath)
+          );
+
+    
         // Do these as two separate steps so you can still try delete ref if file no longer exists
 
         // Delete from Storage

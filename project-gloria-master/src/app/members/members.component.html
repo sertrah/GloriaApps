@@ -4,8 +4,10 @@
     </header>
   <div id="page" [@moveInLeft]="state" class="">
 
-    <div class="row " style="max-width: inherit">    
+    <div class="row " style="max-width: inherit;  margin-top: -20px; ">
       <div class="col s12  m4 l2 fix-position">
+      </div>   
+      <div class="col s12  m4 l2 " style=" background: #c9c9c9">
         <app-user-nav> </app-user-nav>
         <blockquote id="shopd" >
             <div class="chip" *ngFor="let item of ObjCart " [ngClass]="{'hide': item.q==0}">
@@ -16,7 +18,7 @@
             <a class="waves-effect waves-light btn" (click)="purchasedItems( )" ><i class="material-icons">&#xE8CC;</i>Confirm</a>
         </blockquote>
       </div>
-      <div class="col s12  m8 l10 offset-l2 offset-m4">
+      <div class="col s12  m8 l10 ">
          <div class="container">
           <div class="col s12">
             <div class="content-tittle">

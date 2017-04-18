@@ -1,33 +1,46 @@
-<div>
-  <a id="scale-demo" data-target="modal1" (click)="openModal('nokey', false)" class="btn-large scale-transition" style="position: fixed;z-index: 999999999999999999; right: 9%; padding-left: 12px;padding-right: 12px;">
+  <a  data-target="modal1" (click)="openModal('nokey', false)" class="btn-floating btn-large waves-effect waves-light show-on-small hide-on-large-only hide-on-med-only " style="position: fixed;
+    right: 10px;">
     <i class="material-icons">add</i>
   </a>
-  <h4 style="text-align: center; color: #26a69a">INVENTORY</h4>
-</div>
 
 
 <!--<button data-target="modal1" class="btn" (click)="openModal('nokey', false)">INSERT PRODUCTS</button>-->
-<div class="row">
-  <div class="col l3 m6 s12 product-card" *ngFor="let img of imageList | async">
-    <div class="card">
-      <div class="card-image">
-        <img src="{{ img.downloadURL.pa }}" style="width:70%;height:180px;margin:0% auto">
+<div class="row" style="max-width: inherit; margin-top: -20px;"> 
+      <div class="col s12  m4 l2 fix-position">
       </div>
-      <div class="card-content">
-        <span class="card-title">
-          {{img.product}}
-        </span>
-        <div>Price: {{img.price}}</div>
-        <div>Quantity: {{img.quantity}}</div>
+      <div class="col s12  m4 l2 " style=" background: #c9c9c9">
+        <app-user-nav> </app-user-nav>
       </div>
-      <div class="card-action" style="text-align: right">
-        <a data-target="modal1" class="btn-floating" (click)="openModal(img.$key, true)"><i class="material-icons">&#xE3C9;</i></a>
-        <a class="btn-floating" (click)="delReg(img.$key)"><i class="material-icons">&#xE92B;</i></a>
-      </div>
-    </div>
-  </div>
-</div>
 
+      <div class="col s12  m8 l10">
+         <div class="container">
+          <div class="col s12">
+            <div class="content-tittle">
+                <h1 class="left-align">Inventario </h1>
+                <a  data-target="modal1" (click)="openModal('nokey', false)" class="waves-effect waves-light btn hide-on-small-only"><i class="material-icons">add</i> Agregar Producto</a>
+            </div>
+          </div>
+            <div class="col l3 m6 s12 product-card" *ngFor="let img of imageList | async">
+              <div class="card">
+                <div class="card-image">
+                  <img src="{{ img.downloadURL.pa }}" >
+                </div>
+                <div class="card-content">
+                  <span class="card-title">
+                    {{img.product}}
+                  </span>
+                  <div>Precio: {{img.price}}</div>
+                  <div>Cantidad: {{img.quantity}}</div>
+                </div>
+                <div class="card-action" style="text-align: right">
+                  <a data-target="modal1" class="btn-floating" (click)="openModal(img.$key, true)"><i class="material-icons">&#xE3C9;</i></a>
+                  <a class="btn-floating" (click)="delReg(img.path, img.$key )"><i class="material-icons">&#xE92B;</i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
 <!-- Modal Structure -->
 <div id="modal1" class="modal">
@@ -43,14 +56,14 @@
           <label for="price">price</label>
         </div>
         <div class="input-field col s12">
-          <input [(ngModel)]="quantity" value="{{ObjProd.quantity}}" name="quantity" type="text" autofocus>
+          <input [(ngModel)]="quantity" value="{{ObjProd.path}}" name="quantity" type="text" autofocus>
           <label for="quantity">quantity</label>
         </div>
-        <div class="input-field col s12">
-          <input [(ngModel)]="photoURL" value="{{ObjProd.product}}" name="photoURL" type="text" autofocus>
+        <!--<div class="input-field col s12">
+          <input [(ngModel)]="photoURL" value="{{ObjProd.photoURL}}" name="photoURL" type="text" autofocus>
           <label for="photoURL">photoURL</label>
 
-        </div>
+        </div>-->
       </div>
     </div>
     <div class="modal-footer">
@@ -66,6 +79,6 @@
         </div>
       </div>
     </div>
-    <button type="submit" class="modal-action modal-close  ">Update Product</button>
+    <button type="submit" class="modal-action modal-close  ">Aceptar</button>
   </form>
 </div>

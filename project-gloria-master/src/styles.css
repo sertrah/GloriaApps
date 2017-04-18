@@ -433,6 +433,16 @@ h2 {
         top:0px;
         margin-bottom: 20px;
     }
+    h1{
+      font-size: 3rem !important;
+    }
+    .container{
+      width: 100% !important;
+    }
+    .produktliste{
+          padding-left: 0px;
+    padding-right: 0px;
+    }
 }
 
 @-webkit-keyframes jello
@@ -488,7 +498,9 @@ h2 {
       margin-right: 0px;
     }
   @media only screen and (max-width:600px){
-    .produktliste{margin:20px 0}
+    .produktliste{margin:20px 0;
+              padding-left: 0px;
+    padding-right: 0px;}
     .produktliste .card{
       box-shadow:none;
       border-bottom:1px solid #e0e0e0;

@@ -8,7 +8,7 @@
               <span class="card-title">{{ ObjUser.name }}</span>
             </div>
             <div class="card-content">
-              <p style="color: #b30f0f; font-weight: bold;"> Saldo pendiente: $ {{priceTotal}}.</p>       
+              <p style="color: #b30f0f; font-weight: bold;"> Fiao :{{ priceTotal | currency:'USD':true:'3.2-2'}}</p>       
             </div>
             <div class="card-action">
                 <a href="/members" class="btn-flat cyan-text">products</a> <br>

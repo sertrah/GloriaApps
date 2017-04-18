@@ -5,3 +5,8 @@
 .btn-large .scale-transition {
     float: right;
 }
+.card-image img{
+   width: auto;
+   height: 120px;
+   margin: 0% auto;
+}
