@@ -8,28 +8,29 @@
       <div class="col s12  m4 l2 fix-position">
         <app-user-nav> </app-user-nav>
         <blockquote id="shopd" >
-            <div class="chip" *ngFor="let item of ObjCart " >
-              <img src="{{item.url}}" alt="Contact Person">
+            <div class="chip" *ngFor="let item of ObjCart " [ngClass]="{'hide': item.q==0}">
+              <img src="{{item.url}}" alt="Contact Person" >
               {{item.q}}
-              <i class="close material-icons">close</i>
+
             </div>
             <a class="waves-effect waves-light btn" (click)="purchasedItems( )" ><i class="material-icons">&#xE8CC;</i>Confirm</a>
         </blockquote>
       </div>
-      <div class="col s12  m8 l9 offset-l3 offset-m4">
+      <div class="col s12  m8 l10 offset-l2 offset-m4">
+         <div class="container">
           <div class="col s12">
             <div class="content-tittle">
-                  <h3 class="left-align">Welcome back! </h3>
+                  <h1 class="left-align">the best products! </h1>
 
 
 
             </div>
           </div>
           <ul class="row produktliste col s12" >
-            <li  class="col l3 m4 s12 clearfix" *ngFor="let prd of imageList | async; let i = index" style="margin-bottom: 20px">
-                <div class="card row product">
+            <li  class="col l3 m4 s12 clearfix" *ngFor="let prd of imageList | async; let i = index" style="margin-bottom: 20px; margin-left: 0px;" [ngClass]="{'hide': prd.quantity==0}">
+                <div class="card row product  z-depth-4">
                     <div class="card-image">
-                      <img src="{{prd.downloadURL.pa}}" alt="iRobot Roomba 651">
+                      <img src="{{prd.downloadURL.pa}}" alt="Img">
                     </div>
                     <div class="card-content">
                       <h3>{{prd.product}}</h3>
@@ -37,17 +38,22 @@
                     <div class="card-action row">
                         
                         <p class="col s6 l6 m6 ">${{prd.price}} </p>
-                        <span class="col s6 l6 m6 ">
-                            <a (click)="addCart(prd, i )"  class="waves-effect waves-light btn secondary-content btn-addlist" id="" name="refawe2"><i class="material-icons">&#xE854;</i></a>
+                        <span class="col s6 l6 m6 " style="min-height: 43px;     max-height: 43px;">
+                            <a (click)="addCart(prd, i, false)"  class=" waves-effect waves-light btn secondary-content btn-addlist" id="s" name="refawe2" onclick="btncount(this)"><i class="material-icons">&#xE854;</i></a>
+                            <p style="display: inline-block; width: 100%; display: none">
+                              <a (click)="addCart(prd, i, false )"  class="waves-effect waves-light btn secondary-content btn-addlist" name="refawe3" style=" padding-left: 5px;    padding-right: 5px;"><i class="material-icons">&#xE148;</i></a>
+                              <a (click)="addCart(prd, i,true )"  class="waves-effect waves-light btn secondary-content btn-addlist" name="refawe4" style="padding-right: 5px;    padding-left: 5px;"><i class="material-icons">&#xE15D;</i></a>
+                            </p>
+                            
                         </span>
                     </div>
-                   <span style="position: absolute; right: 0;" data-badge-caption="available" class="new badge green">{{prd.quantity}}</span>
+                   <span style="position: absolute; right: 0;     top: 0;" data-badge-caption="available" class="new badge green">{{prd.quantity}}</span>
                 </div>
               </li>
 
           </ul>
         </div>
-
+      </div>
     </div>
 
   </div>

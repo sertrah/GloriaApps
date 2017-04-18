@@ -3,6 +3,7 @@
     border-radius: 50%;
     margin: 1% auto;
     width: 100px;
+    position: relative;
     margin-bottom: 60px;
 }
 .card.small.custom{
@@ -15,10 +16,10 @@
 }
 .card-title{
     z-index: 2;
-    color: rgba(8, 182, 218, 0.97)  !important;
+    color: #666  !important;
     font-weight: bold;
     width: 100%;
-    background: rgba(83, 29, 75, 0.68)  !important;
+    text-align: center;
     padding: 10px  !important;
 }
 .card-image:hover .overlay-p{
@@ -35,6 +36,7 @@
   overflow: hidden;
   z-index: 1 !important;
   z-index: 10;
+  border-radius: 50%;
   transition: .5s ease;
   background-color: rgba(79, 25, 73, 0.53); /*dim the background*/
 }

@@ -34,7 +34,14 @@ body {
 h1 {
   width: 100%;
   text-align: center;
-  padding: 40px 0;
+}
+.container{
+      max-width: 1340px;
+}
+@media only screen and (min-width: 993px){
+  .container {
+      width: 90%;
+  }
 }
 
 .openn {
@@ -420,11 +427,11 @@ h2 {
 
 
 @media (max-width: 600px) {
-    body {
-        padding-top:1.2em;
-    }
-    button {
-        font-size:1em;
+    .fix-position{
+        position: relative;
+        height: 100%;
+        top:0px;
+        margin-bottom: 20px;
     }
 }
 

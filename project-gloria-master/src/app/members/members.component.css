@@ -34,17 +34,10 @@ h2 {
     }
 }
 
-/* animation the el tittle */
-  .content-tittle {
-  position: relative;
-  font-size: 25px;
-  line-height: 25px;
-  color: #198fa1;
-  /*-webkit-animation: opacity 5s infinite; /* Safari 4.0 - 8.0 
-  animation: opacity 5s infinite;*/
-}
+
 h1{
   padding-top: 0px;
+  margin-top: 0px;
 }
 
 @-webkit-keyframes opacity {

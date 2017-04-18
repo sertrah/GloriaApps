@@ -16,10 +16,10 @@
 <body>
     <header >
       <div class="row" style="max-width: inherit;">
-      <div class="col l2 m4 s12">
+      <div class="col l2 m4 s12" style="text-align: center">
         <img  style="    max-width: 100px;" src="https://ii.ct-stc.com/1/logos/empresas/2016/11/30/yuxi-pacific-latam-D5610CA2B7016729thumbnail.jpeg" alt="">
       </div>
-      <div class="col l10  m8  purple darken-4">
+      <div class="col l10  m8" style="background-color: #59214e !important;">
 
       </div>
       </div>
@@ -46,5 +46,13 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script>
   <script src="assets/js/Animation.js">  </script>
+  <script>
+    function btncount(id) {
+         console.log($(id).text());
+        $(id).parents("span").find("p").css({ 'display': "block" });
+        $(id).hide();
+        console.log($(id).parents(".card").find(".badge").text());
+      }
+  </script>
 
 </html>

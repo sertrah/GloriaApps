@@ -52,7 +52,7 @@ export class MembersComponent implements OnInit {
 
   ngOnInit() {
   }
-  addCart(a, i) {
+  addCart(a, i, b= false) {
     var date = new Date();
     var date_Currentdate = ('0' + (date.getMonth() + 1)).slice(-2) + "-" + ('0' + date.getDate()).slice(-2) + "-" + date.getFullYear();
     var adaRankRef = firebase.database().ref('/transaction/' + this.authReg + '/' + (date_Currentdate) + '/' + a.$key + "/transaction");
@@ -60,17 +60,27 @@ export class MembersComponent implements OnInit {
 
           var quantityProduct = this.qDB.getData('inventory/' + a.$key + '/quantity');
           
-          if (currentRank < quantityProduct) {
+          if (currentRank < quantityProduct && b== false) {
               var current = currentRank + 1;
               return current;
-          }if(currentRank == null){
+          }if(currentRank >= 1 && b== true) {
+              console.log(currentRank);
+              return currentRank-1;
+            
+          }
+          
+          if(currentRank == null){
               return currentRank++;
           }
         }).then(
-        (success) => {        
-          if(success.committed == true){
-            this.addProduct({ prod: a.product, url: a.downloadURL.pa, p: a.price, q: success.snapshot.A.B, key: a.$key, quantityT: a.quantity });
-            console.log(success.committed);
+        (success) => {
+          console.log(success);    
+          if(success.committed == true && b == false){
+            this.addProduct({ prod: a.product, url: a.downloadURL.pa, p: a.price, q: success.snapshot.A.B, key: a.$key, quantityT: a.quantity },true);
+          
+          }if(success.committed == true && b == true){
+            this.addProduct({ prod: a.product, url: a.downloadURL.pa, p: a.price, q: success.snapshot.A.B, key: a.$key, quantityT: a.quantity },false);
+            
           }
         }).catch(
           (err) => {
@@ -78,22 +88,32 @@ export class MembersComponent implements OnInit {
           })
   }
 
-  addProduct(productToAdd): void {
+  addProduct(productToAdd, bol): void {
     let found;
-    this.ObjCart.map((product) => {
-      if (product.key === productToAdd.key) {
-        product.q++;
-        found = true;
+    if(bol){
+      this.ObjCart.map((product) => {
+        if (product.key === productToAdd.key) {
+          product.q++;
+          found = true;
+        }
+      });
+      if (!found) {
+        this.ObjCart.push(productToAdd);
       }
-    });
-    if (!found) {
-      this.ObjCart.push(productToAdd);
+    }else{
+      this.ObjCart.map((product) => {
+        if (product.key === productToAdd.key) {
+          product.q= product.q-1;
+          found = true;
+        }
+      });
     }
+
   }
   purchasedItems(){
       this.ObjCart.map((product) => {
       var quantityProduct = this.qDB.getData('inventory/' + product.key + '/quantity');
-      if(product.q  <=  quantityProduct ){
+      if(product.q  <=  quantityProduct && product.q > 0){
         console.log("exitoso");
         var date = new Date();
         var date_Currentdate = ('0' + (date.getMonth() + 1)).slice(-2) + "-" + ('0' + date.getDate()).slice(-2) + "-" + date.getFullYear();
