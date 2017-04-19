@@ -319,6 +319,7 @@ h2 {
   position: fixed;
     height: 100%;
     top: 77px;
+    z-index: -1;
     background: #c9c9c9;
 }
 .btn-5 {

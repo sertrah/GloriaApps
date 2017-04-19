@@ -10,7 +10,7 @@
       <div class="col s12  m4 l2 " style=" background: #c9c9c9">
         <app-user-nav> </app-user-nav>
         <blockquote id="shopd" >
-            <div class="chip" *ngFor="let item of ObjCart ">
+            <div class="chip" *ngFor="let item of ObjCart " [ngClass]="{'hide': item.q==0}">
               <img src="{{item.url}}" alt="Contact Person" >
               {{item.q}}
 
@@ -32,7 +32,7 @@
             <li  class="col l3 m4 s12 clearfix" *ngFor="let prd of imageList | async; let i = index" style="margin-bottom: 20px; margin-left: 0px;" [ngClass]="{'hide': prd.quantity==0}">
                 <div class="card row product  z-depth-4">
                     <div class="card-image">
-                      <img src="{{prd.downloadURL.pa}}" alt="Img">
+                      <img src="{{prd.downloadURL.qa}}" alt="Img">
                     </div>
                     <div class="card-content">
                       <h3>{{prd.product}}</h3>

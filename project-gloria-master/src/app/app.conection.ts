@@ -22,7 +22,7 @@ export class QueryDB  {
           itemList.map(item => {
             var pathReference = storage.ref(item.path).getDownloadURL().then(url => { return url });
             let result = { $key: item.$key, downloadURL: pathReference, path: item.path, product: item.product, price: item.price, quantity: item.quantity };
-
+            console.log(pathReference);
             return result;
           })
         );

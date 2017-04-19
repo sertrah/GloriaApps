@@ -30,14 +30,15 @@ export class UserNavComponent implements OnInit {
     getUserPending(uid){
 
       this.af.database.list('/purchased/'+uid).subscribe((hola) =>{
+        //clean var 
+        this.priceTotal = 0;
         hola.map((m) =>{
+          
             this.af.database.list('/purchased/'+uid+'/'+m.$key).subscribe((a) =>{
-              //clean var 
-              this.priceTotal = 0;
-              a.map((c)=> {
-                console.log(c.$key);
 
-                    console.log(c);
+              a.map((c)=> {
+
+                    console.log(c.price);
                   if(c.price != null && c.Ispaid == false){
                   this.priceTotal += parseFloat(c.price) * c.quantity ;
                   }

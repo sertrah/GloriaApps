@@ -64,7 +64,7 @@ export class MembersComponent implements OnInit {
               var current = currentRank + 1;
               return current;
           }if(currentRank >= 1 && b== true) {
-              console.log(currentRank);
+             
               return currentRank-1;
             
           }
@@ -74,13 +74,13 @@ export class MembersComponent implements OnInit {
           }
         }).then(
         (success) => {
-          console.log(success);    
+          
           if(success.committed == true && b == false){
             this.addProduct({ prod: a.product, url: a.downloadURL.pa, p: a.price, q: success.snapshot.A.B, key: a.$key, quantityT: a.quantity },true);
-            console.log(a.downloadURL.pa,"true");
+          
           }if(success.committed == true && b == true){
             this.addProduct({ prod: a.product, url: a.downloadURL.pa, p: a.price, q: success.snapshot.A.B, key: a.$key, quantityT: a.quantity },false);
-            console.log(a.downloadURL.pa,"false");
+            
           }
         }).catch(
           (err) => {
@@ -90,31 +90,31 @@ export class MembersComponent implements OnInit {
 
   addProduct(productToAdd, bol): void {
     let found;
-    
+    if(bol){
       this.ObjCart.map((product) => {
         if (product.key === productToAdd.key) {
-            if(bol){
-            product.q++;
-           
-          }else{
-            product.q= product.q-1;
-                           
-            }
-           found = true;
-          console.log( this.ObjCart);
+          product.q++;
+          found = true;
         }
       });
-      
+      if (!found) {
         this.ObjCart.push(productToAdd);
-     
-     
-    console.log( this.ObjCart);
+      }
+    }else{
+      this.ObjCart.map((product) => {
+        if (product.key === productToAdd.key) {
+          product.q= product.q-1;
+          found = true;
+        }
+      });
+    }
+
   }
   purchasedItems(){
       this.ObjCart.map((product) => {
       var quantityProduct = this.qDB.getData('inventory/' + product.key + '/quantity');
       if(product.q  <=  quantityProduct && product.q > 0){
-        console.log("exitoso");
+       
         var date = new Date();
         var date_Currentdate = ('0' + (date.getMonth() + 1)).slice(-2) + "-" + ('0' + date.getDate()).slice(-2) + "-" + date.getFullYear();
         const items = this.af.database.list('inventory/' );

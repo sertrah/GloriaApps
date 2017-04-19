@@ -17,6 +17,7 @@ import { QueryDB } from './app.conection';
 import { methodCustom } from './app.methods';
 import { HistorymembersComponent } from './historymembers/historymembers.component';
 import { UserNavComponent } from './user-nav/user-nav.component';
+import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
 
 
 
@@ -41,6 +42,7 @@ var firebaseConfig = {
   ],
   imports: [
     BrowserModule,
+    NgxPaginationModule,
     FormsModule,
     HttpModule,
     AngularFireModule.initializeApp(firebaseConfig),

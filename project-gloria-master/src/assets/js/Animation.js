@@ -14,7 +14,12 @@ $(document).ready(function() {
     });
 
  $(document).ready(function(){
-
+ $('.datepicker').pickadate({
+    format: 'mm/dd/yyyy',
+    selectMonths: true, // Creates a dropdown to control month
+    selectYears: 15 // Creates a dropdown of 15 years to control year
+  });
+        
     // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
     $('.modal').modal({
         ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
