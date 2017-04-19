@@ -10,7 +10,7 @@
       <div class="col s12  m4 l2 " style=" background: #c9c9c9">
         <app-user-nav> </app-user-nav>
         <blockquote id="shopd" >
-            <div class="chip" *ngFor="let item of ObjCart " [ngClass]="{'hide': item.q==0}">
+            <div class="chip" *ngFor="let item of ObjCart ">
               <img src="{{item.url}}" alt="Contact Person" >
               {{item.q}}
 

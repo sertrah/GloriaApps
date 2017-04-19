@@ -77,10 +77,10 @@ export class MembersComponent implements OnInit {
           console.log(success);    
           if(success.committed == true && b == false){
             this.addProduct({ prod: a.product, url: a.downloadURL.pa, p: a.price, q: success.snapshot.A.B, key: a.$key, quantityT: a.quantity },true);
-          
+            console.log(a.downloadURL.pa,"true");
           }if(success.committed == true && b == true){
             this.addProduct({ prod: a.product, url: a.downloadURL.pa, p: a.price, q: success.snapshot.A.B, key: a.$key, quantityT: a.quantity },false);
-            
+            console.log(a.downloadURL.pa,"false");
           }
         }).catch(
           (err) => {
@@ -90,25 +90,25 @@ export class MembersComponent implements OnInit {
 
   addProduct(productToAdd, bol): void {
     let found;
-    if(bol){
+    
       this.ObjCart.map((product) => {
         if (product.key === productToAdd.key) {
-          product.q++;
-          found = true;
+            if(bol){
+            product.q++;
+           
+          }else{
+            product.q= product.q-1;
+                           
+            }
+           found = true;
+          console.log( this.ObjCart);
         }
       });
-      if (!found) {
+      
         this.ObjCart.push(productToAdd);
-      }
-    }else{
-      this.ObjCart.map((product) => {
-        if (product.key === productToAdd.key) {
-          product.q= product.q-1;
-          found = true;
-        }
-      });
-    }
-
+     
+     
+    console.log( this.ObjCart);
   }
   purchasedItems(){
       this.ObjCart.map((product) => {
