@@ -28,7 +28,7 @@ export class MembersComponent implements OnInit {
 
   public ObjCart: any[] = [];
   private authReg: any;
-
+  imgnolist: string = "https://firebasestorage.googleapis.com/v0/b/gloriaapps-a00ed.appspot.com/o/images%2Fnoimg.jpg?alt=media&token=ca822b00-4db9-4acd-9215-c3f7b47f9f45";
   imageList: Observable<Image[]>;
   items: FirebaseListObservable<any>;
   constructor(public af: AngularFire, private router: Router, private qDB: QueryDB) {
