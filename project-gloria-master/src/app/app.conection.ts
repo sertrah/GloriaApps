@@ -1,6 +1,6 @@
 import { CanActivate, Router } from '@angular/router';
-import { AngularFireAuth, AngularFire, FirebaseListObservable } from "angularfire2/angularfire2";
-import { Injectable } from "@angular/core";
+import { AngularFireAuth, AngularFire, FirebaseListObservable, FirebaseApp  } from "angularfire2/angularfire2";
+import { Injectable, Inject } from "@angular/core";
 import { Observable } from "rxjs/Rx";
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/map';
@@ -11,8 +11,9 @@ import * as firebase from 'firebase';
 export class QueryDB  {
     fileList: FirebaseListObservable<any[]>;
     anyList: Observable<any[]>;
-    constructor(private auth: AngularFireAuth, private router: Router, public af: AngularFire) {
-
+    firebase:any;
+    constructor(private auth: AngularFireAuth, private router: Router, public af: AngularFire, @Inject(FirebaseApp) firebase: any) {
+        this.firebase = firebase;
     }
 
     listProductForClient(url: string ): any {
@@ -22,40 +23,45 @@ export class QueryDB  {
         this.fileList =  this.af.database.list(url);
         this.anyList =  this.fileList.map(itemList =>
           itemList.map(item => {
-              // Child references can also take paths delimited by '/'
+            // Child references can also take paths delimited by '/'
             var spaceRef = storageRef.child(item.path);
-            console.log(item.path);
+            var errors= false;
             // Get the download URL
-            spaceRef.getDownloadURL().then((url)  => {
+            var imge =spaceRef.getDownloadURL().then( (url) => {
             // Insert url into an <img> tag to "download"
             console.log(url);
-            }).catch(function(error: any) {
+            return url;
+            }).catch((error: any) => {
             switch (error.code) {
-                case 'storage/object_not_found':
-                // File doesn't exist
-                 console.log(error);
-                break;
+                    case 'storage/object_not_found':
+                    // File doesn't exist
+                    console.log(error);
+                    errors = true;
+                    break;
 
-                case 'storage/unauthorized':
-                // User doesn't have permission to access the object
-                 console.log(error);
-                break;
+                    case 'storage/unauthorized':
+                    // User doesn't have permission to access the object
+                    console.log(error);
+                    errors = true;
+                    break;
 
-                case 'storage/canceled':
-                // User canceled the upload
-                 console.log(error);
-                break;
+                    case 'storage/canceled':
+                    // User canceled the upload
+                    console.log(error);
+                    errors = true;
+                    break;
 
-                
+                    
 
-                case 'storage/unknown':
-                // Unknown error occurred, inspect the server response
-                 console.log(error);
-                break;
-            }
-            });
-            var pathReference = storage.ref(item.path).getDownloadURL().then(url => { return url });
-            let result = { $key: item.$key, downloadURL: pathReference, path: item.path, product: item.product, price: item.price, quantity: item.quantity };
+                    case 'storage/unknown':
+                    // Unknown error occurred, inspect the server response
+                    console.log(error);
+                    errors = true;
+                    break;
+                    }
+                });
+            //var pathReference = storage.ref(item.path).getDownloadURL().then(url => { return url });
+            let result = { $key: item.$key, downloadURL: imge , path: item.path, product: item.product, price: item.price, quantity: item.quantity };
             
             return result;
           })
@@ -75,5 +81,5 @@ export class QueryDB  {
         transaction.remove(key);
     }
 
- 
+
 }
