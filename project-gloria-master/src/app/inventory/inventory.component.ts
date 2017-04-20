@@ -63,14 +63,14 @@ export class InventoryComponent implements OnInit {
                  this.ObjProd[snapshot.key] = snapshot.val();
               }else{
                     const storageRef = firebase.storage().ref().child(snapshot.val());
-                    storageRef.getDownloadURL().then(url =>  this.ObjProd["path"]  = url);
+                    storageRef.getDownloadURL().then(url =>  this.ObjProd["img"]  = url);
               }
             });
           });
          
     }else{
          const storageRef = firebase.storage().ref().child('images/noimg.jpg');
-         storageRef.getDownloadURL().then(url =>  this.ObjProd["path"]  = url);
+         storageRef.getDownloadURL().then(url =>  this.ObjProd["img"]  = url);
            this.ObjProd["key"] = idProduc;
            this.ObjProd["type"] = type;
            delete this.ObjProd["price"];
@@ -87,13 +87,14 @@ export class InventoryComponent implements OnInit {
      var product= this.validFieldForm(formData.productN, "product" );
      var price= this.validFieldForm(formData.price, "price" );
      var quantity= this.validFieldForm(formData.quantity, "quantity" );
-     var path= path == null ? this.ObjProd["path"] : path;
+     var pat = path == null ? this.ObjProd["path"] : path;
 
         if(this.ObjProd["type"]){
-        this.fileList.update(this.ObjProd["key"], new Inventory(product, price, quantity, path));
+          console.log(this.ObjProd["key"], product, price, quantity, pat)
+        this.fileList.update(this.ObjProd["key"], new Inventory(product, price, quantity, pat));
 
         }else if(this.ObjProd["type"] == false){
-        this.fileList.push(new Inventory(product, price, quantity, path));
+        this.fileList.push(new Inventory(product, price, quantity, pat));
 
       }
       return false
@@ -129,7 +130,7 @@ export class InventoryComponent implements OnInit {
 
         let success = false;
         // This currently only grabs item 0, TODO refactor it to grab them all
-        if([(<HTMLInputElement>document.getElementById('file')).files[0]] == null){
+        if([(<HTMLInputElement>document.getElementById('file')).files[0]][0] &&  !this.ObjProd["type"]){
          for (let selectedFile of [(<HTMLInputElement>document.getElementById('file')).files[0]]) {
              console.log(selectedFile);
               //Make local copies of services because "this" will be clobbered
@@ -144,8 +145,29 @@ export class InventoryComponent implements OnInit {
              });
          }
         }else{
-           this.SubmitData(formData);
-           console.log("hahahahha");
+          if([(<HTMLInputElement>document.getElementById('file')).files[0]][0] ){
+              for (let selectedFile of [(<HTMLInputElement>document.getElementById('file')).files[0]]) {
+                  console.log(selectedFile);
+                  //delete the last path 
+                  firebase.storage().ref().child(this.ObjProd["path"] ).delete().then(
+                        () => {},
+                        (error) => console.error("Error deleting stored file",this.ObjProd["path"] )
+                    );
+                      //Make local copies of services because "this" will be clobbered
+                  let router = this.router;
+                  let af = this.af;
+                  let folder = this.folder;
+                  let path = `/images/${selectedFile.name}`;
+                  var iRef = storageRef.child(path);
+                  iRef.put(selectedFile).then((snapshot) => {
+                      this.SubmitData(formData,path);
+
+                  });
+              }
+          }else{
+            this.SubmitData(formData);
+          }
+
         }
       return false
     }

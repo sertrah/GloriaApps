@@ -51,6 +51,8 @@ export class MembersComponent implements OnInit {
 
 
   ngOnInit() {
+    const items = this.af.database.list('/transaction/'+this.authReg);
+    items.remove();
   }
   addCart(a, i, b= false) {
     var date = new Date();
@@ -101,11 +103,14 @@ export class MembersComponent implements OnInit {
         this.ObjCart.push(productToAdd);
       }
     }else{
-      this.ObjCart.map((product) => {
+      this.ObjCart.map((product,i) => {
         if (product.key === productToAdd.key) {
           product.q= product.q-1;
           found = true;
+
+       
         }
+
       });
     }
 

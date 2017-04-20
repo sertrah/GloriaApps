@@ -44,19 +44,19 @@
 
 <!-- Modal Structure -->
 <div id="modal1" class="modal">
-  <form #formData='ngForm' (ngSubmit)="onSubmit(formData.value)">
+  <form #formData='ngForm' >
     <div class="modal-content">
       <div class="row">
         <div class="input-field col s12">
-          <input [(ngModel)]="productN" value="{{ObjProd.product}}" name="productN" type="text" autofocus>
+          <input #text1  [(ngModel)]="productN" value="{{ObjProd.product}}" name="productN" type="text" autofocus>
           <label for="productN">Product Name</label>
         </div>
         <div class="input-field col s12">
-          <input [(ngModel)]="price" value="{{ObjProd.price}}" name="price" type="text" autofocus>
+          <input #text2 [(ngModel)]="price" value="{{ObjProd.price}}" name="price" type="text" autofocus>
           <label for="price">price</label>
         </div>
         <div class="input-field col s12">
-          <input [(ngModel)]="quantity" value="{{ObjProd.path}}" name="quantity" type="text" autofocus>
+          <input #text3 [(ngModel)]="quantity" value="{{ObjProd.quantity}}" name="quantity" type="text" autofocus>
           <label for="quantity">quantity</label>
         </div>
         <!--<div class="input-field col s12">
@@ -68,17 +68,17 @@
     </div>
     <div class="modal-footer">
 
-      <form ngNoForm>
+    </div>
+    <a type="submit" (click)="onSubmit(formData.value)"  class="modal-action modal-close waves-effect waves-light btn ">Aceptar</a>
+  </form>
+        
         <input id="file" name="file" type="file">
 
-      </form>
+      
       <div style="overflow:hidden;">
         <div style="position:relative;width:100px;height:100px;float:left;display:flex;justify-content:center;align-items:center;">
-          <img [src]="ObjProd.path" style="max-width:100px;max-height:100px;">
-          <button (click)="delete(ObjProd.path, ObjProd.key)" style="position:absolute;top:2px;right:2px;">[x]</button>
+          <img [src]="ObjProd.img" style="max-width:100px;max-height:100px;">
+          <!--<button (click)="delete(ObjProd.path, ObjProd.key)" style="position:absolute;top:2px;right:2px;">[x]</button>-->
         </div>
       </div>
-    </div>
-    <button type="submit" class="modal-action modal-close  ">Aceptar</button>
-  </form>
 </div>
