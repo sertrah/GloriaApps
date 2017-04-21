@@ -43,11 +43,6 @@ export class MembersComponent implements OnInit {
 
   }
 
-  logout() {
-    this.af.auth.logout();
-    console.log('logged out');
-    this.router.navigateByUrl('/login');
-  }
 
 
   ngOnInit() {
@@ -78,10 +73,10 @@ export class MembersComponent implements OnInit {
         (success) => {
           
           if(success.committed == true && b == false){
-            this.addProduct({ prod: a.product, url: a.downloadURL.pa, p: a.price, q: success.snapshot.A.B, key: a.$key, quantityT: a.quantity },true);
+            this.addProduct({ prod: a.product, url: a.downloadURL.qa, p: a.price, q: success.snapshot.A.B, key: a.$key, quantityT: a.quantity },true);
           
           }if(success.committed == true && b == true){
-            this.addProduct({ prod: a.product, url: a.downloadURL.pa, p: a.price, q: success.snapshot.A.B, key: a.$key, quantityT: a.quantity },false);
+            this.addProduct({ prod: a.product, url: a.downloadURL.qa, p: a.price, q: success.snapshot.A.B, key: a.$key, quantityT: a.quantity },false);
             
           }
         }).catch(

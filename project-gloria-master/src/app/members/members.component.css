@@ -7,7 +7,16 @@ padding: 24px 10px;
     width: auto;
     margin: 1% auto;
 }
-
+blockquote, blockquote p{
+  line-height:  0.4;
+}
+.collection .collection-item.avatar {
+  min-height: 60px;
+}
+.collection{
+    overflow-y: scroll;
+    max-height: 200px;
+}
 .basic-btn {
     width:100px;
     margin:0;
@@ -26,12 +35,14 @@ h2 {
 
 
 @media (max-width: 600px) {
-    #page {
-        padding:1em;
+    .collection{
+        overflow-y: visible;
+        max-height: 100%;
     }
-    #toolbar {
-
-    }
+#page {
+    padding-top:0em;
+    margin:0;
+}
 }
 
 

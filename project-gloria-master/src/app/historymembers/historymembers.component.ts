@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { AngularFire, AuthProviders, AuthMethods, FirebaseListObservable } from 'angularfire2';
 import {methodCustom} from './../app.methods';
 import { Observable } from 'rxjs';
+import { WindowRef } from './../WindowRef';
 interface purchasedprop {
     Ispaid: boolean;
     name: string;
@@ -20,19 +21,32 @@ export class HistorymembersComponent implements OnInit {
   @Input() myname: String;
   items: FirebaseListObservable<any>;
   itemslist: Object[] = [];
+  userRf: any;
   datAts: string= "";
   datEnds: string= "";
-  constructor(public af: AngularFire, private mc: methodCustom) {
+  windows: any;
+  constructor(public af: AngularFire, private mc: methodCustom, private winRef: WindowRef) {
 
 
   }
 
   ngOnInit() {
     this.loadData();
+    
+   this.userWith()
   }
-  sendNude(){
-   
+  getClassView(Ispaid){
+    this.windows = this.winRef.nativeWindow;
+    if( this.windows.outerHeight < 700){
+      
+      return (Ispaid==true)? 'green lighten-4':'red lighten-4'
+     
+    }else {
+      
+      return 'black-text'
+    }
   }
+
      setNewData(a,b){
         var d = new Date(a);
         // var dateForm = a.substring(5,7)+a.substring(8,10)+a.substring(0,4)
@@ -77,7 +91,37 @@ export class HistorymembersComponent implements OnInit {
               });
           });
     }
+public num: number=0;
+// userWith(){
+//           this.af.database.list("/users").subscribe((users: any) => {
+//              this.userRf = users;
+//             users.map( (user) => {
+//                         this.af.database.list('/purchased/'+user.$key).subscribe((a) =>{
+//                           if(a.length > 0 ){
+                           
+//                             a.map((dates) => {
+//                              this.af.database.list('/purchased/'+user.$key+'/'+dates.$key).subscribe((purch) =>{
+//                                purch.map( (u) =>{
+                                 
+//                                  user.priceTotal += +u.price;
+                                 
+//                                })
 
+//                               })
 
+//                             })
+//                                  console.log(user.num, user.name, user.$key);
+//                                 this.num  = 0;
+//                           }else{
+//                             console.log(user.name, "no tengo", user.$key);
+//                           }
+           
+//                 })
+//             }) 
+
+            
+//               });
+      
+// }
 
 }
