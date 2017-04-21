@@ -40,10 +40,10 @@
   transition: .5s ease;
   background-color: rgba(79, 25, 73, 0.53); /*dim the background*/
 }
-.cyan-text{
+.black-text{
     border-bottom: 2px solid rgba(255, 255, 255, 0.45);
     width: 100%;
 }
-.cyan-text:hover{
+.black-text:hover{
     color:#9C27B0 !important
 }

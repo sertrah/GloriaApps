@@ -38,7 +38,6 @@ export class UserNavComponent implements OnInit {
 
               a.map((c)=> {
 
-                    console.log(c.price);
                   if(c.price != null && c.Ispaid == false){
                   this.priceTotal += parseFloat(c.price) * c.quantity ;
                   }
