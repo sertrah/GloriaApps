@@ -1,55 +1,49 @@
-    <div class="row " style="max-width: inherit; margin-top: -20px;">
-      <div class="col s12  m4 l2 fix-position">
-      </div>  
-      <div class="col s12  m4 l2 "  >
-        <app-user-nav> </app-user-nav>
-      </div>
-    <div class="col s12  m8 l10 ">
-      <div class="container">
-      <h1>Purchase history</h1>
-       <div class="row">
-        <div class="input-field col s6">
-          <i class="material-icons prefix">&#xE916;</i>
-           <input #date1 type="date" name="myname" id="myname" class="datepicker" placeholder="mm/dd/yy">
-          <label for="icon_prefix">Fecha inicial</label>
-        </div>
-        <div class="input-field col s6">
-          <i class="material-icons prefix">&#xE916;</i>
-           <input #date2 type="date" name="myname" id="myname" class="datepicker" placeholder="mm/dd/yy">
-          <label for="icon_prefix">Fecha final</label>
-        </div>
-          <div class=" col s12 left-align">
-            <a  class="waves-effect waves-light btn"  (click)="setNewData(date1.value,date2.value)">Buscar</a>
-          </div>  
-           <div class=" col s12 left-align">
-             <h4>{{datAts | date:'yMMMd'}} To {{datEnds | date:'yMMMd'}} </h4> 
-           </div>
-       </div>
-      <table class="striped">
-              <thead>
-                <tr>
-                    <th>Order date</th>
-                    <th>Name</th>              
-                    <th class="hide-on-small-only">quantity</th>
-                    <th class="hide-on-small-only">Status</th>
-                    <th>Grand Total</th>
-                    
-                  
-                </tr>
-              </thead>
 
-              <tbody>
-                <tr *ngFor="let item of itemslist | paginate: { itemsPerPage: 10, currentPage: p }" class="{{ getClassView(item.Ispaid)}}" >
-                  <td>{{item.date | date:'yMMMd'}}</td>
-                  <td  class="truncate">{{item.name}}</td>
-                  <td  class="hide-on-small-only">{{item.quantity}}</td>
-                  <td [ngClass]="(item.Ispaid==true)? 'green-text':'red-text'" class="hide-on-small-only">{{item.Ispaid == true ? "payout": "pending"}}</td>     
-                  <td  >{{item.price * item.quantity}}</td>
-                          
-                </tr>
-              </tbody>
-            </table>
-            <pagination-controls (pageChange)="p = $event"></pagination-controls>
-            </div>
+<div class="row " style="max-width: inherit; margin-top: -20px;">
+  <div class="col s12  m4 l2 fix-position">
+  </div>
+  <div class="col s12  m4 l2 " style=" background: #c9c9c9">
+    <app-user-nav> </app-user-nav>
+  </div>
+  <div class="col s12  m8 l10 ">
+    <div class="container">
+      <h1>Purchase history</h1>
+      <div class="row">
+        <div class="col s12 m6 l6">
+          <input #date1 type="date" name="myname" id="myname" class="datepicker" placeholder="mm/dd/yy">
+        </div>
+        <div class="col s12 m6 l6">
+          <input #date2 type="date" name="myname2" id="myname2" class="datepicker" placeholder="mm/dd/yy">
+        </div>
+        <div class=" col s12 left-align">
+          <a class="waves-effect waves-light btn" (click)="setNewData(date1.value,date2.value)">Buscar</a>
+        </div>
+        <div class=" col s12 left-align">
+          <h4>{{datAts | date:'yMMMd'}} To {{datEnds | date:'yMMMd'}} </h4>
+        </div>
+      </div>
+      <table class="striped">
+        <thead>
+          <tr>
+            <th>Order date</th>
+            <th>Name</th>
+            <th class="hide-on-small-only">quantity</th>
+            <th>Status</th>
+            <th>Grand Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of itemslist | paginate: { itemsPerPage: 10, currentPage: p }">
+            <td>{{item.date | date:'yMMMd'}}</td>
+            <td class="truncate">{{item.name}}</td>
+            <td class="hide-on-small-only">{{item.quantity}}</td>
+            <td [ngClass]="(item.Ispaid==true)? 'green-text':'red-text'">{{item.Ispaid == true ? "payout": "pending"}}</td>
+            <td>{{item.price * item.quantity}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+
     </div>
-    </div>
+  </div>
+</div>

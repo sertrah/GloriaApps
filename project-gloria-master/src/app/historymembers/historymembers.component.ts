@@ -1,16 +1,16 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { AngularFire, AuthProviders, AuthMethods, FirebaseListObservable } from 'angularfire2';
-import {methodCustom} from './../app.methods';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { AngularFire, AuthProviders, AuthMethods,/** */ FirebaseListObservable } from 'angularfire2';
+import { methodCustom } from './../app.methods';
+/** */ import { ActivatedRoute } from "@angular/router";
 import { Observable } from 'rxjs';
 import { WindowRef } from './../WindowRef';
 interface purchasedprop {
-    Ispaid: boolean;
-    name: string;
-    price: number;
-    quantity: number;
-    $key?: string;
-    date: string;
-
+  Ispaid: boolean;
+  name: string;
+  price: number;
+  quantity: number;
+  $key?: string;
+  date: string;
 }
 @Component({
   selector: 'app-historymembers',
@@ -21,42 +21,43 @@ export class HistorymembersComponent implements OnInit {
   @Input() myname: String;
   items: FirebaseListObservable<any>;
   itemslist: Object[] = [];
-  userRf: any;
-  datAts: string= "";
-  datEnds: string= "";
-  windows: any;
-  constructor(public af: AngularFire, private mc: methodCustom, private winRef: WindowRef) {
+
+  datAts: string = "";
 
 
+  /** */userId: any;
+  /** */sub: any;
+
+  datEnds: string = "";
+  constructor(public af: AngularFire, private mc: methodCustom, /** */ public router: ActivatedRoute) {
+    
   }
 
   ngOnInit() {
-    this.loadData();
-    
-   this.userWith()
-  }
-  getClassView(Ispaid){
-    this.windows = this.winRef.nativeWindow;
-    if( this.windows.outerHeight < 700){
-      
-      return (Ispaid==true)? 'green lighten-4':'red lighten-4'
-     
-    }else {
-      
-      return 'black-text'
-    }
-  }
 
-     setNewData(a,b){
-        var d = new Date(a);
-        // var dateForm = a.substring(5,7)+a.substring(8,10)+a.substring(0,4)
-        // var dateForm2 = b.substring(5,7)+b.substring(8,10)+b.substring(0,4)
-       var dateForm = a.split('/').join('');
-       var dateForm2 = b.split('/').join('');
-       
-      this.loadData( dateForm, dateForm2);
-    }
-    loadData(dateAt= null, dateEnd =null){
+   
+    /** */
+    /** */this.sub = this.router.params.subscribe( p => {
+    /** */  this.userId = p['id'];
+             this.loadData();
+    /** */  
+    /** */});
+    //** */
+  }
+  sendNude() {
+
+
+  }
+  setNewData(a, b) {
+    var d = new Date(a);
+    // var dateForm = a.substring(5,7)+a.substring(8,10)+a.substring(0,4)
+    // var dateForm2 = b.substring(5,7)+b.substring(8,10)+b.substring(0,4)
+    var dateForm = a.split('/').join('');
+    var dateForm2 = b.split('/').join('');
+
+    this.loadData(dateForm, dateForm2);
+  }
+loadData(dateAt= null, dateEnd =null){
       var dt = new Date();
 
       var prevDate = dt.getDate() < 10 ? "0"+dt.getDate() : dt.getDate();
@@ -91,37 +92,4 @@ export class HistorymembersComponent implements OnInit {
               });
           });
     }
-public num: number=0;
-// userWith(){
-//           this.af.database.list("/users").subscribe((users: any) => {
-//              this.userRf = users;
-//             users.map( (user) => {
-//                         this.af.database.list('/purchased/'+user.$key).subscribe((a) =>{
-//                           if(a.length > 0 ){
-                           
-//                             a.map((dates) => {
-//                              this.af.database.list('/purchased/'+user.$key+'/'+dates.$key).subscribe((purch) =>{
-//                                purch.map( (u) =>{
-                                 
-//                                  user.priceTotal += +u.price;
-                                 
-//                                })
-
-//                               })
-
-//                             })
-//                                  console.log(user.num, user.name, user.$key);
-//                                 this.num  = 0;
-//                           }else{
-//                             console.log(user.name, "no tengo", user.$key);
-//                           }
-           
-//                 })
-//             }) 
-
-            
-//               });
-      
-// }
-
 }
