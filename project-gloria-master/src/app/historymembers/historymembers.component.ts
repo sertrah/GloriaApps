@@ -3,6 +3,7 @@ import { AngularFire, AuthProviders, AuthMethods,/** */ FirebaseListObservable }
 import { methodCustom } from './../app.methods';
 /** */ import { ActivatedRoute } from "@angular/router";
 import { Observable } from 'rxjs';
+import { WindowRef } from './../WindowRef';
 interface purchasedprop {
   Ispaid: boolean;
   name: string;
@@ -20,7 +21,9 @@ export class HistorymembersComponent implements OnInit {
   @Input() myname: String;
   items: FirebaseListObservable<any>;
   itemslist: Object[] = [];
+
   datAts: string = "";
+
 
   /** */userId: any;
   /** */sub: any;
@@ -31,6 +34,7 @@ export class HistorymembersComponent implements OnInit {
   }
 
   ngOnInit() {
+
    
     /** */
     /** */this.sub = this.router.params.subscribe( p => {
@@ -42,6 +46,7 @@ export class HistorymembersComponent implements OnInit {
   }
   sendNude() {
 
+
   }
   setNewData(a, b) {
     var d = new Date(a);
@@ -52,38 +57,39 @@ export class HistorymembersComponent implements OnInit {
 
     this.loadData(dateForm, dateForm2);
   }
-  loadData(dateAt = null, dateEnd = null) {
-    var dt = new Date();
+loadData(dateAt= null, dateEnd =null){
+      var dt = new Date();
 
-    var prevDate = dt.getDate() < 10 ? "0" + dt.getDate() : dt.getDate();
-    var datAt = dateAt == null ? (dt.getMonth() + 1) + "01" + dt.getFullYear() : dateAt;
-    var datEnd = dateEnd == null ? (dt.getMonth() + 1) + "" + prevDate + dt.getFullYear() : dateEnd;
+      var prevDate = dt.getDate() < 10 ? "0"+dt.getDate() : dt.getDate();
+      var datAt = dateAt == null? (dt.getMonth()+1)+"01"+dt.getFullYear(): dateAt;
+      var datEnd = dateEnd == null? (dt.getMonth()+1)+""+prevDate+dt.getFullYear(): dateEnd;
+      
+      this.datAts = dt.getFullYear()+"-"+(dt.getMonth()+1)+"-01";
+      this.datEnds = dt.getFullYear()+"-"+(dt.getMonth()+1)+"-"+dt.getDate();
+        this.af.auth.subscribe(auth => {
 
-    this.datAts = dt.getFullYear() + "-" + (dt.getMonth() + 1) + "-01";
-    this.datEnds = dt.getFullYear() + "-" + (dt.getMonth() + 1) + "-" + dt.getDate();
+          this.af.database.list('/purchased/'+auth.uid).subscribe((a) =>{
+              //clear my var 
+              this.itemslist = [];
+              a.map((m) =>{
+                  this.af.database.list('/purchased/'+auth.uid+'/'+m.$key).subscribe((a) =>{
+                  
+                    a.map((c)=> {
+                      var dateF = this.mc.getDateFormat(c.date) ;
+                      if( Number(dateF) >= Number(datAt)   && Number(dateF) <= Number(datEnd)){
 
+             
+                      let result = { Ispaid:  c.Ispaid, name: c.name, price: c.price, quantity: c.quantity, date: (c.date* 1000)};
+                      this.itemslist.push(result);
+                       
+                      }
+                    
 
-
-    this.af.auth.subscribe(auth => {
-      var uid = this.userId ? this.userId : auth.uid; 
-      console.log(uid);
-      this.af.database.list('/purchased/' + uid).subscribe((a) => {
-        //clear my var 
-        this.itemslist = [];
-        a.map((m) => {
-          this.af.database.list('/purchased/' + uid + '/' + m.$key).subscribe((a) => {
-
-            a.map((c) => {
-              var dateF = this.mc.getDateFormat(c.date);
-              if (Number(dateF) >= Number(datAt) && Number(dateF) <= Number(datEnd)) {
-
-                let result = { Ispaid: c.Ispaid, name: c.name, price: c.price, quantity: c.quantity, date: (c.date * 1000) };
-                this.itemslist.push(result);
-              }
-            });
+                      });
+                  });
+                })
+            
+              });
           });
-        })
-      });
-    });
-  }
+    }
 }

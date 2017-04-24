@@ -20,7 +20,7 @@ import { UserNavComponent } from './user-nav/user-nav.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { UserAdminComponent } from './user-admin/user-admin.component'; // <-- import the module
 
-
+import { WindowRef } from './WindowRef';
 
 var firebaseConfig = {
   apiKey: "AIzaSyABL2Mn6GNlnuw8RqNdb6Yjjs_4OM-IWnM",
@@ -50,7 +50,7 @@ var firebaseConfig = {
     AngularFireModule.initializeApp(firebaseConfig),
     routes
   ],
-  providers: [AuthGuard,QueryDB,methodCustom],
+  providers: [AuthGuard,QueryDB,methodCustom, WindowRef],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

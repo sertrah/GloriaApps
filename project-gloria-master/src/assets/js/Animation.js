@@ -19,9 +19,7 @@ $(document).ready(function () {
         selectMonths: true, // Creates a dropdown to control month
         selectYears: 15 // Creates a dropdown of 15 years to control year
     });
-    if($( window ).width()){
-        console.log("Cambie");
-    }
+     $('.button-collapse').sideNav();
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || $(window).width() < 600) {
 
         $(document).ready(function () {
@@ -37,17 +35,8 @@ $(document).ready(function () {
     }
     // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
     $('.modal').modal({
-        ready: function (modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
-        },
+        ready: function (modal, trigger) {    },
         complete: function () { } // Callback for Modal close
 
     });
-});
-
-document.addEventListener("DOMContentLoaded", function (event) {
-    $('.product').each(function () {
-        var imgURL = $(this).find(".card-image").find('img').attr('src');
-        $(this).find(".card-image").css('background-image', 'url(' + imgURL + ')');
-    });
-
 });

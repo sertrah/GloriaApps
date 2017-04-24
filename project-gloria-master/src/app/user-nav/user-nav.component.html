@@ -1,4 +1,4 @@
-        <div class="card small custom" style="min-height: 360px; background: transparent; ">
+        <div class="card small custom hide-on-small-only" style="min-height: 360px; background: transparent; ">
             <div class="card-image ">
               
               <div class="container-img">
@@ -16,3 +16,20 @@
                 <a (click)="logout()" class="btn-flat black-text" title="Logout">Logout</a>
             </div>
         </div>
+  <ul id="slide-out" class="side-nav">
+    <li><div class="userView">
+      <div class="background">
+        <img src="{{ObjUser.photoUrl}}">
+      </div>
+      <a href="#!user"><img class="circle" src="{{ObjUser.photoUrl}}"></a>
+      <a href="#!name"><span class="white-text name">{{ ObjUser.name }}</span></a>
+      <a href="#!email"><span class="red-text email">Fiao :{{ priceTotal | currency:'USD':true:'3.2-2'}}</span></a>
+    </div></li>
+    <li> <a href="/members" class="btn-flat black-text">products</a></li>
+    <li> <a href="/history" class="btn-flat black-text">History</a></li>
+    <li> </li>
+    <li><div class="divider"></div></li>
+    <li><a (click)="logout()" class="btn-flat red-text" title="Logout">Logout</a></li>
+  </ul>
+  
+        
