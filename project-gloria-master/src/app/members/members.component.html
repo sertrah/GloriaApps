@@ -1,8 +1,4 @@
-<div class="form-container" id="toolbar">
-    <header [@fallIn]="state">
-
-    </header>
-  <div id="page" [@moveInLeft]="state" class="">
+  <div id="page" >
 
     <div class="row " style="max-width: inherit;  margin-top: -20px; ">
       <ul id="tabs-swipe-demo" class="tabs hide-on-med-only hide-on-large-only">
@@ -11,16 +7,22 @@
       </ul>
       <div class="col s12  m4 l2 fix-position">
       </div>   
-      <div class="col s12  m4 l2 " style=" background: #c9c9c9" id="test1">
+      <div class="col s12  m4 l2 " >
         <app-user-nav> </app-user-nav>
-        <blockquote id="shopd" >
-            <div class="chip" *ngFor="let item of ObjCart " [ngClass]="{'hide': item.q==0}">
-              <img src="{{item.url}}" alt="Contact Person" >
-              {{item.q}}
+        <div id="test1">
+        <div id="shopd"  class="center-align">
 
-            </div>
-            <a class="waves-effect waves-light btn" (click)="purchasedItems( )" ><i class="material-icons">&#xE8CC;</i>Confirm</a>
-        </blockquote>
+            <ul class="collection left-align">
+              <li class="collection-item avatar"  *ngFor="let item of ObjCart " [ngClass]="{'hide': item.q==0}">
+                <img src="{{item.url}}" alt="" class="circle">
+                <span class="title">{{item.prod}} x {{item.q}}</span>
+                <p> {{item.p}} </p>
+              </li>
+
+            </ul>
+            <a class="waves-effect waves-light btn " (click)="purchasedItems( )" ><i class="material-icons">&#xE8CC;</i>Confirm</a>
+        </div>
+        </div>
       </div>
       <div class="col s12  m8 l10 " id="test2">
          <div class="container">
@@ -34,7 +36,7 @@
           </div>
           <ul class="row produktliste col s12" >
             <li  class="col l3 m4 s12 clearfix" *ngFor="let prd of imageList | async; let i = index" style="margin-bottom: 20px; margin-left: 0px;" [ngClass]="{'hide': prd.quantity==0}">
-                <div class="card row product  z-depth-4">
+                <div class="card row product hoverable  z-depth-4">
                     <div class="card-image">
                       <img src="{{ prd.downloadURL.qa ? prd.downloadURL.qa : imgnolist}}" alt="Img">
                     </div>
@@ -47,8 +49,8 @@
                         <span class="col s6 l6 m6 " style="min-height: 43px;     max-height: 43px;">
                             <a (click)="addCart(prd, i, false)"  class=" waves-effect waves-light btn secondary-content btn-addlist" id="s" name="refawe2" onclick="btncount(this)"><i class="material-icons">&#xE854;</i></a>
                             <p style="display: inline-block; width: 100%; display: none">
-                              <a (click)="addCart(prd, i, false )"  class="waves-effect waves-light btn secondary-content btn-addlist" name="refawe3" style=" padding-left: 5px;    padding-right: 5px;"><i class="material-icons">&#xE148;</i></a>
-                              <a (click)="addCart(prd, i,true )"  class="waves-effect waves-light btn secondary-content btn-addlist" name="refawe4" style="padding-right: 5px;    padding-left: 5px;"><i class="material-icons">&#xE15D;</i></a>
+                              <a (click)="addCart(prd, i, false )"  class="waves-effect waves-light btn-flat secondary-content btn-addlist" name="refawe3" style=" padding-left: 5px;    padding-right: 5px;"><i class="material-icons">&#xE148;</i></a>
+                              <a (click)="addCart(prd, i,true )"  class="waves-effect waves-light btn-flat secondary-content btn-addlist" name="refawe4" style="padding-right: 5px;    padding-left: 5px;"><i class="material-icons">&#xE15D;</i></a>
                             </p>
                             
                         </span>
@@ -62,5 +64,4 @@
       </div>
     </div>
 
-  </div>
 
