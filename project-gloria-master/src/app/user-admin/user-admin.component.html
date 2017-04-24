@@ -1,0 +1,26 @@
+<div class="row " style="max-width: inherit; margin-top: -20px;">
+  <div class="col s12  m4 l2 fix-position">
+  </div>
+  <div class="col s12  m4 l2 " style=" background: #c9c9c9">
+    <app-user-nav> </app-user-nav>
+  </div>
+  <div class="col s12  m8 l10 ">
+    <div class="container">
+      <h1>Debtor history</h1>
+      <table class="striped">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Grand Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users">
+            <td>{{user.name}}</td>
+            <td>{{ user.priceTotal? user.priceTotal : 0 }}<a [routerLink]="['/history', user.$key]" class="secondary-content"><i class="material-icons">send</i></a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
