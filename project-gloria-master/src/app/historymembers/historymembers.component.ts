@@ -1,9 +1,8 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import { AngularFire, AuthProviders, AuthMethods,/** */ FirebaseListObservable } from 'angularfire2';
+import { AngularFire, AuthProviders, AuthMethods, FirebaseListObservable } from 'angularfire2';
 import { methodCustom } from './../app.methods';
-/** */ import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute } from "@angular/router";
 import { Observable } from 'rxjs';
-import { WindowRef } from './../WindowRef';
 interface purchasedprop {
   Ispaid: boolean;
   name: string;
@@ -21,31 +20,21 @@ export class HistorymembersComponent implements OnInit {
   @Input() myname: String;
   items: FirebaseListObservable<any>;
   itemslist: Object[] = [];
-
   datAts: string = "";
-
-
-  /** */userId: any;
-  /** */sub: any;
+  userId: any;
+  sub: any;
 
   datEnds: string = "";
-  constructor(public af: AngularFire, private mc: methodCustom, /** */ public router: ActivatedRoute) {
-    
+  constructor(public af: AngularFire, private mc: methodCustom, public router: ActivatedRoute) {
   }
 
   ngOnInit() {
-
-   
-    /** */
-    /** */this.sub = this.router.params.subscribe( p => {
-    /** */  this.userId = p['id'];
-             this.loadData();
-    /** */  
-    /** */});
-    //** */
+    this.sub = this.router.params.subscribe(p => {
+      this.userId = p['id'];
+      this.loadData();
+    });
   }
   sendNude() {
-
 
   }
   setNewData(a, b) {
@@ -57,39 +46,36 @@ export class HistorymembersComponent implements OnInit {
 
     this.loadData(dateForm, dateForm2);
   }
-loadData(dateAt= null, dateEnd =null){
-      var dt = new Date();
+  loadData(dateAt = null, dateEnd = null) {
+    var dt = new Date();
 
-      var prevDate = dt.getDate() < 10 ? "0"+dt.getDate() : dt.getDate();
-      var datAt = dateAt == null? (dt.getMonth()+1)+"01"+dt.getFullYear(): dateAt;
-      var datEnd = dateEnd == null? (dt.getMonth()+1)+""+prevDate+dt.getFullYear(): dateEnd;
-      
-      this.datAts = dt.getFullYear()+"-"+(dt.getMonth()+1)+"-01";
-      this.datEnds = dt.getFullYear()+"-"+(dt.getMonth()+1)+"-"+dt.getDate();
-        this.af.auth.subscribe(auth => {
+    var prevDate = dt.getDate() < 10 ? "0" + dt.getDate() : dt.getDate();
+    var datAt = dateAt == null ? (dt.getMonth() + 1) + "01" + dt.getFullYear() : dateAt;
+    var datEnd = dateEnd == null ? (dt.getMonth() + 1) + "" + prevDate + dt.getFullYear() : dateEnd;
 
-          this.af.database.list('/purchased/'+auth.uid).subscribe((a) =>{
-              //clear my var 
-              this.itemslist = [];
-              a.map((m) =>{
-                  this.af.database.list('/purchased/'+auth.uid+'/'+m.$key).subscribe((a) =>{
-                  
-                    a.map((c)=> {
-                      var dateF = this.mc.getDateFormat(c.date) ;
-                      if( Number(dateF) >= Number(datAt)   && Number(dateF) <= Number(datEnd)){
+    this.datAts = dt.getFullYear() + "-" + (dt.getMonth() + 1) + "-01";
+    this.datEnds = dt.getFullYear() + "-" + (dt.getMonth() + 1) + "-" + dt.getDate();
 
-             
-                      let result = { Ispaid:  c.Ispaid, name: c.name, price: c.price, quantity: c.quantity, date: (c.date* 1000)};
-                      this.itemslist.push(result);
-                       
-                      }
-                    
+    this.af.auth.subscribe(auth => {
+      var uid = this.userId ? this.userId : auth.uid;
+      console.log(uid);
+      this.af.database.list('/purchased/' + uid).subscribe((a) => {
+        //clear my var 
+        this.itemslist = [];
+        a.map((m) => {
+          this.af.database.list('/purchased/' + uid + '/' + m.$key).subscribe((a) => {
 
-                      });
-                  });
-                })
-            
-              });
+            a.map((c) => {
+              var dateF = this.mc.getDateFormat(c.date);
+              if (Number(dateF) >= Number(datAt) && Number(dateF) <= Number(datEnd)) {
+
+                let result = { Ispaid: c.Ispaid, name: c.name, price: c.price, quantity: c.quantity, date: (c.date * 1000) };
+                this.itemslist.push(result);
+              }
+            });
           });
-    }
+        })
+      });
+    });
+  }
 }
