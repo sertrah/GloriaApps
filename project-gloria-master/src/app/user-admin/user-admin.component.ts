@@ -12,6 +12,7 @@ export class UserAdminComponent implements OnInit {
   users: any[] = [];
   usersRef: FirebaseListObservable<any>;
   priceTotals: number = 0;
+  tran: FirebaseListObservable<any>;
 
   constructor(private af: AngularFire, private router: Router) {
   }
@@ -23,10 +24,8 @@ export class UserAdminComponent implements OnInit {
       this.users.map(user => {
         this.af.database.list('/purchased/' + user.$key).subscribe((dates) => {
           var priceTotals = 0;
-           user.priceTotal = 0;
-           
+          user.priceTotal = 0;
           dates.map((date) => {
-            
             this.af.database.list('/purchased/' + user.$key + '/' + date.$key).subscribe((transactions) => {
               transactions.map((transaction) => {
                 if (transaction.price && !transaction.Ispaid) {
@@ -34,13 +33,23 @@ export class UserAdminComponent implements OnInit {
                 }
               });
               user.priceTotal = priceTotals;
-              console.log( user.priceTotal, user.name)
             })
-            
           })
-          
         });
-        
+      });
+    });
+  }
+
+  onCheck(useruid) {
+    alert(useruid);
+    this.af.database.list('/purchased/' + useruid).subscribe((dates) => {
+      dates.map((date) => {
+        var purchased = this.af.database.list('/purchased/' + useruid + '/' + date.$key)
+        purchased.subscribe((purchases) => {
+          purchases.map((purchase) => {
+            purchased.update(purchase.$key, { Ispaid: true });
+          });
+        });
       });
     });
   }
