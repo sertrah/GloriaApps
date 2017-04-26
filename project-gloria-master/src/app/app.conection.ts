@@ -59,7 +59,7 @@ export class QueryDB {
                             break;
                     }
                 });
-                console.log(imge);
+               
                 //var pathReference = storage.ref(item.path).getDownloadURL().then(url => { return url });
                 let result = { $key: item.$key, downloadURL: imge, path: item.path, product: item.product, price: item.price, quantity: item.quantity };
 

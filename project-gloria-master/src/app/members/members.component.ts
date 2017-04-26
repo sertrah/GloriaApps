@@ -96,7 +96,7 @@ export class MembersComponent implements OnInit {
                             break;
                     }
                 });
-                console.log(this.ProductObj, imge);
+               
             });
         });
         return this.ProductObj;
@@ -126,7 +126,7 @@ export class MembersComponent implements OnInit {
           }if(success.committed && b){
             this.addProduct({ prod: productObj.product, url: productObj.imagen, p: productObj.price, q: success.snapshot.A.B, key: productObj.$key, quantityT: productObj.quantity },false);
             this.cartPrice = this.cartPrice - productObj.price;
-            console.log(this.cartPrice - productObj.price)
+       
           }
         }).catch(
           (err) => {
