@@ -13,6 +13,7 @@ interface Image {
   quantity?: any;
   downloadURL?: string;
   $key?: string;
+  imagen?: string;
 
 }
 @Component({
@@ -24,20 +25,21 @@ interface Image {
 })
 export class MembersComponent implements OnInit {
 
-
-
   public ObjCart: any[] = [];
   private authReg: any;
   private FlagAuth: any = false;
   imgnolist: string = "https://firebasestorage.googleapis.com/v0/b/gloriaapps-a00ed.appspot.com/o/images%2Fnoimg.jpg?alt=media&token=ca822b00-4db9-4acd-9215-c3f7b47f9f45";
-  imageList: Observable<Image[]>;
-  items: FirebaseListObservable<any>;
+
+  ProductObj: any[] = [];
+  cartPrice: number= 0;
   constructor(public af: AngularFire, private router: Router, private qDB: QueryDB) {
-     this.imageList = qDB.listProductForClient("inventory");
+
     this.af.auth.subscribe(auth => {
       if (auth) {
         this.FlagAuth = true;
         this.authReg = auth.uid;
+        const items = this.af.database.list('/transaction/'+this.authReg);
+        items.remove();
        
       }
     });
@@ -47,48 +49,91 @@ export class MembersComponent implements OnInit {
 
 
   ngOnInit() {
-    
-    const items = this.af.database.list('/transaction/'+this.authReg);
-    items.remove();
+        
+    this.loadRegProducts();
   }
-  addCart(a, i, b= false) {
+  loadRegProducts(){
+        this.ProductObj = [];
+        this.af.database.list("inventory").subscribe(list => {
+            this.ProductObj = list;
+            this.ProductObj.map(product => {
+                // Child references can also take paths delimited by '/'
+                let storage = firebase.storage();
+                var storageRef = storage.ref();
+                var spaceRef = storageRef.child(product.path);
+                var errors = false;
+                // Get the download URL
+                var imge = spaceRef.getDownloadURL().then((url) => {
+                    // Insert url into an <img> tag to "download"
+                    product.imagen= url;
+                    return url;
+                }).catch((error: any) => {
+                    switch (error.code) {
+                        case 'storage/object_not_found':
+                            // File doesn't exist
+                            console.log(error);
+                            errors = true;
+                            break;
+
+                        case 'storage/unauthorized':
+                            // User doesn't have permission to access the object
+                            console.log(error);
+                            errors = true;
+                            break;
+
+                        case 'storage/canceled':
+                            // User canceled the upload
+                            console.log(error);
+                            errors = true;
+                            break;
+
+
+
+                        case 'storage/unknown':
+                            // Unknown error occurred, inspect the server response
+                            console.log(error);
+                            errors = true;
+                            break;
+                    }
+                });
+                console.log(this.ProductObj, imge);
+            });
+        });
+        return this.ProductObj;
+  }
+  addCart(productObj, i, b= false) {
     if(this.FlagAuth){ 
         
     var date = new Date();
     var date_Currentdate = ('0' + (date.getMonth() + 1)).slice(-2) + "-" + ('0' + date.getDate()).slice(-2) + "-" + date.getFullYear();
-    var adaRankRef = firebase.database().ref('/transaction/' + this.authReg + '/' + (date_Currentdate) + '/' + a.$key + "/transaction");
-        adaRankRef.transaction( (currentRank) => {
-
-          var quantityProduct = this.qDB.getData('inventory/' + a.$key + '/quantity');
-          
-          if (currentRank < quantityProduct && b== false) {
-              var current = currentRank + 1;
+    var transactionRef = firebase.database().ref('/transaction/' + this.authReg + '/' + (date_Currentdate) + '/' + productObj.$key + "/transaction");
+        transactionRef.transaction( (transaction) => {
+          var quantityProduct = this.qDB.getData('inventory/' + productObj.$key + '/quantity');          
+          if (transaction < quantityProduct && b== false) {
+              var current = transaction + 1;
               return current;
-          }if(currentRank >= 1 && b== true) {
-             
-              return currentRank-1;
-            
-          }
-          
-          if(currentRank == null){
-              return currentRank++;
+          }if(transaction >= 1 && b== true) {             
+              return transaction-1;            
+          }          
+          if(transaction == null){
+              return transaction++;
           }
         }).then(
-        (success) => {
-          
-          if(success.committed == true && b == false){
-            this.addProduct({ prod: a.product, url: a.downloadURL.qa, p: a.price, q: success.snapshot.A.B, key: a.$key, quantityT: a.quantity },true);
-          
-          }if(success.committed == true && b == true){
-            this.addProduct({ prod: a.product, url: a.downloadURL.qa, p: a.price, q: success.snapshot.A.B, key: a.$key, quantityT: a.quantity },false);
-            
+        (success) => {          
+          if(success.committed && !b){
+            this.addProduct({ prod: productObj.product, url: productObj.imagen, p: productObj.price, q: success.snapshot.A.B, key: productObj.$key, quantityT: productObj.quantity },true);
+             this.cartPrice += +productObj.price;
+          }if(success.committed && b){
+            this.addProduct({ prod: productObj.product, url: productObj.imagen, p: productObj.price, q: success.snapshot.A.B, key: productObj.$key, quantityT: productObj.quantity },false);
+            this.cartPrice = this.cartPrice - productObj.price;
+            console.log(this.cartPrice - productObj.price)
           }
         }).catch(
           (err) => {
             console.log(err);
           })
     }else{
-        this.router.navigateByUrl('/login');
+       location.reload();
         
     }
   }
@@ -100,6 +145,7 @@ export class MembersComponent implements OnInit {
         if (product.key === productToAdd.key) {
           product.q++;
           found = true;
+          
         }
       });
       if (!found) {
@@ -140,10 +186,7 @@ export class MembersComponent implements OnInit {
 
 }
 
-  getDate(){
-    var date = new Date();
-   return  ('0' + (date.getMonth() + 1)).slice(-2) + "-" + ('0' + date.getDate()).slice(-2) + "-" + date.getFullYear();
-  }
+
   // your use is value.toDateString.slice(start,end)
   // private toDateString(date: Date): string {
   //     return (date.getFullYear().toString() + '/' 

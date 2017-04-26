@@ -454,10 +454,12 @@ h2 {
   top: 15px;
   left: 25px;
   position: absolute;
+  display: none
 }
 
 
 @media (max-width: 600px) {
+.button-collapse{ display: block}
     .fix-position{
         position: relative;
         height: 100%;
