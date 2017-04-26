@@ -47,3 +47,15 @@
 .black-text:hover{
     color:#9C27B0 !important
 }
+
+.noLog{
+    width: 100%;
+    padding-top: 100px; 
+    margin: 0px auto;
+    /* padding: 20px; */
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    /* resize: both; */
+    overflow: auto;
+}

@@ -1,11 +1,28 @@
+    <header >
+      <div class="row" style="max-width: inherit;">
+      <div class="col l2 m4 s12 menu-top" style="text-align: center">
+        <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons Medium">menu</i></a>
+        <img  style="    max-width: 100px;" class="hide-on-small-only" src="https://ii.ct-stc.com/1/logos/empresas/2016/11/30/yuxi-pacific-latam-D5610CA2B7016729thumbnail.jpeg" alt="">
+        <img  style=" width: 50px;   margin-top: 10px; margin-bottom: 10px;" class="show-on-small" src="/assets/images/logohrl.png" alt="">
+      </div>
+      <div class="col l10  m8 hide-on-small-only" style="background-color: #59214e !important;">
+
+      </div>
+      </div>
+
+    </header>
   <a  data-target="modal1" (click)="openModal('nokey', false)" class="btn-floating btn-large waves-effect waves-light show-on-small hide-on-large-only hide-on-med-only " style="position: fixed;
-    right: 10px;">
+    right: 10px;     top: 145px;">
     <i class="material-icons">add</i>
   </a>
 
 
 <!--<button data-target="modal1" class="btn" (click)="openModal('nokey', false)">INSERT PRODUCTS</button>-->
-<div class="row" style="max-width: inherit; margin-top: -20px;"> 
+<div class="row" style="max-width: inherit; margin-top: -20px;">
+                <div class="menu-admin">
+                  <a href="/admin"  class="waves-effect waves-teal btn-flat" [ngClass]="(priceTotals === 0 )? 'green-text':'red-text'" ><i class="material-icons left">&#xE227;</i>Por cobrar {{priceTotals}}  </a>
+                  <a href="/ventas" class="waves-effect waves-teal btn-flat" ><i class="material-icons left">&#xE8CB;</i> ventas</a>
+                </div>
       <div class="col s12  m4 l2 fix-position">
       </div>
       <div class="col s12  m4 l2 " style=" background: #c9c9c9">
@@ -17,6 +34,7 @@
           <div class="col s12">
             <div class="content-tittle">
                 <h1 class="left-align">Inventario </h1>
+
                 <a  data-target="modal1" (click)="openModal('nokey', false)" class="waves-effect waves-light btn hide-on-small-only"><i class="material-icons">add</i> Agregar Producto</a>
             </div>
           </div>

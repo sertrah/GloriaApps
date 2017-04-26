@@ -9,10 +9,12 @@ import { Router } from '@angular/router';
 })
 export class UserNavComponent implements OnInit {
   public ObjUser: Object[] = [];
+  FlagAuth: any = false;
   public priceTotal: number = 0;
   constructor(public af: AngularFire, private router: Router) {
     this.af.auth.subscribe(auth => {
       if (auth) {
+        this.FlagAuth = true;
         this.af.database.list('/users/' + auth.uid, { preserveSnapshot: true })
           .subscribe(snapshots => {
             snapshots.forEach(snapshot => {
