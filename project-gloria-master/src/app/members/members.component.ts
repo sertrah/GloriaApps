@@ -28,16 +28,17 @@ export class MembersComponent implements OnInit {
 
   public ObjCart: any[] = [];
   private authReg: any;
+  private FlagAuth: any = false;
   imgnolist: string = "https://firebasestorage.googleapis.com/v0/b/gloriaapps-a00ed.appspot.com/o/images%2Fnoimg.jpg?alt=media&token=ca822b00-4db9-4acd-9215-c3f7b47f9f45";
   imageList: Observable<Image[]>;
   items: FirebaseListObservable<any>;
   constructor(public af: AngularFire, private router: Router, private qDB: QueryDB) {
-    
+     this.imageList = qDB.listProductForClient("inventory");
     this.af.auth.subscribe(auth => {
       if (auth) {
-        
+        this.FlagAuth = true;
         this.authReg = auth.uid;
-        this.imageList = qDB.listProductForClient("inventory");
+       
       }
     });
 
@@ -46,10 +47,13 @@ export class MembersComponent implements OnInit {
 
 
   ngOnInit() {
+    
     const items = this.af.database.list('/transaction/'+this.authReg);
     items.remove();
   }
   addCart(a, i, b= false) {
+    if(this.FlagAuth){ 
+        
     var date = new Date();
     var date_Currentdate = ('0' + (date.getMonth() + 1)).slice(-2) + "-" + ('0' + date.getDate()).slice(-2) + "-" + date.getFullYear();
     var adaRankRef = firebase.database().ref('/transaction/' + this.authReg + '/' + (date_Currentdate) + '/' + a.$key + "/transaction");
@@ -83,6 +87,10 @@ export class MembersComponent implements OnInit {
           (err) => {
             console.log(err);
           })
+    }else{
+        this.router.navigateByUrl('/login');
+        
+    }
   }
 
   addProduct(productToAdd, bol): void {
@@ -111,6 +119,7 @@ export class MembersComponent implements OnInit {
 
   }
   purchasedItems(){
+
       this.ObjCart.map((product) => {
       var quantityProduct = this.qDB.getData('inventory/' + product.key + '/quantity');
       if(product.q  <=  quantityProduct && product.q > 0){
@@ -128,7 +137,7 @@ export class MembersComponent implements OnInit {
       }
 
     });
-  
+
 }
 
   getDate(){

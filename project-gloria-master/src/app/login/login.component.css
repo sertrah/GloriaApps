@@ -11,7 +11,7 @@
     margin:0px 50px;
 }
 .aside-login{
-    background: url(https://images.pexels.com/photos/7070/space-desk-workspace-coworking.jpg);
+    background: url(/assets/images/slider-bg1.jpg);
     background-position: center;
     background-size: cover;
      position: relative;

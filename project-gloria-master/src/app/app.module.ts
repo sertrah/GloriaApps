@@ -21,6 +21,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import { UserAdminComponent } from './user-admin/user-admin.component'; // <-- import the module
 
 import { WindowRef } from './WindowRef';
+import { SalesViewComponent } from './sales-view/sales-view.component';
 
 var firebaseConfig = {
   apiKey: "AIzaSyABL2Mn6GNlnuw8RqNdb6Yjjs_4OM-IWnM",
@@ -40,7 +41,8 @@ var firebaseConfig = {
     InventoryComponent,
     HistorymembersComponent,
     UserNavComponent,
-    UserAdminComponent
+    UserAdminComponent,
+    SalesViewComponent
   ],
   imports: [
     BrowserModule,

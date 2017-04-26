@@ -10,3 +10,25 @@
    height: 120px;
    margin: 0% auto;
 }
+.menu-admin{
+    position: absolute;
+    right: 50px;
+    top: 100px;
+}
+.menu-admin .btn-flat{
+    border-bottom: 2px solid #4e1f56;
+}
+
+@media only screen and (max-width: 600px){
+    .menu-admin{
+            position: relative;
+            top: 0px;
+            width: 100%;
+            margin-top: 15px;
+            right: 0;
+            text-align: center;
+    }
+    .menu-admin .btn-flat{
+        padding: 0 1rem;
+    }
+}
