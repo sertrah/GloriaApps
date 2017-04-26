@@ -1,69 +1,73 @@
-    <header >
-      <div class="row" style="max-width: inherit;">
-      <div class="col l2 m4 s12 menu-top" style="text-align: center">
-        <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons Medium">menu</i></a>
-        <img  style="    max-width: 100px;" class="hide-on-small-only" src="https://ii.ct-stc.com/1/logos/empresas/2016/11/30/yuxi-pacific-latam-D5610CA2B7016729thumbnail.jpeg" alt="">
-        <img  style=" width: 50px;   margin-top: 10px; margin-bottom: 10px;" class="show-on-small" src="/assets/images/logohrl.png" alt="">
-      </div>
-      <div class="col l10  m8 hide-on-small-only" style="background-color: #59214e !important;">
+<header>
+  <div class="row" style="max-width: inherit;">
+    <div class="col l2 m4 s12 menu-top" style="text-align: center">
+      <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons Medium">menu</i></a>
+      <img style="    max-width: 100px;" class="hide-on-small-only" src="https://ii.ct-stc.com/1/logos/empresas/2016/11/30/yuxi-pacific-latam-D5610CA2B7016729thumbnail.jpeg"
+        alt="">
+      <img style=" width: 50px;   margin-top: 10px; margin-bottom: 10px;" class="show-on-small" src="/assets/images/logohrl.png"
+        alt="">
+    </div>
+    <div class="col l10  m8 hide-on-small-only" style="background-color: #59214e !important;">
 
-      </div>
-      </div>
+    </div>
+  </div>
 
-    </header>
-  <div id="page" >
+</header>
+<div id="page">
 
-    <div class="row " style="max-width: inherit;  margin-top: -20px; ">
-      <ul id="tabs-swipe-demo" class="tabs hide-on-med-only hide-on-large-only">
-        <li class="tab col s3"><a href="#test-swipe-1">My Cart <span style="min-width: 2rem;" class="badge red white-text">{{ObjCart.length}}</span></a></li>
-        <li class="tab col s3"><a class="active" href="#test-swipe-2">Products</a></li>
-      </ul>
-      <div class="col s12  m4 l2 fix-position">
-        
-      </div> 
-          
-      <div class="col s12  m4 l2 move-class "  >
-        <app-user-nav> </app-user-nav>
-        
-        <div id="test1" [ngClass]="{'hide': !FlagAuth }">
-          <h4 class="center-align hide-on-large-only hide-on-med-only">My cart</h4>
-          <div id="shopd"  class="center-align ">
+  <div class="row " style="max-width: inherit;  margin-top: -20px; ">
+    <ul id="tabs-swipe-demo" class="tabs hide-on-med-only hide-on-large-only">
+      <li class="tab col s3"><a href="#test-swipe-1">My Cart <span style="min-width: 2rem;" class="badge red white-text">{{ObjCart.length}}</span></a></li>
+      <li class="tab col s3"><a class="active" href="#test-swipe-2">Products</a></li>
+    </ul>
+    <div class="col s12  m4 l2 fix-position">
 
-              <ul class="collection left-align">
-                <li class="collection-item avatar"  *ngFor="let item of ObjCart " [ngClass]="{'hide': item.q==0}">
-                  <img src="{{item.url}}" alt="" class="circle">
-                  <span class="title">{{item.prod}} x {{item.q}}</span>
-                  <p> {{item.p}} </p>
-                </li>
+    </div>
 
-              </ul>
-              <a class="waves-effect waves-light btn " (click)="purchasedItems( )" ><i class="material-icons">&#xE8CC;</i>Confirm</a>
-          </div>
+    <div class="col s12  m4 l2 move-class ">
+      <app-user-nav> </app-user-nav>
+
+      <div id="test1" [ngClass]="{'hide': !FlagAuth }">
+        <h4 class="center-align hide-on-large-only hide-on-med-only">My cart</h4>
+        <div id="shopd" class="center-align ">
+
+          <ul class="collection left-align">
+            <li class="collection-item avatar" *ngFor="let item of ObjCart " [ngClass]="{'hide': item.q==0}">
+              <img src="{{item.url}}" alt="" class="circle">
+              <span class="title">{{item.prod}} x {{item.q}}</span>
+              <p> {{item.p}} </p>
+            </li>
+
+          </ul>
+          <p *ngIf="cartPrice" style="margin-bottom: 2px; border-top: 2px solid #000;  text-align: left;  padding-left: 30px; font-weight: bold;">{{cartPrice}}</p>
+          <a class="waves-effect waves-light btn " *ngIf="cartPrice" (click)="purchasedItems( )"><i class="material-icons">&#xE8CC;</i>Confirm</a>
         </div>
       </div>
-      <div class="col s12  m8 l10 " id="test2">
-         <div class="container">
-          <div class="col s12">
-            <div class="content-tittle">
-                  <h1 class="left-align">the best products! </h1>
+    </div>
+    <div class="col s12  m8 l10 " id="test2">
+      <div class="container">
+        <div class="col s12">
+          <div class="content-tittle">
+            <h1 class="left-align">the best products! </h1>
 
 
 
-            </div>
           </div>
-          <ul class="row produktliste col s12" >
-            <li  class="col l3 m4 s12 clearfix" *ngFor="let prd of imageList | async; let i = index" style="margin-bottom: 20px; margin-left: 0px;" [ngClass]="{'hide': prd.quantity==0}">
-                <div class="card row product hoverable  z-depth-4">
-                    <div class="card-image">
-                      <img src="{{ prd.downloadURL.qa ? prd.downloadURL.qa : imgnolist}}" alt="Img">
-                    </div>
-                    <div class="card-content">
-                      <h3>{{prd.product}}</h3>
-                    </div>
-                    <div class="card-action row">
-                        
-                        <p class="col s6 l6 m6 ">${{prd.price}} </p>
-                        <span class="col s6 l6 m6 " style="min-height: 43px;     max-height: 43px;">
+        </div>
+        <ul class="row produktliste col s12">
+          <li class="col l3 m4 s12 clearfix" *ngFor="let prd of ProductObj ; let i = index" style="margin-bottom: 20px; margin-left: 0px;"
+            [ngClass]="{'hide': prd.quantity==0}">
+            <div class="card row product hoverable  z-depth-4">
+              <div class="card-image">
+                <img src="{{ prd.imagen ? prd.imagen : imgnolist}}" alt="Img">
+              </div>
+              <div class="card-content">
+                <h3 class="truncate">{{prd.product}}</h3>
+              </div>
+              <div class="card-action row">
+
+                <p class="col s6 l6 m6 ">${{prd.price}} </p>
+                <span class="col s6 l6 m6 " style="min-height: 43px;     max-height: 43px;">
                             <a (click)="addCart(prd, i, false)"  class=" waves-effect waves-light btn secondary-content btn-addlist" id="s" name="refawe2" onclick="btncount(this)"><i class="material-icons">&#xE854;</i></a>
                             <p style="display: inline-block; width: 100%; display: none">
                               <a (click)="addCart(prd, i, false )"  class="waves-effect waves-light btn-flat secondary-content btn-addlist" name="refawe3" style=" padding-left: 5px;    padding-right: 5px;"><i class="material-icons">&#xE148;</i></a>
@@ -71,14 +75,12 @@
                             </p>
                             
                         </span>
-                    </div>
-                   <span style="position: absolute; right: 0;     top: 0;" data-badge-caption="available" class="new badge green">{{prd.quantity}}</span>
-                </div>
-              </li>
+              </div>
+              <span style="position: absolute; right: 0;     top: 0;" data-badge-caption="available" class="new badge green">{{prd.quantity}}</span>
+            </div>
+          </li>
 
-          </ul>
-        </div>
+        </ul>
       </div>
     </div>
-
-
+  </div>

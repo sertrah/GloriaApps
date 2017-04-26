@@ -1,4 +1,4 @@
-<div class="card small custom hide-on-small-only" style="min-height: 360px; background: transparent; " *ngIf="FlagAuth">
+<div class="card small custom hide-on-small-only" style="min-height: 380px; background: transparent; " *ngIf="FlagAuth">
   <div class="card-image ">
 
     <div class="container-img">
@@ -7,15 +7,13 @@
     </div>
     <span class="card-title">{{ ObjUser.name }}</span>
   </div>
-
-  <div class="card-content" style="    padding-top: 0;">
-    <p style="color: #b30f0f; font-weight: bold;"> Fiao :{{ priceTotal | currency:'USD':true:'3.2-2'}}</p>
-  </div>
   <div class="card-action">
     <a href="/members" class="btn-flat black-text">products</a> <br>
     <a href="/my-history" class="btn-flat black-text">History</a> <br>
     <a href="/inventory" class="btn-flat black-text">Inventario</a> <br>
     <a (click)="logout()" class="btn-flat black-text" title="Logout">Logout</a>
+    <p  style="color: #b30f0f; font-weight: bold; margin-top: 20px"> Mi fiao:{{ priceTotal | currency:'USD':true:'3.2-2'}}</p>
+ 
   </div>
 </div>
 <div *ngIf="!FlagAuth" class="noLog">
