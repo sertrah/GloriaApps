@@ -36,6 +36,12 @@ h2 {
     margin:0;
 }
 
+.green.darken-3:hover{
+  background: #3c9e41 !important;
+  transition: 3s;
+  color: #fff;
+
+}
 
 @media (max-width: 600px) {
     .collection{
