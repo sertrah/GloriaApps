@@ -64,11 +64,9 @@ export class HistorymembersComponent implements OnInit {
         this.itemslist = [];
         a.map((m) => {
           this.af.database.list('/purchased/' + uid + '/' + m.$key).subscribe((a) => {
-
             a.map((c) => {
               var dateF = this.mc.getDateFormat(c.date);
               if (Number(dateF) >= Number(datAt) && Number(dateF) <= Number(datEnd)) {
-
                 let result = { Ispaid: c.Ispaid, name: c.name, price: c.price, quantity: c.quantity, date: (c.date * 1000) };
                 this.itemslist.push(result);
               }
