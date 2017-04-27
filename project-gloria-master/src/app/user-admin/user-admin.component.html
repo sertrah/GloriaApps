@@ -3,30 +3,32 @@
 
   <div class="col s12  ">
     <div class="container">
-      <h1>Debtor history</h1>
-      <table class="striped">
+      <h1>Historial de deudores</h1>
+      <table class="striped centered">
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Grand Total</th>
-            <th>Cancelado</th>
+            <th>Nombre</th>
+            <th>Deduda total</th>
+            <th>Pagado?</th>
+            <th></th>
           </tr>
         </thead>
-        <tbody>
+        <tbody >
           <tr *ngFor="let user of users; let i = index">
-            <td *ngIf="user.priceTotal != 0">{{user.name}}</td>
-            <td *ngIf="user.priceTotal != 0">
+            <td *ngIf="user.priceTotal > 0">{{user.name}}</td>
+            <td *ngIf="user.priceTotal > 0">
               {{user.priceTotal? user.priceTotal : 0}}
             </td>
-            <td *ngIf="user.priceTotal != 0">
+            <td *ngIf="user.priceTotal > 0">
               <a>
                 <input type="checkbox" id="check{{i}}" (click)="onCheck(user.$key)" />
                 <label for="check{{i}}"></label>
               </a>
+
+            </td>
+            <td *ngIf="user.priceTotal > 0">
                <a [routerLink]="['/history', user.$key]" class="secondary-content">
-                <i class="material-icons">
-                send
-                </i>
+                <i class="material-icons">&#xE8F4;</i>
               </a>
             </td>
           </tr>

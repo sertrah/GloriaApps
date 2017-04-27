@@ -319,9 +319,12 @@ h2 {
 .fix-position{
   position: fixed;
     height: 100%;
-    top: 77px;
+    top: 0px;
     z-index: -1;
-    background: #c9c9c9;
+    background: #dedede;
+-webkit-box-shadow: 7px 0px 3px -2px rgba(0,0,0,0.21);
+-moz-box-shadow: 7px 0px 3px -2px rgba(0,0,0,0.21);
+box-shadow: 7px 0px 3px -2px rgba(0,0,0,0.21);
 }
 .btn-5 {
   border: 0 solid;
@@ -562,26 +565,11 @@ h2 {
 .menu-horizontal{
   background: #59214e;
 }
-.menu-horizontal ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-
+nav{
+  background:  #59214e;
 }
-
-.menu-horizontal li {
-    float: right;
-}
-
-.menu-horizontal li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 27px 16px;
-    text-decoration: none;
-    height: 77px;
-    transition: 0.75s;
+nav ul a{
+ 
 }
 .menu-horizontal li a:hover:not(.active) {
     border-bottom: 4px solid #6199AF ;
@@ -591,10 +579,9 @@ h1{
   font-size: 3.2rem;
 }
 .a-span-menu{
-    background: #000;
-    width: 120%;
+
     padding: 16px 0;
-    margin-left: -16px;
+
     text-align: center;
     font-size: 1.2rem;
     font-weight: bold;

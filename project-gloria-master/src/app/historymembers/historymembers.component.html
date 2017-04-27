@@ -5,15 +5,19 @@
   <div class="col s12 ">
     <div class="container">
       <h1>Purchase history</h1>
-      <div class="row">
-        <div class="col s12 m6 l6">
-          <input #date1 type="date" name="myname" id="myname" class="datepicker" placeholder="mm/dd/yy">
+      <div class="row" style="    margin: 0 auto;">
+        <div class="input-field col s12 l6">
+          <i class="material-icons prefix">&#xE916;</i>
+          <input #date1 type="date" name="date1" id="date1" class="datepicker" placeholder="mm/dd/yy">
+          <label for="date1">Initial date</label>
         </div>
-        <div class="col s12 m6 l6">
-          <input #date2 type="date" name="myname2" id="myname2" class="datepicker" placeholder="mm/dd/yy">
+        <div class="input-field col s12 l6">
+          <i class="material-icons prefix">&#xE916;</i>
+          <input #date2 type="date" name="date2" id="date2" class="datepicker" placeholder="mm/dd/yy">
+          <label for="date2">Final date</label>
         </div>
         <div class=" col s12 left-align">
-          <a class="waves-effect waves-light btn" (click)="setNewData(date1.value,date2.value)">Buscar</a>
+          <a class="waves-effect waves-light btn" (click)="setNewData(date1.value,date2.value)">Search</a>
         </div>
         <div class=" col s12 left-align">
           <h4>{{datAts | date:'yMMMd'}} To {{datEnds | date:'yMMMd'}} </h4>
@@ -25,7 +29,7 @@
             <th>Order date</th>
             <th>Name</th>
             <th class="hide-on-small-only">quantity</th>
-            <th>Status</th>
+            <th *ngIf="!this.userId">Status</th>
             <th>Grand Total</th>
             <th *ngIf="this.userId">Cancelled</th>
           </tr>
@@ -35,15 +39,15 @@
             <td>{{item.date | date:'yMMMd'}}</td>
             <td class="truncate">{{item.name}}</td>
             <td class="hide-on-small-only">{{item.quantity}}</td>
-            <td [ngClass]="(item.Ispaid==true)? 'green-text':'red-text'">{{item.Ispaid == true ? "payout": "pending"}}</td>
+            <td *ngIf="!this.userId" [ngClass]="(item.Ispaid==true)? 'green-text':'red-text'">{{item.Ispaid == true ? "payout": "pending"}}</td>
             <td>{{item.price * item.quantity}}</td>
-            <td *ngIf="this.userId">
-              <div class="switch">
+            <td *ngIf="this.userId" style="width: 200px">
+              <div class="switch" style="width: 180px">
                 <label>
-                  pending
+                  Pendiente
                     <input type="checkbox" [checked]="item.Ispaid" (click)="onCheckPurchased(item)" >
                     <span class="lever"></span>
-                  payout
+                  Pagado
                 </label>
               </div>
             </td>
