@@ -1,4 +1,3 @@
-
 <div class="row " style="max-width: inherit; margin-top: -20px;">
   <div class="col s12  m4 l2 fix-position">
   </div>
@@ -30,20 +29,30 @@
             <th class="hide-on-small-only">quantity</th>
             <th>Status</th>
             <th>Grand Total</th>
+            <th *ngIf="this.userId">Cancelled</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of itemslist | paginate: { itemsPerPage: 10, currentPage: p }">
+          <tr *ngFor="let item of itemslist | paginate: { itemsPerPage: 10, currentPage: p } , let j = index">
             <td>{{item.date | date:'yMMMd'}}</td>
             <td class="truncate">{{item.name}}</td>
             <td class="hide-on-small-only">{{item.quantity}}</td>
             <td [ngClass]="(item.Ispaid==true)? 'green-text':'red-text'">{{item.Ispaid == true ? "payout": "pending"}}</td>
             <td>{{item.price * item.quantity}}</td>
+            <td *ngIf="this.userId">
+              <div class="switch">
+                <label>
+                  pending
+                    <input type="checkbox" [checked]="item.Ispaid" (click)="onCheckPurchased(item)" >
+                    <span class="lever"></span>
+                  payout
+                </label>
+              </div>
+            </td>
           </tr>
         </tbody>
       </table>
       <pagination-controls (pageChange)="p = $event"></pagination-controls>
-
     </div>
   </div>
 </div>

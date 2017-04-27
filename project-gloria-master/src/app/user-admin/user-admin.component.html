@@ -12,23 +12,26 @@
           <tr>
             <th>Name</th>
             <th>Grand Total</th>
+            <th>Cancelado</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let user of users; let i = index">
-              <td *ngIf="user.priceTotal != 0">{{user.name}}</td>
-              <td *ngIf="user.priceTotal != 0">
-                {{user.priceTotal? user.priceTotal : 0}}
-                <a>
-                  <input type="checkbox" id="check{{i}}" (click)="onCheck(user.$key )" />
-                  <label for="check{{i}}">Pagó</label>
-                </a>
-                <a [routerLink]="['/history', user.$key]" class="secondary-content">
-                  <i class="material-icons">
+            <td *ngIf="user.priceTotal != 0">{{user.name}}</td>
+            <td *ngIf="user.priceTotal != 0">
+              {{user.priceTotal? user.priceTotal : 0}}
+            </td>
+            <td *ngIf="user.priceTotal != 0">
+              <a>
+                <input type="checkbox" id="check{{i}}" (click)="onCheck(user.$key)" />
+                <label for="check{{i}}"></label>
+              </a>
+               <a [routerLink]="['/history', user.$key]" class="secondary-content">
+                <i class="material-icons">
                 send
                 </i>
-                </a>
-              </td>
+              </a>
+            </td>
           </tr>
         </tbody>
       </table>

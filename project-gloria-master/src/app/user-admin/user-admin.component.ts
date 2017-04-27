@@ -41,16 +41,19 @@ export class UserAdminComponent implements OnInit {
   }
 
   onCheck(useruid) {
-    alert(useruid);
-    this.af.database.list('/purchased/' + useruid).subscribe((dates) => {
-      dates.map((date) => {
-        var purchased = this.af.database.list('/purchased/' + useruid + '/' + date.$key)
-        purchased.subscribe((purchases) => {
-          purchases.map((purchase) => {
-            purchased.update(purchase.$key, { Ispaid: true });
+    if (confirm("va a cancelar toda la deuda de este usuario, esat seguro ?")) {
+      this.af.database.list('/purchased/' + useruid).subscribe((dates) => {
+        dates.map((date) => {
+          var purchased = this.af.database.list('/purchased/' + useruid + '/' + date.$key)
+          purchased.subscribe((purchases) => {
+            purchases.map((purchase) => {
+              purchased.update(purchase.$key, { Ispaid: true });
+            });
           });
         });
       });
-    });
+    } else {
+      return false;
+    }
   }
 }
