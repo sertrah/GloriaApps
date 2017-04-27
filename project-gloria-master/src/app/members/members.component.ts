@@ -41,6 +41,7 @@ export class MembersComponent implements OnInit {
         const items = this.af.database.list('/transaction/'+this.authReg);
         items.remove();
        
+       this.getUserPending(auth.uid);
       }
     });
 
@@ -52,6 +53,29 @@ export class MembersComponent implements OnInit {
         
     this.loadRegProducts();
   }
+      getUserPending(uid){
+
+      this.af.database.list('/purchased/'+uid).subscribe((hola) =>{
+        //clean var 
+        this.cartPrice = 0;
+        hola.map((m) =>{
+          
+            this.af.database.list('/purchased/'+uid+'/'+m.$key).subscribe((a) =>{
+
+              a.map((c)=> {
+
+                  if(c.price != null && c.Ispaid == false){
+                  this.cartPrice += parseFloat(c.price) * c.quantity ;
+                  }
+
+            });
+        })
+      })
+      
+      });
+
+
+    }
   loadRegProducts(){
         this.ProductObj = [];
         this.af.database.list("inventory").subscribe(list => {
@@ -65,7 +89,7 @@ export class MembersComponent implements OnInit {
                 // Get the download URL
                 var imge = spaceRef.getDownloadURL().then((url) => {
                     // Insert url into an <img> tag to "download"
-                    product.imagen= url;
+                    product.imagen = product.imagen? product.imagen : url ;
                     return url;
                 }).catch((error: any) => {
                     switch (error.code) {
