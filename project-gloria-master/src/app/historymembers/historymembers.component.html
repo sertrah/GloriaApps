@@ -27,7 +27,7 @@
             <th>Order date</th>
             <th>Name</th>
             <th class="hide-on-small-only">quantity</th>
-            <th>Status</th>
+            <th *ngIf="!this.userId">Status</th>
             <th>Grand Total</th>
             <th *ngIf="this.userId">Cancelled</th>
           </tr>
@@ -37,7 +37,7 @@
             <td>{{item.date | date:'yMMMd'}}</td>
             <td class="truncate">{{item.name}}</td>
             <td class="hide-on-small-only">{{item.quantity}}</td>
-            <td [ngClass]="(item.Ispaid==true)? 'green-text':'red-text'">{{item.Ispaid == true ? "payout": "pending"}}</td>
+            <td *ngIf="!this.userId" [ngClass]="(item.Ispaid==true)? 'green-text':'red-text'">{{item.Ispaid == true ? "payout": "pending"}}</td>
             <td>{{item.price * item.quantity}}</td>
             <td *ngIf="this.userId">
               <div class="switch">
