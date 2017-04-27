@@ -1,35 +1,51 @@
-        <div class="card small custom hide-on-small-only" style="min-height: 360px; background: transparent; ">
-            <div class="card-image ">
-              
-              <div class="container-img">
-                <img  src="{{ObjUser.photoUrl}}" class="">
-                <div class="overlay-p"></div>
-              </div>
-              <span class="card-title">{{ ObjUser.name }}</span>
-            </div>
-            <div class="card-content">
-              <p style="color: #b30f0f; font-weight: bold;"> Fiao :{{ priceTotal | currency:'USD':true:'3.2-2'}}</p>       
-            </div>
-            <div class="card-action">
-                <a href="/members" class="btn-flat black-text">products</a> <br>
-                <a href="/my-history" class="btn-flat black-text">History</a> <br>
-                <a (click)="logout()" class="btn-flat black-text" title="Logout">Logout</a>
-            </div>
+<div class="card small custom hide-on-small-only" style="min-height: 380px; background: transparent; " *ngIf="FlagAuth">
+  <div class="card-image ">
+
+    <div class="container-img">
+      <img src="{{ObjUser.photoUrl}}" class="">
+      <div class="overlay-p"></div>
+    </div>
+    <span class="card-title">{{ ObjUser.name }}</span>
+  </div>
+  <div class="card-action">
+    <a href="/members" class="btn-flat black-text">products</a> <br>
+    <a href="/my-history" class="btn-flat black-text">History</a> <br>
+    <a href="/inventory" class="btn-flat black-text">Inventario</a> <br>
+    <a (click)="logout()" class="btn-flat black-text" title="Logout">Logout</a>
+    <p  style="color: #b30f0f; font-weight: bold; margin-top: 20px"> Mi fiao:{{ priceTotal | currency:'USD':true:'3.2-2'}}</p>
+ 
+  </div>
+</div>
+<div *ngIf="!FlagAuth" class="noLog">
+  <p class="flow-text" style="    color: #5a224f; font-weight: bold;">conectate y disfruta de los snacks</p>
+  <a class="waves-effect waves-light btn" href="/login">Log in</a>
+</div>
+<ul id="slide-out" class="side-nav">
+  <div *ngIf="FlagAuth">
+    <li>
+      <div class="userView">
+        <div class="background">
+          <img src="assets/images/bg-menu.jpg">
         </div>
-  <ul id="slide-out" class="side-nav">
-    <li><div class="userView">
-      <div class="background">
-        <img src="{{ObjUser.photoUrl}}">
+        <a href="/members"><img class="circle" src="{{ObjUser.photoUrl}}"></a>
+        <a href="/members"><span class="white-text name">{{ ObjUser.name }}</span></a>
+        <a ><span class="red-text email">Fiao :{{ priceTotal | currency:'USD':true:'3.2-2'}}</span></a>
       </div>
-      <a href="#!user"><img class="circle" src="{{ObjUser.photoUrl}}"></a>
-      <a href="#!name"><span class="white-text name">{{ ObjUser.name }}</span></a>
-      <a href="#!email"><span class="red-text email">Fiao :{{ priceTotal | currency:'USD':true:'3.2-2'}}</span></a>
-    </div></li>
+    </li>
     <li> <a href="/members" class="btn-flat black-text">products</a></li>
-    <li> <a href="/history" class="btn-flat black-text">History</a></li>
+    <li> <a href="/my-history" class="btn-flat black-text">History</a></li>
     <li> </li>
-    <li><div class="divider"></div></li>
+    <li>
+      <div class="divider"></div>
+    </li>
     <li><a (click)="logout()" class="btn-flat red-text" title="Logout">Logout</a></li>
-  </ul>
-  
-        
+  </div>
+  <div *ngIf="!FlagAuth" >
+    <li><h1 style="color: #5ec3df; text-align: center;    font-size: 30px;    margin-top: 113px;">Ingresa <br> y <br> mecatea</h1></li>
+    <li> </li>
+    <li>
+      <div class="divider"></div>
+    </li>
+    <li><a (click)="logout()" class="waves-effect waves-light btn  btn-large purple darken-3 " title="Logout">Logout</a></li>
+  </div>
+</ul>

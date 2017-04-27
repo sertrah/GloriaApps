@@ -11,7 +11,7 @@
     margin:0px 50px;
 }
 .aside-login{
-    background: url(https://images.pexels.com/photos/7070/space-desk-workspace-coworking.jpg);
+    background: url(/assets/images/slider-bg1.jpg);
     background-position: center;
     background-size: cover;
      position: relative;
@@ -24,7 +24,7 @@
   width: 100%;
   height: 100%;
   z-index: 0;
-  background-color: rgba(20, 86, 103, 0.86); /*dim the background*/
+  background-color: rgba(20, 86, 103, 0.38); /*dim the background*/
 }
 .valign-wrapper{
     height: 100%;
