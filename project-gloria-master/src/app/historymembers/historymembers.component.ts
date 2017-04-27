@@ -58,16 +58,16 @@ export class HistorymembersComponent implements OnInit {
 
     this.af.auth.subscribe(auth => {
       var uid = this.userId ? this.userId : auth.uid;
-      console.log(uid);
+      // console.log(uid);
       this.af.database.list('/purchased/' + uid).subscribe((a) => {
         //clear my var 
         this.itemslist = [];
-        a.map((m) => {
-          this.af.database.list('/purchased/' + uid + '/' + m.$key).subscribe((a) => {
+        a.map((dateKey) => {
+          this.af.database.list('/purchased/' + uid + '/' + dateKey.$key).subscribe((a) => {
             a.map((c) => {
               var dateF = this.mc.getDateFormat(c.date);
               if (Number(dateF) >= Number(datAt) && Number(dateF) <= Number(datEnd)) {
-                let result = { Ispaid: c.Ispaid, name: c.name, price: c.price, quantity: c.quantity, date: (c.date * 1000) };
+                let result = { Ispaid: c.Ispaid, name: c.name, price: c.price, quantity: c.quantity, date: (c.date * 1000), key: c.$key, dateref: dateKey.$key };
                 this.itemslist.push(result);
               }
             });
@@ -75,5 +75,12 @@ export class HistorymembersComponent implements OnInit {
         })
       });
     });
+  }
+
+  onCheckPurchased(purchaseObj) {
+    console.log(purchaseObj);
+    const items = this.af.database.list('/purchased/' + this.userId + '/' + purchaseObj.dateref);
+    purchaseObj.Ispaid = !purchaseObj.Ispaid;
+    items.update(purchaseObj.key, { Ispaid: purchaseObj.Ispaid });
   }
 }
