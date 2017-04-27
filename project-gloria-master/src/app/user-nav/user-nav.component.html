@@ -1,4 +1,25 @@
-<div class="card small custom hide-on-small-only" style="min-height: 380px; background: transparent; " *ngIf="FlagAuth">
+<header>
+  <div class="row" style="max-width: inherit;">
+    <div class="col l2 m4 s12 menu-top" style="text-align: center">
+      <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons Medium">menu</i></a>
+      <img style="    max-width: 100px;" class="hide-on-small-only" src="https://ii.ct-stc.com/1/logos/empresas/2016/11/30/yuxi-pacific-latam-D5610CA2B7016729thumbnail.jpeg"
+        alt="">
+      <img style=" width: 50px;   margin-top: 10px; margin-bottom: 10px;" class="hide-on-large-only hide-on-med-only " src="/assets/images/logohrl.png"
+        alt="">
+    </div>
+    <div class="col l10  m8 hide-on-small-only menu-horizontal" >
+       <ul>
+         <li><a (click)="logout()"  title="Logout">Logout</a></li>
+        <li> <a href="/members" >products</a></li>
+        <li> <a href="/my-history" >History</a></li>
+        <li><a href="/inventory" >Inventario</a></li>
+        
+      </ul>
+    </div>
+  </div>
+
+</header>
+<!--<div class="card small custom hide-on-small-only" style="min-height: 380px; background: transparent; " *ngIf="FlagAuth">
   <div class="card-image ">
 
     <div class="container-img">
@@ -12,14 +33,14 @@
     <a href="/my-history" class="btn-flat black-text">History</a> <br>
     <a href="/inventory" class="btn-flat black-text">Inventario</a> <br>
     <a (click)="logout()" class="btn-flat black-text" title="Logout">Logout</a>
-    <p  style="color: #b30f0f; font-weight: bold; margin-top: 20px"> Mi fiao:{{ priceTotal | currency:'USD':true:'3.2-2'}}</p>
+    <p  style=" font-weight: bold; margin-top: 20px;  margin-bottom: 0px;"  [ngClass]="(priceTotal>0)? 'red-text':'green-text'"> Mi fiao:{{ priceTotal | currency:'USD':true:'3.2-2'}}</p>
  
   </div>
 </div>
 <div *ngIf="!FlagAuth" class="noLog">
   <p class="flow-text" style="    color: #5a224f; font-weight: bold;">conectate y disfruta de los snacks</p>
   <a class="waves-effect waves-light btn" href="/login">Log in</a>
-</div>
+</div>-->
 <ul id="slide-out" class="side-nav">
   <div *ngIf="FlagAuth">
     <li>
@@ -29,7 +50,7 @@
         </div>
         <a href="/members"><img class="circle" src="{{ObjUser.photoUrl}}"></a>
         <a href="/members"><span class="white-text name">{{ ObjUser.name }}</span></a>
-        <a ><span class="red-text email">Fiao :{{ priceTotal | currency:'USD':true:'3.2-2'}}</span></a>
+        <a ><span class="a-span-menu" [ngClass]="(priceTotal>0 )? 'red-text':'green-text'">Fiao :{{ priceTotal | currency:'USD':true:'3.2-2'}}</span></a>
       </div>
     </li>
     <li> <a href="/members" class="btn-flat black-text">products</a></li>

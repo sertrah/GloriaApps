@@ -1,18 +1,4 @@
-<header>
-  <div class="row" style="max-width: inherit;">
-    <div class="col l2 m4 s12 menu-top" style="text-align: center">
-      <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons Medium">menu</i></a>
-      <img style="    max-width: 100px;" class="hide-on-small-only" src="https://ii.ct-stc.com/1/logos/empresas/2016/11/30/yuxi-pacific-latam-D5610CA2B7016729thumbnail.jpeg"
-        alt="">
-      <img style=" width: 50px;   margin-top: 10px; margin-bottom: 10px;" class="hide-on-large-only hide-on-med-only " src="/assets/images/logohrl.png"
-        alt="">
-    </div>
-    <div class="col l10  m8 hide-on-small-only" style="background-color: #59214e !important;">
-
-    </div>
-  </div>
-
-</header>
+ <app-user-nav> </app-user-nav>
 <div id="page">
 
   <div class="row " style="max-width: inherit;  margin-top: -20px; ">
@@ -25,21 +11,21 @@
     </div>
 
     <div class="col s12  m4 l2 move-class ">
-      <app-user-nav> </app-user-nav>
+     
 
-      <div id="test1" [ngClass]="{'hide': !FlagAuth }">
+      <div id="test1" [ngClass]="{'hide': !FlagAuth }" class="cart-contain z-depth-4">
         <h4 class="center-align hide-on-large-only hide-on-med-only">My cart</h4>
-        <div id="shopd" class="center-align ">
+        <div id="shopd" class="center-align " >
 
           <ul class="collection left-align">
-            <li class="collection-item avatar" *ngFor="let item of ObjCart " [ngClass]="{'hide': item.q==0}">
+            <li class="collection-item avatar z-depth-4" *ngFor="let item of ObjCart " [ngClass]="{'hide': item.q==0}" [class.bounceIn]="item.q">
               <img src="{{item.url}}" alt="" class="circle">
               <span class="title">{{item.prod}} x {{item.q}}</span>
               <p> {{item.p}} </p>
             </li>
 
           </ul>
-          <p *ngIf="cartPrice" style="margin-bottom: 2px; border-top: 2px solid #000;  text-align: left;  padding-left: 30px; font-weight: bold;">{{cartPrice}}</p>
+          <p *ngIf="cartPrice" style="margin-bottom: 2px; border-top: 2px solid rgba(57, 92, 118, 0.65);  text-align: left;  padding-left: 30px; font-weight: bold;">{{cartPrice}}</p>
           <a class="waves-effect waves-light btn green darken-3" *ngIf="cartPrice" (click)="purchasedItems( )"><i class="material-icons">&#xE8CC;</i>Confirm</a>
         </div>
       </div>
@@ -69,7 +55,7 @@
                 <p class="col s6 l6 m6 ">${{prd.price}} </p>
                 <span class="col s6 l6 m6 " style="min-height: 43px;     max-height: 43px;">
                             <a (click)="addCart(prd, i, false)"  class=" waves-effect waves-light btn secondary-content btn-addlist" id="s" name="refawe2" onclick="btncount(this)"><i class="material-icons">&#xE854;</i></a>
-                            <p style="display: inline-block; width: 100%; display: none">
+                            <p  class="hide-button">
                               <a (click)="addCart(prd, i, false )"  class="waves-effect waves-light btn-flat secondary-content btn-addlist" name="refawe3" style=" padding-left: 5px;    padding-right: 5px;"><i class="material-icons">&#xE148;</i></a>
                               <a (click)="addCart(prd, i,true )"  class="waves-effect waves-light btn-flat secondary-content btn-addlist" name="refawe4" style="padding-right: 5px;    padding-left: 5px;"><i class="material-icons">&#xE15D;</i></a>
                             </p>

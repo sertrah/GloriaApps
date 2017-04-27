@@ -6,6 +6,9 @@
     position: relative;
     margin-bottom: 60px;
 }
+.card-action{
+    padding-bottom: 0px
+}
 .card.small.custom{
     height: 360px;
     box-shadow: none;
