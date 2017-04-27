@@ -585,7 +585,10 @@ h2 {
 }
 .menu-horizontal li a:hover:not(.active) {
     border-bottom: 4px solid #6199AF ;
-    transition: 0.75s;
+   
+}
+h1{
+  font-size: 3.2rem;
 }
 .a-span-menu{
     background: #000;

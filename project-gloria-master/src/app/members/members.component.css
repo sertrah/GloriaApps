@@ -21,7 +21,7 @@ blockquote, blockquote p{
     width:100px;
     margin:0;
 }
-
+#shopd{padding-bottom: 20px;}
 #page {
     padding-top: 0;
     margin:0;
@@ -33,7 +33,7 @@ blockquote, blockquote p{
 .cart-contain{
     background: #fff;
    
-    padding-bottom: 10px;
+    padding-bottom: 0px;
 }
 
 h2 {
