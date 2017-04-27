@@ -38,10 +38,15 @@
   <script src="assets/js/Animation.js">  </script>
   <script>
     function btncount(id) {
-         console.log($(id).text());
-        $(id).parents("span").find("p").css({ 'display': "block" });
-        $(id).hide();
-        console.log($(id).parents(".card").find(".badge").text());
+        
+        // $(id).parents("span").find("p").css({ 'display': "block" });
+       
+        
+        $(id).addClass("zoomOut").delay(500).queue(function(){
+           $(id).css({ 'display': "none" });
+          $(id).parents("span").find("p").addClass("expandOpen");
+         
+      });
       }
   </script>
 
