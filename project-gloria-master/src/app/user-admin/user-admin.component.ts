@@ -15,16 +15,35 @@ export class UserAdminComponent implements OnInit {
   tran: FirebaseListObservable<any>;
 
   constructor(private af: AngularFire, private router: Router) {
+        this.af.auth.subscribe(auth => {
+          if (auth) {
+            
+            af.database.object('/users/' + auth.uid+"/IsAdmin").subscribe(snapshot => {
+            
+           if(snapshot.$value){
+              this.loadUsers();
+           }else{
+             this.router.navigateByUrl('/members')
+           }
+          })
+          
+          }
+        });
   }
 
   ngOnInit() {
-    this.users = [];
+    
+  }
+  loadUsers(){
+  this.users = [];
     this.af.database.list("/users").subscribe(userList => {
       this.users = userList;
       this.users.map(user => {
+        console.log(user);
         this.af.database.list('/purchased/' + user.$key).subscribe((dates) => {
           var priceTotals = 0;
           user.priceTotal = 0;
+          
           dates.map((date) => {
             this.af.database.list('/purchased/' + user.$key + '/' + date.$key).subscribe((transactions) => {
               transactions.map((transaction) => {
@@ -39,7 +58,6 @@ export class UserAdminComponent implements OnInit {
       });
     });
   }
-
   onCheck(useruid) {
     if (confirm("va a cancelar toda la deuda de este usuario, esat seguro ?")) {
       this.af.database.list('/purchased/' + useruid).subscribe((dates) => {

@@ -21,19 +21,17 @@ blockquote, blockquote p{
     width:100px;
     margin:0;
 }
-
+#shopd{padding-bottom: 20px;}
 #page {
     padding-top: 0;
     margin:0;
 }
-.move-class{
-      background: #c9c9c9;
-}
+
 
 .cart-contain{
     background: #fff;
    
-    padding-bottom: 10px;
+    padding-bottom: 0px;
 }
 
 h2 {
@@ -60,7 +58,7 @@ h2 {
         max-height: 100%;
     }
   .cart-contain{
-      background: #c9c9c9;
+      background: #eaeaea;
       outline: none;
       padding-bottom: 30px;
   }

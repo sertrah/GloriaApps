@@ -6,6 +6,15 @@
     position: relative;
     margin-bottom: 60px;
 }
+.cinta-negra{
+background: #000;
+    position: absolute;
+    height: 50px;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+}
 .card-action{
     padding-bottom: 0px
 }

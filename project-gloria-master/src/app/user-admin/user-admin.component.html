@@ -1,48 +1,34 @@
-    <header >
-      <div class="row" style="max-width: inherit;">
-      <div class="col l2 m4 s12 menu-top" style="text-align: center">
-        <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons Medium">menu</i></a>
-        <img  style="    max-width: 100px;" class="hide-on-small-only" src="https://ii.ct-stc.com/1/logos/empresas/2016/11/30/yuxi-pacific-latam-D5610CA2B7016729thumbnail.jpeg" alt="">
-        <img  style=" width: 50px;   margin-top: 10px; margin-bottom: 10px;" class="show-on-small" src="/assets/images/logohrl.png" alt="">
-      </div>
-      <div class="col l10  m8 hide-on-small-only" style="background-color: #59214e !important;">
-
-      </div>
-      </div>
-
-    </header>
+ <app-user-nav> </app-user-nav>
 <div class="row " style="max-width: inherit; margin-top: -20px;">
-  <div class="col s12  m4 l2 fix-position">
-  </div>
-  <div class="col s12  m4 l2 " style=" background: #c9c9c9">
-    <app-user-nav> </app-user-nav>
-  </div>
-  <div class="col s12  m8 l10 ">
+
+  <div class="col s12  ">
     <div class="container">
-      <h1>Debtor history</h1>
-      <table class="striped">
+      <h1>Historial de deudores</h1>
+      <table class="striped centered">
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Grand Total</th>
-            <th>Cancelado</th>
+            <th>Nombre</th>
+            <th>Deduda total</th>
+            <th>Pagado?</th>
+            <th></th>
           </tr>
         </thead>
-        <tbody>
+        <tbody >
           <tr *ngFor="let user of users; let i = index">
-            <td *ngIf="user.priceTotal != 0">{{user.name}}</td>
-            <td *ngIf="user.priceTotal != 0">
+            <td *ngIf="user.priceTotal > 0">{{user.name}}</td>
+            <td *ngIf="user.priceTotal > 0">
               {{user.priceTotal? user.priceTotal : 0}}
             </td>
-            <td *ngIf="user.priceTotal != 0">
+            <td *ngIf="user.priceTotal > 0">
               <a>
                 <input type="checkbox" id="check{{i}}" (click)="onCheck(user.$key)" />
                 <label for="check{{i}}"></label>
               </a>
+
+            </td>
+            <td *ngIf="user.priceTotal > 0">
                <a [routerLink]="['/history', user.$key]" class="secondary-content">
-                <i class="material-icons">
-                send
-                </i>
+                <i class="material-icons">&#xE8F4;</i>
               </a>
             </td>
           </tr>
