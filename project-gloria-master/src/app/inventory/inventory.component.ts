@@ -33,40 +33,54 @@ export class InventoryComponent implements OnInit {
   imageList: Observable<Image[]>;
   priceTotals: number = 0;
   constructor(public af: AngularFire, private router: Router) {
-    let storage = firebase.storage();
-    this.ObjProd["path"] = " ";
-    this.fileList = this.af.database.list(`/inventory`);
-    this.imageList = this.fileList.map(itemList =>
-      itemList.map(item => {
-        var pathReference = storage.ref(item.path).getDownloadURL().then(url => { return url });
-        let result = { $key: item.$key, downloadURL: pathReference, path: item.path, product: item.product, price: item.price, quantity: item.quantity };
-        return result;
-      })
-    );
-    
-    this.af.database.list("/users").subscribe(userList => {
-     this.priceTotals = 0;  
-      userList.map(user => {
-        this.af.database.list('/purchased/' + user.$key).subscribe((dates) => {
-                   
-          dates.map((date) => {
-            
-            this.af.database.list('/purchased/' + user.$key + '/' + date.$key).subscribe((transactions) => {
-              transactions.map((transaction) => {
-                if (transaction.price && !transaction.Ispaid) {
-                   this.priceTotals += parseFloat(transaction.price) * transaction.quantity;
-                }
+    this.af.auth.subscribe(auth => {
+      if (auth) {
+
+        af.database.object('/users/' + auth.uid + "/IsAdmin").subscribe(snapshot => {
+
+          if (snapshot.$value) {
+            let storage = firebase.storage();
+            this.ObjProd["path"] = " ";
+            this.fileList = this.af.database.list(`/inventory`);
+            this.imageList = this.fileList.map(itemList =>
+              itemList.map(item => {
+                var pathReference = storage.ref(item.path).getDownloadURL().then(url => { return url });
+                let result = { $key: item.$key, downloadURL: pathReference, path: item.path, product: item.product, price: item.price, quantity: item.quantity };
+                return result;
+              })
+            );
+
+            this.af.database.list("/users").subscribe(userList => {
+              this.priceTotals = 0;
+              userList.map(user => {
+                this.af.database.list('/purchased/' + user.$key).subscribe((dates) => {
+
+                  dates.map((date) => {
+
+                    this.af.database.list('/purchased/' + user.$key + '/' + date.$key).subscribe((transactions) => {
+                      transactions.map((transaction) => {
+                        if (transaction.price && !transaction.Ispaid) {
+                          this.priceTotals += parseFloat(transaction.price) * transaction.quantity;
+                        }
+                      });
+
+                    })
+
+                  })
+
+                });
+
               });
-          
-            })
-            
-          })
-          
-        });
-        
-      });
+            });
+          } else {
+            this.router.navigateByUrl('/members')
+          }
+        })
+
+      }
     });
-  
+
+
 
   }
 
