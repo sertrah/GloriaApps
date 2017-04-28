@@ -1,48 +1,42 @@
+<div *ngIf="FlagAuth" >
 <header>
-  <div class="row" style="max-width: inherit;">
+  <div class="row" style="max-width: inherit;     max-width: inherit; border-bottom: 2px solid #59214e;">
     <div class="col l2 m4 s12 menu-top" style="text-align: center">
       <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons Medium">menu</i></a>
-      <img style="    max-width: 100px;" class="hide-on-small-only" src="https://ii.ct-stc.com/1/logos/empresas/2016/11/30/yuxi-pacific-latam-D5610CA2B7016729thumbnail.jpeg"
+      <img *ngIf="FlagAuth" style="    max-width: 80px;" class="hide-on-small-only" src="https://ii.ct-stc.com/1/logos/empresas/2016/11/30/yuxi-pacific-latam-D5610CA2B7016729thumbnail.jpeg"
         alt="">
       <img style=" width: 50px;   margin-top: 10px; margin-bottom: 10px;" class="hide-on-large-only hide-on-med-only " src="/assets/images/logohrl.png"
         alt="">
     </div>
-    <div class="col l10  m8 hide-on-small-only menu-horizontal" >
-       <ul>
-         <li><a (click)="logout()"  title="Logout">Logout</a></li>
+
+    <!--<ul>
+         <li><a (click)="logout()"  title="Logout" style="background: #2F1A45 ">Logout</a></li>
         <li> <a href="/members" >products</a></li>
         <li> <a href="/my-history" >History</a></li>
         <li><a href="/inventory" >Inventario</a></li>
         
-      </ul>
-    </div>
+      </ul>-->
+    <nav class="col l10  m8 hide-on-small-only menu-horizontal" style="padding: 0" *ngIf="FlagAuth">
+      <div class="nav-wrapper">
+
+        <ul id="nav-mobile" class="right hide-on-med-and-down" style="    line-height: inherit;">
+
+          <li><a href="/members">Products</a></li>
+          <li><a href="/my-history">History</a></li>
+          <li><a *ngIf="ObjUser.IsAdmin" href="/inventory">Inventory</a></li>
+          <li>
+            <a href="#" class=" right" style=" border-left: 1px solid rgba(255,255,255,0.8); background: #2F1A45"><img style="height: 50px; border-radius: 50%" src="{{ObjUser.photoUrl}}" class=""></a>
+          </li>
+          <li><a (click)="logout()" title="Logout" style="background: #2F1A45 ">Logout</a></li>
+        </ul>
+      </div>
+    </nav>
+
   </div>
 
 </header>
-<!--<div class="card small custom hide-on-small-only" style="min-height: 380px; background: transparent; " *ngIf="FlagAuth">
-  <div class="card-image ">
-
-    <div class="container-img">
-      <img src="{{ObjUser.photoUrl}}" class="">
-      <div class="overlay-p"></div>
-    </div>
-    <span class="card-title">{{ ObjUser.name }}</span>
-  </div>
-  <div class="card-action">
-    <a href="/members" class="btn-flat black-text">products</a> <br>
-    <a href="/my-history" class="btn-flat black-text">History</a> <br>
-    <a href="/inventory" class="btn-flat black-text">Inventario</a> <br>
-    <a (click)="logout()" class="btn-flat black-text" title="Logout">Logout</a>
-    <p  style=" font-weight: bold; margin-top: 20px;  margin-bottom: 0px;"  [ngClass]="(priceTotal>0)? 'red-text':'green-text'"> Mi fiao:{{ priceTotal | currency:'USD':true:'3.2-2'}}</p>
- 
-  </div>
-</div>
-<div *ngIf="!FlagAuth" class="noLog">
-  <p class="flow-text" style="    color: #5a224f; font-weight: bold;">conectate y disfruta de los snacks</p>
-  <a class="waves-effect waves-light btn" href="/login">Log in</a>
-</div>-->
 <ul id="slide-out" class="side-nav">
-  <div *ngIf="FlagAuth">
+  <div>
     <li>
       <div class="userView">
         <div class="background">
@@ -50,19 +44,23 @@
         </div>
         <a href="/members"><img class="circle" src="{{ObjUser.photoUrl}}"></a>
         <a href="/members"><span class="white-text name">{{ ObjUser.name }}</span></a>
-        <a ><span class="a-span-menu" [ngClass]="(priceTotal>0 )? 'red-text':'green-text'">Fiao :{{ priceTotal | currency:'USD':true:'3.2-2'}}</span></a>
+        <a><span class="a-span-menu" [ngClass]="(priceTotal>0 )? 'red-text':'green-text'">Fiao :{{ priceTotal | currency:'USD':true:'3.2-2'}}</span>
+        <span class="cinta-negra"></span></a>
       </div>
     </li>
     <li> <a href="/members" class="btn-flat black-text">products</a></li>
     <li> <a href="/my-history" class="btn-flat black-text">History</a></li>
+    <li> <a *ngIf="ObjUser.IsAdmin" href="/inventory" class="btn-flat black-text">Inventory</a></li>
     <li> </li>
     <li>
       <div class="divider"></div>
     </li>
     <li><a (click)="logout()" class="btn-flat red-text" title="Logout">Logout</a></li>
   </div>
-  <div *ngIf="!FlagAuth" >
-    <li><h1 style="color: #5ec3df; text-align: center;    font-size: 30px;    margin-top: 113px;">Ingresa <br> y <br> mecatea</h1></li>
+  <div *ngIf="!FlagAuth">
+    <li>
+      <h1 style="color: #5ec3df; text-align: center;    font-size: 30px;    margin-top: 113px;">Ingresa <br> y <br> mecatea</h1>
+    </li>
     <li> </li>
     <li>
       <div class="divider"></div>
@@ -70,3 +68,19 @@
     <li><a (click)="logout()" class="waves-effect waves-light btn  btn-large purple darken-3 " title="Logout">Logout</a></li>
   </div>
 </ul>
+</div>
+<div *ngIf="!FlagAuth" >
+<header>
+  <div class="row" style="max-width: inherit;     max-width: inherit; border-bottom: 2px solid #59214e;">
+    <div class="col l2 m4 s12 menu-top" style="text-align: center">
+      <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons Medium">menu</i></a>
+      <img style=" width: 50px;   margin-top: 10px; margin-bottom: 10px;" class="hide-on-large-only hide-on-med-only " src="/assets/images/logohrl.png"
+        alt="">
+    </div>
+  </div>
+</header>
+  <div style="padding-bottom: 24px" class="center-align">
+    <p class="center-align">Enter To enjoy any of our products :) </p>
+    <a  class="waves-effect waves-light btn  btn-large purple darken-3 center-align" href="/login">Log In</a>
+  </div>
+</div>
