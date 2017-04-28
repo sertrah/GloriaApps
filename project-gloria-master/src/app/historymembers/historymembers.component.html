@@ -8,12 +8,12 @@
       <div class="row" style="    margin: 0 auto;">
         <div class="input-field col s12 l6">
           <i class="material-icons prefix">&#xE916;</i>
-          <input #date1 type="date" name="date1" id="date1" class="datepicker" placeholder="mm/dd/yy">
+          <input #date1 type="date" name="date1" id="date1" class="datepicker" placeholder="mm/dd/yy" onfocus="myDates()">
           <label for="date1">Initial date</label>
         </div>
         <div class="input-field col s12 l6">
           <i class="material-icons prefix">&#xE916;</i>
-          <input #date2 type="date" name="date2" id="date2" class="datepicker" placeholder="mm/dd/yy">
+          <input #date2 type="date" name="date2" id="date2" class="datepicker" placeholder="mm/dd/yy" onfocus="myDates()">
           <label for="date2">Final date</label>
         </div>
         <div class=" col s12 left-align">
@@ -41,8 +41,8 @@
             <td class="hide-on-small-only">{{item.quantity}}</td>
             <td *ngIf="!this.userId" [ngClass]="(item.Ispaid==true)? 'green-text':'red-text'">{{item.Ispaid == true ? "payout": "pending"}}</td>
             <td>{{item.price * item.quantity}}</td>
-            <td *ngIf="this.userId" style="width: 200px">
-              <div class="switch" style="width: 180px">
+            <td *ngIf="this.userId" >
+              <div class="switch" >
                 <label>
                   Pendiente
                     <input type="checkbox" [checked]="item.Ispaid" (click)="onCheckPurchased(item)" >

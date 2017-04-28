@@ -2,7 +2,7 @@
 <header>
   <div class="row" style="max-width: inherit;     max-width: inherit; border-bottom: 2px solid #59214e;">
     <div class="col l2 m4 s12 menu-top" style="text-align: center">
-      <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons Medium">menu</i></a>
+      <a href="#" onload="mymenu()"  data-activates="slide-out" class="button-collapse"><i class="material-icons Medium">menu</i></a>
       <img *ngIf="FlagAuth" style="    max-width: 80px;" class="hide-on-small-only" src="https://ii.ct-stc.com/1/logos/empresas/2016/11/30/yuxi-pacific-latam-D5610CA2B7016729thumbnail.jpeg"
         alt="">
       <img style=" width: 50px;   margin-top: 10px; margin-bottom: 10px;" class="hide-on-large-only hide-on-med-only " src="/assets/images/logohrl.png"
@@ -24,8 +24,9 @@
           <li><a href="/members">Products</a></li>
           <li><a href="/my-history">History</a></li>
           <li><a *ngIf="ObjUser.IsAdmin" href="/inventory">Inventory</a></li>
+          <li><a href="/comments">Comments</a></li>
           <li>
-            <a href="#" class=" right" style=" border-left: 1px solid rgba(255,255,255,0.8); background: #2F1A45"><img style="height: 50px; border-radius: 50%" src="{{ObjUser.photoUrl}}" class=""></a>
+            <a href="#" class=" right" style=" border-left: 1px solid rgba(255,255,255,0.8); background: #2F1A45"><img style="width: 50px; height: 50px; border-radius: 50%" src="{{ObjUser.photoUrl}}" class=""></a>
           </li>
           <li><a (click)="logout()" title="Logout" style="background: #2F1A45 ">Logout</a></li>
         </ul>
@@ -51,6 +52,7 @@
     <li> <a href="/members" class="btn-flat black-text">products</a></li>
     <li> <a href="/my-history" class="btn-flat black-text">History</a></li>
     <li> <a *ngIf="ObjUser.IsAdmin" href="/inventory" class="btn-flat black-text">Inventory</a></li>
+    <li> <a href="/comments" class="btn-flat black-text">Comments</a></li>
     <li> </li>
     <li>
       <div class="divider"></div>

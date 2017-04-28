@@ -1,5 +1,5 @@
  <app-user-nav> </app-user-nav>
-  <a  data-target="modal1" (click)="openModal('nokey', false)" class="btn-floating btn-large waves-effect waves-light show-on-small hide-on-large-only hide-on-med-only " style="position: fixed;
+  <a  onclick="myModal()" data-target="modal1" (click)="openModal('nokey', false)" class="btn-floating btn-large waves-effect waves-light show-on-small hide-on-large-only hide-on-med-only " style="position: fixed;
     right: 10px;     top: 145px;">
     <i class="material-icons">add</i>
   </a>
@@ -9,7 +9,7 @@
 <div class="row" style="max-width: inherit; margin-top: -20px;">
                 <div class="menu-admin">
                   <a href="/admin"  class="waves-effect waves-teal btn-flat" [ngClass]="(priceTotals === 0 )? 'green-text':'red-text'" ><i class="material-icons left">&#xE227;</i>Por cobrar {{priceTotals}}  </a>
-                  <a href="/ventas" class="waves-effect waves-teal btn-flat" ><i class="material-icons left">&#xE8CB;</i> ventas</a>
+                  <a href="/sales" class="waves-effect waves-teal btn-flat" ><i class="material-icons left">&#xE8CB;</i> ventas</a>
                 </div>
 
       <div class="col s12 ">
@@ -18,7 +18,7 @@
             <div class="content-tittle">
                 <h1 class="left-align">Inventario </h1>
 
-                <a  data-target="modal1" (click)="openModal('nokey', false)" class="waves-effect waves-light btn hide-on-small-only"><i class="material-icons">add</i> Agregar Producto</a>
+                <a  data-target="modal1" onclick="myModal()" (click)="openModal('nokey', false)" class="waves-effect waves-light btn hide-on-small-only"><i class="material-icons">add</i> Agregar Producto</a>
             </div>
           </div>
             <div class="col l3 m6 s12 product-card" *ngFor="let img of imageList | async">
@@ -34,7 +34,7 @@
                   <div>Cantidad: {{img.quantity}}</div>
                 </div>
                 <div class="card-action" style="text-align: right">
-                  <a data-target="modal1" class="btn-floating" (click)="openModal(img.$key, true)"><i class="material-icons">&#xE3C9;</i></a>
+                  <a data-target="modal1" onclick="myModal()" class="btn-floating" (click)="openModal(img.$key, true)"><i class="material-icons">&#xE3C9;</i></a>
                   <a class="btn-floating" (click)="delReg(img.path, img.$key )"><i class="material-icons">&#xE92B;</i></a>
                 </div>
               </div>

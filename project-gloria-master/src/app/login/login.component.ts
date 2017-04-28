@@ -9,24 +9,24 @@ import { IUser, User } from '../models/user';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
   animations: [moveIn()],
-  host: {'[@moveIn]': ''}
+  host: { '[@moveIn]': '' }
 })
 export class LoginComponent implements OnInit {
 
-   error: any;
-   private users: FirebaseListObservable<IUser[]>;
-   
-    constructor(public af: AngularFire,private router: Router) {
-      
-      this.af.auth.subscribe(auth => {
+  error: any;
+  private users: FirebaseListObservable<IUser[]>;
 
-        if(auth) {
+  constructor(public af: AngularFire, private router: Router) {
+
+    this.af.auth.subscribe(auth => {
+
+      if (auth) {
         this.router.navigateByUrl('/members');
 
         const path = `users`;
         this.users = af.database.list(path);
 
-        }
+      }
 
     });
   }
@@ -36,11 +36,20 @@ export class LoginComponent implements OnInit {
       provider: AuthProviders.Facebook,
       method: AuthMethods.Popup,
     }).then(
-        (success) => {
-        this.router.navigate(['/members']);
-        this.af.database.object('users/'+success.uid ).set(new User(success.auth.displayName, success.auth.photoURL));
+      (success) => {
+       
+        const item = this.af.database.object('users/' + success.uid, { preserveSnapshot: true });
+        item.subscribe(snapshot => {
+          if (snapshot.val()) {
+            
+          } else {
+            this.af.database.object('users/' + success.uid).set(new User(success.auth.displayName, success.auth.photoURL));
+            
+          }
+        });
+         this.router.navigate(['/members']);
       }).catch(
-        (err) => {
+      (err) => {
         this.error = err;
       })
   }
@@ -50,13 +59,22 @@ export class LoginComponent implements OnInit {
       provider: AuthProviders.Google,
       method: AuthMethods.Popup,
     }).then(
-        (success) => {
+      (success) => {
+        
+        const item = this.af.database.object('users/' + success.uid, { preserveSnapshot: true });
+        item.subscribe(snapshot => {
+          if (snapshot.val()) {
+            
+          } else {
+            this.af.database.object('users/' + success.uid).set(new User(success.auth.displayName, success.auth.photoURL));
+            
+          }
+
+        });
         this.router.navigate(['/members']);
-          
-          this.af.database.object('users/'+success.uid ).set(new User(success.auth.displayName, success.auth.photoURL));
-          
+
       }).catch(
-        (err) => {
+      (err) => {
         this.error = err;
       })
   }

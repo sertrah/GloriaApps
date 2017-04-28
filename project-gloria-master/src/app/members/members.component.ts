@@ -205,10 +205,13 @@ export class MembersComponent implements OnInit {
         this.qDB.removeItem('/transaction/' + this.authReg + '/' + (date_Currentdate) + '/' + product.key, '/transaction');
 
       }
-
+     
     });
+
+
     location.reload();
   }
+
 
 
   // your use is value.toDateString.slice(start,end)
