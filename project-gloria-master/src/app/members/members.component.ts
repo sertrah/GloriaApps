@@ -203,11 +203,11 @@ export class MembersComponent implements OnInit {
         this.af.database.list('/purchased/' + this.authReg + '/' + (date_Currentdate)).push({name: product.prod, price: product.p, quantity: product.q,  Ispaid: false, keyreference: product.key, date: Math.round(new Date().getTime()/1000) });
         //reset my var
         this.qDB.removeItem('/transaction/' + this.authReg + '/' + (date_Currentdate) + '/' + product.key, '/transaction');
-        location.reload();
+       
       }
-
+     
     });
-
+     location.reload();
 }
 
 

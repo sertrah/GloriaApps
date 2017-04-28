@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy,  ViewChild, ElementRef, AfterViewInit  } from '@angular/core';
 import { AngularFire, AuthProviders, AuthMethods, FirebaseListObservable } from 'angularfire2';
 import { methodCustom } from './../app.methods';
 import { ActivatedRoute } from "@angular/router";
@@ -16,7 +16,7 @@ interface purchasedprop {
   templateUrl: './historymembers.component.html',
   styleUrls: ['./historymembers.component.css']
 })
-export class HistorymembersComponent implements OnInit {
+export class HistorymembersComponent implements AfterViewInit  {
   @Input() myname: String;
   items: FirebaseListObservable<any>;
   itemslist: Object[] = [];
@@ -24,19 +24,17 @@ export class HistorymembersComponent implements OnInit {
   userId: any;
   sub: any;
 
+
   datEnds: string = "";
   constructor(public af: AngularFire, private mc: methodCustom, public router: ActivatedRoute) {
   }
-
-  ngOnInit() {
+  ngAfterViewInit() {
     this.sub = this.router.params.subscribe(p => {
       this.userId = p['id'];
       this.loadData();
     });
   }
-  sendNude() {
 
-  }
   setNewData(a, b) {
     var d = new Date(a);
     // var dateForm = a.substring(5,7)+a.substring(8,10)+a.substring(0,4)

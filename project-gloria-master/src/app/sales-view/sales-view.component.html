@@ -1,39 +1,61 @@
-    <header >
-      <div class="row" style="max-width: inherit;">
-      <div class="col l2 m4 s12 menu-top" style="text-align: center">
-        <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons Medium">menu</i></a>
-        <img  style="    max-width: 100px;" class="hide-on-small-only" src="https://ii.ct-stc.com/1/logos/empresas/2016/11/30/yuxi-pacific-latam-D5610CA2B7016729thumbnail.jpeg" alt="">
-        <img  style=" width: 50px;   margin-top: 10px; margin-bottom: 10px;" class="show-on-small" src="/assets/images/logohrl.png" alt="">
-      </div>
-      <div class="col l10  m8 hide-on-small-only" style="background-color: #59214e !important;">
-
-      </div>
-      </div>
-
-    </header>
+<app-user-nav> </app-user-nav>
 <div class="row " style="max-width: inherit; margin-top: -20px;">
-  <div class="col s12  m4 l2 fix-position">
-  </div>
-  <div class="col s12  m4 l2 " style=" background: #c9c9c9">
-    <app-user-nav> </app-user-nav>
-  </div>
-  <div class="col s12  m8 l10 ">
+
+  <div class="col s12  ">
     <div class="container">
-      <h1>Debtor history</h1>
-      <table class="striped">
+      <h1>Historial de deudores</h1>
+      <div class="row" style="    margin: 0 auto;">
+        <div class="input-field col s12 l6">
+          <i class="material-icons prefix">&#xE916;</i>
+          <input #date1 type="date" name="date1" id="date1" class="datepicker" placeholder="mm/dd/yy">
+          <label for="date1">Initial date</label>
+        </div>
+        <div class="input-field col s12 l6">
+          <i class="material-icons prefix">&#xE916;</i>
+          <input #date2 type="date" name="date2" id="date2" class="datepicker" placeholder="mm/dd/yy">
+          <label for="date2">Final date</label>
+        </div>
+        <div class=" col s12 left-align">
+          <a class="waves-effect waves-light btn" (click)="setNewData(date1.value,date2.value)">Search</a>
+        </div>
+        <div class=" col s12 l6 left-align">
+          <h4>{{datAts | date:'yMMMd'}} To {{datEnds | date:'yMMMd'}} </h4>
+        </div>
+        <div class=" col s12 l6 right-align"><h4>Total por rango: {{getSum() | currency:'USD':true:'3.2-2'}}</h4></div>
+      </div>
+      
+      <table class="striped centered">
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Grand Total</th>
+            <th>Nombre</th>
+            <th>Deduda total</th>
+            <th>Estado</th>
+            <th>Detalles</th>
           </tr>
         </thead>
-        <tbody>
-          <tr *ngFor="let user of users">
+        <tbody >
+          <tr *ngFor="let user of users | paginate: { itemsPerPage: 10, currentPage: p } ; let i = index; ">
             <td>{{user.name}}</td>
-            <td>{{ user.priceTotal? user.priceTotal : 0 }}<a [routerLink]="['/history', user.$key]" class="secondary-content"><i class="material-icons">send</i></a></td>
+            <td>
+              {{ user.priceTotal? user.priceTotal : 0}}
+            </td>
+            
+            <td [ngClass]="(user.priceTotal>0)? 'red-text':' green-text'">
+              {{user.priceTotal>0? "Pendiente": " Pagado"}}
+
+            </td>
+            <td>
+               <a [routerLink]="['/history', user.$key]" class="secondary-content">
+                <i class="material-icons">&#xE8F4;</i>
+              </a>
+            </td>
           </tr>
         </tbody>
       </table>
+      
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        
     </div>
+    
   </div>
 </div>

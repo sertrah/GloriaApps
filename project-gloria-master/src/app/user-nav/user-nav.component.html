@@ -25,7 +25,7 @@
           <li><a href="/my-history">History</a></li>
           <li><a *ngIf="ObjUser.IsAdmin" href="/inventory">Inventory</a></li>
           <li>
-            <a href="#" class=" right" style=" border-left: 1px solid rgba(255,255,255,0.8); background: #2F1A45"><img style="height: 50px; border-radius: 50%" src="{{ObjUser.photoUrl}}" class=""></a>
+            <a href="#" class=" right" style=" border-left: 1px solid rgba(255,255,255,0.8); background: #2F1A45"><img style="width: 50px; height: 50px; border-radius: 50%" src="{{ObjUser.photoUrl}}" class=""></a>
           </li>
           <li><a (click)="logout()" title="Logout" style="background: #2F1A45 ">Logout</a></li>
         </ul>
