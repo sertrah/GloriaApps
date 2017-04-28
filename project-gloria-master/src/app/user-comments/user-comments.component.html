@@ -1,3 +1,46 @@
-<p>
-  user-comments works!
-</p>
+<app-user-nav> </app-user-nav>
+
+<div class="row " style="max-width: inherit; margin-top: -20px;">
+  <div class="col s12  ">
+    <div *ngIf="ObjUser.IsAdmin" class="container">
+      <h1>Historial de Comentarios</h1>
+      <table class="striped centered">
+        <thead>
+          <tr>
+            <th>Asunto</th>
+            <th>Comentario</th>
+            <th>Fecha</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let comment of comments | paginate: { itemsPerPage: 10, currentPage: p }">
+            <td>{{comment.subject}}</td>
+            <td>{{comment.commentary}}</td>
+            <td>{{comment.date}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </div>
+    <div class="container" *ngIf="!ObjUser.IsAdmin">
+      <h1>Comments</h1>
+      <form #formData='ngForm' class="col s12">
+        <div class="row">
+          <div class="input-field col s12">
+            <input [(ngModel)]="subject" name="subject" id="subject" type="text" class="validate">
+            <label for="textarea1">Subject</label>
+          </div>
+          <div class="col s12">
+            <div class="input-field col s12">
+              <textarea [(ngModel)]="commentary" name="commentary" id="commentary" class="materialize-textarea"></textarea>
+              <label for="textarea1">Commentary</label>
+            </div>
+          </div>
+          <div class="col s12">
+            <a class="waves-effect waves-light btn" (click)="onSubmit(formData.value)"><i class="material-icons right">send</i>Submit</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

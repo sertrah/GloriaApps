@@ -11,7 +11,7 @@ import { SignupComponent } from './signup/signup.component';
 import { EmailComponent } from './email/email.component';
 import { UserAdminComponent } from './user-admin/user-admin.component';
 import { SalesViewComponent } from './sales-view/sales-view.component';
-import { UserCommentsComponent } from './user-comments/user-comments.component'
+import { UserCommentsComponent } from './user-comments/user-comments.component';
 
 export const router: Routes = [
     { path: '', redirectTo: 'members', pathMatch: 'full' },
@@ -24,8 +24,7 @@ export const router: Routes = [
     { path: 'members', component: MembersComponent },
     { path: 'admin', component: UserAdminComponent, canActivate: [AuthGuard] },
     { path: 'sales', component: SalesViewComponent, canActivate: [AuthGuard] },
-    { path: 'comments', component: UserCommentsComponent, canActivate: [AuthGuard]}
-
+    { path: 'comments', component: UserCommentsComponent, canActivate: [AuthGuard] }
 ]
 
 export const routes: ModuleWithProviders = RouterModule.forRoot(router);
