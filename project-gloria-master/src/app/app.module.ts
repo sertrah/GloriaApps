@@ -22,6 +22,7 @@ import { UserAdminComponent } from './user-admin/user-admin.component'; // <-- i
 
 import { WindowRef } from './WindowRef';
 import { SalesViewComponent } from './sales-view/sales-view.component';
+import { UserCommentsComponent } from './user-comments/user-comments.component';
 
 var firebaseConfig = {
   apiKey: "AIzaSyABL2Mn6GNlnuw8RqNdb6Yjjs_4OM-IWnM",
@@ -42,7 +43,8 @@ var firebaseConfig = {
     HistorymembersComponent,
     UserNavComponent,
     UserAdminComponent,
-    SalesViewComponent
+    SalesViewComponent,
+    UserCommentsComponent
   ],
   imports: [
     BrowserModule,
