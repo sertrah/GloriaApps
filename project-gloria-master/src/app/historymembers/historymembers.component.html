@@ -41,8 +41,8 @@
             <td class="hide-on-small-only">{{item.quantity}}</td>
             <td *ngIf="!this.userId" [ngClass]="(item.Ispaid==true)? 'green-text':'red-text'">{{item.Ispaid == true ? "payout": "pending"}}</td>
             <td>{{item.price * item.quantity}}</td>
-            <td *ngIf="this.userId" style="width: 200px">
-              <div class="switch" style="width: 180px">
+            <td *ngIf="this.userId" >
+              <div class="switch" >
                 <label>
                   Pendiente
                     <input type="checkbox" [checked]="item.Ispaid" (click)="onCheckPurchased(item)" >
