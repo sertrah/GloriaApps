@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
       method: AuthMethods.Popup,
     }).then(
       (success) => {
-        this.router.navigate(['/members']);
+       
         const item = this.af.database.object('users/' + success.uid, { preserveSnapshot: true });
         item.subscribe(snapshot => {
           if (snapshot.val()) {
@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
             
           }
         });
-
+         this.router.navigate(['/members']);
       }).catch(
       (err) => {
         this.error = err;
@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
       method: AuthMethods.Popup,
     }).then(
       (success) => {
-        this.router.navigate(['/members']);
+        
         const item = this.af.database.object('users/' + success.uid, { preserveSnapshot: true });
         item.subscribe(snapshot => {
           if (snapshot.val()) {
@@ -69,8 +69,9 @@ export class LoginComponent implements OnInit {
             this.af.database.object('users/' + success.uid).set(new User(success.auth.displayName, success.auth.photoURL));
             
           }
+
         });
-        
+        this.router.navigate(['/members']);
 
       }).catch(
       (err) => {

@@ -50,7 +50,7 @@ loadUsersHistory(dateAt = null, dateEnd = null){
             this.af.database.list('/purchased/' + user.$key + '/' + date.$key).subscribe((transactions) => {
               transactions.map((transaction) => {
                  var dateF = this.mc.getDateFormat(transaction.date);
-                if (transaction.price && !transaction.Ispaid && Number(dateF) >= Number(datAt) && Number(dateF) <= Number(datEnd) ){
+                if (transaction.price  && Number(dateF) >= Number(datAt) && Number(dateF) <= Number(datEnd) ){
                   priceTotals += parseFloat(transaction.price) * transaction.quantity;
                 }
               });

@@ -207,7 +207,7 @@ export class MembersComponent implements OnInit {
       }
      
     });
-     location.reload();
+      this.router.navigateByUrl('/#');
 }
 
 

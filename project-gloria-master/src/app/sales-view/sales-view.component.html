@@ -3,7 +3,7 @@
 
   <div class="col s12  ">
     <div class="container">
-      <h1>Historial de deudores</h1>
+      <h1>Historial de Compras de clientes</h1>
       <div class="row" style="    margin: 0 auto;">
         <div class="input-field col s12 l6">
           <i class="material-icons prefix">&#xE916;</i>
@@ -21,15 +21,14 @@
         <div class=" col s12 l6 left-align">
           <h4>{{datAts | date:'yMMMd'}} To {{datEnds | date:'yMMMd'}} </h4>
         </div>
-        <div class=" col s12 l6 right-align"><h4>Total por rango: {{getSum() | currency:'USD':true:'3.2-2'}}</h4></div>
+        <div class=" col s12 l6 right-align"><h4>Total por rango: {{getSum() | currency:'USD':true}}</h4></div>
       </div>
       
-      <table class="striped centered">
+      <table class="striped ">
         <thead>
           <tr>
             <th>Nombre</th>
-            <th>Deduda total</th>
-            <th>Estado</th>
+            <th>Comprado</th>
             <th>Detalles</th>
           </tr>
         </thead>
@@ -37,13 +36,9 @@
           <tr *ngFor="let user of users | paginate: { itemsPerPage: 10, currentPage: p } ; let i = index; ">
             <td>{{user.name}}</td>
             <td>
-              {{ user.priceTotal? user.priceTotal : 0}}
+              {{ (user.priceTotal ? user.priceTotal  : 0) | currency:'USD':true }}
             </td>
             
-            <td [ngClass]="(user.priceTotal>0)? 'red-text':' green-text'">
-              {{user.priceTotal>0? "Pendiente": " Pagado"}}
-
-            </td>
             <td>
                <a [routerLink]="['/history', user.$key]" class="secondary-content">
                 <i class="material-icons">&#xE8F4;</i>
